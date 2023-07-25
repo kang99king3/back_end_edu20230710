@@ -1,6 +1,6 @@
 package hk.edu20230725.day02;
 
-public class Operator {
+public class D2_Operator {
 
 	public static void main(String[] args) {
 		//관계연산자

@@ -1,6 +1,6 @@
 package hk.edu20230725.day02;
 
-public class IsLeapYear {
+public class D3_IsLeapYear {
 
 	public static void main(String[] args) {
 		

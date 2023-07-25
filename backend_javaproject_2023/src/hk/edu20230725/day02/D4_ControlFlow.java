@@ -1,6 +1,6 @@
 package hk.edu20230725.day02;
 
-public class ControlFlow {
+public class D4_ControlFlow {
 
 	public static void main(String[] args) {
 		
