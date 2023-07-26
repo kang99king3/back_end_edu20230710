@@ -3,6 +3,11 @@ package hk.edu20230726.day03;
 public class D2_Gugudan {
 
 	public static void main(String[] args) {
+		
+		D1_ControlFlow_For_While d=new D1_ControlFlow_For_While();
+		
+		
+		
 		//구구단 출력하기
 		//2단 출력: 2X1=2, 2X2=4..... 범위는 1~9 까지 곱하기
 		for (int i = 1; i <= 9; i++) {
