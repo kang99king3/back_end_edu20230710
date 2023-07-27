@@ -26,14 +26,33 @@ public class BankTest {
 			System.out.println("--------------------------");
 			System.out.println("선택>");
 			
-			int num=scan.nextInt();
+			int num=scan.nextInt();//원하는 작업 선택을 위한 입력
 			
-			if(num==4) {
+			if(num==1) {//입금(예금)
+				System.out.println("예금액을 입력하세요>");
+				int a=scan.nextInt();//콘솔에서 입금액을 입력받는다.
+				balance+=a;//balance=balance+a
+				System.out.println("예금합니다.");
+			}else if(num==2) {//출금
+				System.out.println("출금액을 입력하세요>");
+				int a=scan.nextInt();//콘솔에서 출금액을 입력받는다.
+				if(balance<a) {
+					System.out.println("잔액이 부족합니다.");
+					continue;
+				}else {
+					balance-=a;//출금을 실행한다.
+					System.out.println("출금합니다.");					
+				}
+			}else if(num==3) {//잔액조회
+				System.out.println("잔고:"+balance+"원 입니다.");
+			}else if(num==4) {//종료
+				System.out.println("종료합니다.");
 				break;
+			}else {
+				//1~4번외에 번호를 입력하면 다시 입력하라고 알려주고 다시 입력받기
+				System.out.println("1~4까지의 숫자만 입력하세요");
+				continue;
 			}
-			
-			//1~4번외에 번호를 입력하면 다시 입력하라고 알려주고 다시 입력받기
-			
 		}
 	}
 }
