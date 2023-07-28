@@ -2,6 +2,12 @@ package hk.edu20230727.day04;
 
 public class Divisor {
 
+	public int num;
+	
+	public Divisor() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public static void main(String[] args) {
 		
 		//12약수 : 1~12까지의 수로 12를 나누는 작업
