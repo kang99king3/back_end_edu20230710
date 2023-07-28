@@ -20,6 +20,8 @@ public class Divisor {
 		//                            |    284      |    
 //		System.out.println(220==sumDivisor(sumDivisor(220)));  
 		amicable(1, 5000);
+		System.out.println("========================");
+		perfectNum(1, 10000);
 	}
 	
 	//약수를 구하는 메서드
@@ -86,7 +88,22 @@ public class Divisor {
 		return sum; // 외부에서 호출했을때 값을 전달할 수 있다
 	}
 	
+	//완전수를 구하는 메서드: 진약수의 합을 구하는 메서드 활용
+	public static void perfectNum(int start, int end) {
+		for (int i = start; i < end; i++) {
+			if(sumDivisor(i)==i) {
+				System.out.printf("%d은 완전수이다\n",i);
+			}
+		}
+	}
+	
+	
 }
+
+
+
+
+
 
 
 
