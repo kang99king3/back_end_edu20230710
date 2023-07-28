@@ -16,6 +16,10 @@ public class Divisor {
 		greateDivisor(30, 20);
 		System.out.println("========================");
 		lowestMultiple(10, 20);
+		System.out.println("========================");
+		//                            |    284      |    
+//		System.out.println(220==sumDivisor(sumDivisor(220)));  
+		amicable(1, 5000);
 	}
 	
 	//약수를 구하는 메서드
@@ -51,12 +55,37 @@ public class Divisor {
 		return a;
 	}
 	
+	//최소공배수
 //	10 20  --> (10*20)/(두수의 최대공약수)
 	public static void lowestMultiple(int a, int b) {
 		int val=greateDivisor(a, b);
 		System.out.println(a+"와"+b+"의 최소공배수는:"+(a*b)/val);
 //		(tempA*tempB)/a;
 	}
+	
+	//친화수구하기
+	// 220의 진약수합 ---> 284의 진약수의 합--->220
+	// 범위를 지정해서 친화수를 찾는 메서드,  1 ~1000 까지 입력받기
+	public static void amicable(int start, int end) {
+		for (int i = start; i < end; i++) {
+			if(i!=sumDivisor(i)&&i==sumDivisor(sumDivisor(i))) {
+				System.out.println(i+":"+sumDivisor(i)+" 는 친화수 관계이다.");
+			}
+		}
+	}
+	
+	//진약수의 합을 구하는 메서드 
+	public static int sumDivisor(int a) {
+//		int a=220;
+		int sum=0;//합을 저장할 변수 선언
+		for (int i = 1; i < a; i++) {
+			if(a%i==0) { //약수냐??
+				sum+=i;//단축연산자:  sum=sum+i;
+			}
+		}
+		return sum; // 외부에서 호출했을때 값을 전달할 수 있다
+	}
+	
 }
 
 
