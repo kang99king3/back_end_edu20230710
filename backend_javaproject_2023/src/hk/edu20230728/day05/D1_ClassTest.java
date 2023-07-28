@@ -3,14 +3,14 @@ package hk.edu20230728.day05;
 
 // javap java.lang.Object 
 //클래스의 구성 내용
-public class ClassTest{
+public class D1_ClassTest{
 
 	//맴버필드: 클래스에서 저장하는 저장공간
 	public int number;//인스턴스 변수
 	public static int staticNumber;//클래스 변수
 	
 	//기본 생성자: default 생성자라고 함, 파라미터가 없음, 생략 가능, 클래스의 초기화 작업 수행
-	public ClassTest() {
+	public D1_ClassTest() {
 		super();// 부모의 생성자를 호출, 생략가능
 //		this.number=6 ;
 		this.number=5;//초기값 설정

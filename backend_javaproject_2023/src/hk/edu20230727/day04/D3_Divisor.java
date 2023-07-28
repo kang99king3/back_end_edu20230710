@@ -1,10 +1,10 @@
 package hk.edu20230727.day04;
 
-public class Divisor {
+public class D3_Divisor {
 
 	public int num;
 	
-	public Divisor() {
+	public D3_Divisor() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -71,6 +71,7 @@ public class Divisor {
 //		(tempA*tempB)/a;
 	}
 	
+	//5일차에 진행
 	//친화수구하기
 	// 220의 진약수합 ---> 284의 진약수의 합--->220
 	// 범위를 지정해서 친화수를 찾는 메서드,  1 ~1000 까지 입력받기

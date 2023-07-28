@@ -2,7 +2,7 @@ package hk.edu20230726.day03;
 
 import java.util.Scanner;
 
-public class BankTest {
+public class D3_BankTest {
 
 	public static void main(String[] args) {
 		//참조타입  객체명

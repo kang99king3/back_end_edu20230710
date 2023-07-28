@@ -1,10 +1,10 @@
 package hk.edu20230727.day04;
 
-public class MethodTest {
+public class D2_MethodTest {
 
 	public static void main(String[] args) {
 		
-		MethodTest mt=new MethodTest();
+		D2_MethodTest mt=new D2_MethodTest();
 //		mt.main(args);
 		test01();
 //		test02();//설계도-->제품

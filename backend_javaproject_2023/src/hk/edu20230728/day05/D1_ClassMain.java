@@ -1,16 +1,16 @@
 package hk.edu20230728.day05;
 
-public class ClassMain {
+public class D1_ClassMain {
 
 	public static void main(String[] args) {
 		
-		ClassTest ct01=new ClassTest();// 객체 생성 ct01
+		D1_ClassTest ct01=new D1_ClassTest();// 객체 생성 ct01
 		ct01.methodTest();//객체명.메서드명
-		ClassTest.staticMethodTest();//정적메서드
+		D1_ClassTest.staticMethodTest();//정적메서드
 		int num=ct01.number;
-		int numStatic=ClassTest.staticNumber;
+		int numStatic=D1_ClassTest.staticNumber;
 		
-		ClassTest ct02=new ClassTest();// 객체 생성 ct02
+		D1_ClassTest ct02=new D1_ClassTest();// 객체 생성 ct02
 		ct02.methodTest();
 		int num2=ct02.number;
 		

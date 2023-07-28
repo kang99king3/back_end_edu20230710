@@ -1,6 +1,6 @@
 package hk.edu20230728.day05;
 
-public class AccessTest {
+public class D3_AccessTest {
 
 	//맴버필드
 	public int a;

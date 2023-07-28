@@ -1,12 +1,12 @@
 package hk.edu20230728.day05;
 
-public class ObjectTest {
+public class D2_ObjectTest {
 
 	public static void main(String[] args) {
 		String obj=new String();
 		System.out.println(obj.getClass());
 		
-		ClassTest ct=new ClassTest();
+		D1_ClassTest ct=new D1_ClassTest();
 		System.out.println(ct.getClass());
 		
 		System.out.println(ct.toString());
@@ -14,7 +14,7 @@ public class ObjectTest {
 		System.out.println(a.toString());
 //		int b=10;  b.toString();
 		
-		ClassTest ct2=new ClassTest();
+		D1_ClassTest ct2=new D1_ClassTest();
 		
 		System.out.println(ct.hashCode());
 		System.out.println(ct2.hashCode());
