@@ -8,7 +8,8 @@ public class CalculatorB {
 	private int result;
 	
 	public CalculatorB() {
-		super();
+//		super();
+		this(10,10);
 	}
 
 	public CalculatorB(int num1, int num2) {
