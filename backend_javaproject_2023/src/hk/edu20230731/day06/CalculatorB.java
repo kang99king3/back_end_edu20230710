@@ -8,12 +8,12 @@ public class CalculatorB {
 	private int result;
 	
 	public CalculatorB() {
-//		super();
+//		super(); //super생성자가 실행되고
 		this(10,10);
 	}
 
 	public CalculatorB(int num1, int num2) {
-		super();
+		super();//여기서도 실행되고 ---> 생성자는 한번만 실행되야 한다.
 		this.num1 = num1;
 		this.num2 = num2;
 	}
