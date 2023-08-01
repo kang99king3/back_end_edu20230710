@@ -3,7 +3,7 @@ package hk.edu20230731.day06;
 import java.util.Arrays;
 //final은 클래스 상속을 금지한다.
 //public class FinalTest extends ParentFinal{
-public class FinalTest{
+public class D3_FinalTest{
 	//static: 정적인 의미
 	//final : 금지의 의미
 	//static final : 정직이면서 변경 금지 --> 진정한 상수
@@ -15,7 +15,7 @@ public class FinalTest{
 		
 		//2.메서드에 아큐먼트를 전달하여 실행해본다
 		//메서드 실행할때마다 값을 변경하여 실행하면 변경된다.
-		FinalTest ft=new FinalTest();
+		D3_FinalTest ft=new D3_FinalTest();
 		System.out.println(ft.test01(15)); 
 		
 		//4.참조타입은 주소값이 저장되기 때문에 내부 값 변경은 가능하다.

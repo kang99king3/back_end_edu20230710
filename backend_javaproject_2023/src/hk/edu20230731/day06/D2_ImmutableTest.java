@@ -1,6 +1,6 @@
 package hk.edu20230731.day06;
 
-public class ImmutableTest {
+public class D2_ImmutableTest {
 
 	public String ss="HI";
 	
@@ -10,12 +10,12 @@ public class ImmutableTest {
 		change01(s);
 		System.out.println("원본값:"+s);
 		
-		ImmutableTest it=new ImmutableTest();
+		D2_ImmutableTest it=new D2_ImmutableTest();
 		change02(it);//ss값을 "안녕"으로 변경
 		System.out.println("원본값:"+it.ss);//원본값 변경됨
 	}	
 	
-	public static void change02(ImmutableTest it) {
+	public static void change02(D2_ImmutableTest it) {
 		it.ss="안녕";
 	}
 	

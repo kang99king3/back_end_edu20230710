@@ -1,7 +1,7 @@
 package hk.edu20230731.day06;
 
 
-public class CalculatorMain {
+public class D1_CalculatorMain {
 
 	public static void main(String[] args) {
 //		CalculatorA cal=new CalculatorA(50,30);

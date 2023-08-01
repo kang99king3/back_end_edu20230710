@@ -1,7 +1,7 @@
 package hk.edu20230731.day06;
 
 //final 예약어를 붙여주면 상속을 금지
-public final class ParentFinal {
+public final class D3_ParentFinal {
 	
 	public int number;
 	
