@@ -1,10 +1,10 @@
 package hk.edu20230801.day07;
 
-public class StringMethodMain {
+public class D4_StringMethodMain {
 
 	public static void main(String[] args) {
 //		String s = new StringMethodTest().sTest01("abc");
-		StringMethodTest st=new StringMethodTest();
+		D4_StringMethodTest st=new D4_StringMethodTest();
 //		String s=st.sTest01("abc");
 //		
 //		System.out.println(s);

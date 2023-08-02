@@ -1,6 +1,6 @@
 package hk.edu20230801.day07;
 
-public class StringCompare {
+public class D3_StringCompare {
 
 	public static void main(String[] args) {
 		//리터럴과 리터럴 비교

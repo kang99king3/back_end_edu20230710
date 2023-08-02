@@ -1,6 +1,6 @@
 package hk.edu20230801.day07;
 
-public class StringMethodTest {
+public class D4_StringMethodTest {
 
 	//String 주요메서드
 	
