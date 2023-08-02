@@ -71,7 +71,7 @@ public class StringMethodTest {
 	//2.해당 검색어의 인덱스를 구해보기: 검색어 인덱스 출력하기
 	//3.해당 검색어를 추출해서 출력해보기: substring()을 사용해서 출력하기
 	//4.해당 검색어를 문자열에서 ###으로 바꿔주기
-	//5.해당 검색어의 검색된 개수 출력하기[ indexOf(idx,검색시작인덱스)]
+	//5.해당 검색어의 검색된 개수 출력하기[indexOf(idx,검색시작인덱스)]
 	
 	public void search(String str) {
 //		String s="부산";
@@ -79,10 +79,44 @@ public class StringMethodTest {
 				 +"'드론 라이트쇼(Drone Light Show)'를 진행했다고 부산 1일 밝혔다."
 				 +"지난 28일 열린 이번 행사는 부산 갤럭시 신제품을 체험할 수 있는 삼성전자 갤럭시 "
 				 +"스튜디오 '부산 광안리' 오픈을 기념해 열렸다.";
+		
+		if(txt.indexOf(str)!=-1) {// 검색어가 존재한다면
+			System.out.println("검색어가 존재합니다.");
+			
+			System.out.println("검색어 인덱스:"+txt.indexOf(str));
+			//substring(s,e) --> e(종료인덱스) = 첫번째 인덱스 + 문자열의 길이
+			System.out.println("검색어 출력:"
+						+txt.substring(txt.indexOf(str),txt.indexOf(str)+str.length()));
+			
+			String txtAfter = txt.replace(str, "###");
+			System.out.println(txtAfter);
+			
+			indexCount(txt, str);
+			
+		}else {
+			//해당 검색어가 존재하지 않을 경우
+			System.out.println("검색어가 존재하지 않습니다.");
+		}
 	}
 	
 	//2,3,5번 기능은 메서드에 따로 txt와 검색어를 받아서 처리
-	// 
+	public void indexCount(String txt, String str) {
+		
+		int count=0;
+		int idx=0;//검색을 시작할 인덱스 
+		while(txt.indexOf(str,idx)!=-1) {
+			count++;//count의 값을 1씩 증가시킨다.
+			System.out.println("검색된 인덱스:"+txt.indexOf(str,idx));
+			
+			System.out.println("검색어 추출:"
+			    +txt.substring(txt.indexOf(str,idx), txt.indexOf(str,idx)+str.length()));
+			
+			idx=txt.indexOf(str,idx)+str.length();
+			System.out.println("--------------------------");
+		}
+		
+		System.out.println(str+"의 검색된 개수는 "+count+"개 입니다.");
+	}
 }
 
 
