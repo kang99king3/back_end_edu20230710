@@ -60,7 +60,82 @@ public class ArrayTest {
 		int [] f=new int [5];
 		System.arraycopy(c, 0, f, 0, f.length);
 		System.out.println(Arrays.toString(f));
+		
+		
+		//2차원 배열
+		
+		int [][] aa= {{1,2,3},{4,5,6}};
+		int [][] bb=new int[][]{{1,2,3},{4,5,6}};
+		int [][] cc=new int [2][3];
+		System.out.println("aa배열의 길이:"+aa.length);
+		System.out.println("aa에 요소의 길이:"+aa[0].length);
+		
+		for (int i = 0; i < aa.length; i++) {
+			for (int j = 0; j < aa[0].length; j++) {
+				System.out.print(aa[i][j]);
+			}
+			System.out.println();
+		}
+		//배열에서 값 가져오는 예시
+		int aa1=aa[0][0];//값을 가져옴
+		int [] aaArray1=aa[0];//배열을 가져옴
+		int aa2=aaArray1[2];//가져온 배열에서 값 꺼내기
+		
+		aa[1][1]=10;//값을 저장
+		aaArray1[1]=30;//값을 저장
+		
+		for (int i = 0; i < aa.length; i++) {
+			for (int j = 0; j < aa[0].length; j++) {
+				System.out.print(aa[i][j]+" ");
+			}
+			System.out.println();
+		}
+		
+		//배열 차원 변환하기
+		int [][] dd=new int [][] {{1,2,3},{4,5,6}};
+		int [] d1 = new int[dd.length*dd[0].length]; 
+		//2차원 --> 1차원 변환
+		// i*col+j = 0*3+0 = 0
+		// i*col+j = 0*3+1 = 1
+		// i*col+j = 0*3+2 = 2
+		// i*col+j = 1*3+0 = 3
+		// i*col+j = 1*3+1 = 4
+		// i*col+j = 1*3+2 = 5
+		for (int i = 0; i < dd.length; i++) {
+			for (int j = 0; j < dd[0].length; j++) {
+				d1[i*dd[0].length+j]=dd[i][j];
+			}
+		}
+		System.out.println(Arrays.toString(d1));
+		
+		//1차원 --> 2차원 변환
+		//[i/col][i%col]
+		//[0/3][0%3]  [1/3][1%3]  [2/3][2%3] [3/3][3%3] [4/3][4%3] [5/3][5%3] 
+		//[0][0]      [0][1]      [0] [2]    [1][0]     [1][1]     [1][2]  
+		int[][] ddd=new int[2][3];
+		int col=ddd[0].length;
+		for (int i = 0; i < d1.length; i++) {
+			ddd[i/col][i%col]=d1[i];
+		}
+		System.out.println(Arrays.toString(ddd[0]));
+		System.out.println(Arrays.toString(ddd[1]));
+		
 	}
+	//생성자를 통해 배열 초기화
+	public int [][] abc;
+	
+	public ArrayTest() {//default 생성자
+		abc=new int[3][3];
+	}
+	
+	public ArrayTest(int n) {//생성자 오버로딩
+		abc=new int[n][n];
+	}
+	
+	public ArrayTest(int m,int n) {//생성자 오버로딩
+		abc=new int[m][n];
+	}
+	
 }
 
 
