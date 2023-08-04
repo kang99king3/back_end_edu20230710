@@ -46,8 +46,70 @@ public class OddMagicSquare {
 			for (int j = 0; j < magic.length; j++) {
 				System.out.print(magic[i][j]+"\t");
 			}
+			System.out.println(sumCol(i));//가로방향 합 출력
 			System.out.println();
 		}
+		for (int i = 0; i < magic.length; i++) {
+			System.out.print(sumRow(i)+"\t"); //세로합 출력
+		}
+		System.out.println("\n대각선의 합:"+sumDia()+","+sumRevDia());
+		System.out.println("마방진 확인:"+(isCheck()?"마방진 증명":"마방진 실패"));
+	}
+	
+	//row (세로방향)합
+	public int sumRow(int j) {
+		int tot=0;
+		for (int i = 0; i < magic.length; i++) {
+			tot+=magic[i][j];
+		}
+		return tot;
+	}
+	
+	//col (가로방향)합
+	public int sumCol(int j) {
+		int tot=0;
+		for (int i = 0; i < magic.length; i++) {
+			tot+=magic[j][i];
+		}
+		return tot;
+	}
+	//왼쪽->오른쪽 대각선의 합
+	public int sumDia() {
+		int tot=0;
+		for (int i = 0; i < magic.length; i++) {
+			tot+=magic[i][i];
+		}
+		return tot;
+	}
+	//오른쪽->왼쪽 대각선의 합
+	public int sumRevDia() {
+		int tot=0;
+		for (int i = 0; i < magic.length; i++) {
+			tot+=magic[i][magic.length-1-i];
+		}
+		return tot;
+	}
+	//합이 같은지 체크
+	public boolean isCheck() {
+		boolean isC=true;
+		int n=magic.length;
+		int [] ma=new int [2*n+2];
+		
+		for (int i = 0; i < n; i++) {
+			ma[i]=sumRow(i);// 0 1 2
+			ma[i+n]=sumCol(i);// 3 4 5
+		}
+		ma[2*n]=sumDia();
+		ma[2*n+1]=sumRevDia();
+		
+		for (int i = 1; i < ma.length; i++) {
+			if(ma[0]!=ma[i]) {
+				isC=false;
+				break;
+			}
+		}
+		
+		return isC;
 	}
 }
 
