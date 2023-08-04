@@ -17,6 +17,7 @@ public class LottoStore {
 	}
 	
 	public LottoStore(int n) {
+		//       new int []
 		lottoObj=new Lotto[n];
 		makeLotto();
 	}

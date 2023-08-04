@@ -13,12 +13,15 @@ public class LottoMain {
 //			
 //		}
 		
-		LottoStore lottoStore=new LottoStore(20);
-		Lotto[] lottoObj=lottoStore.lottoObj;
-		for (int i = 0; i < lottoObj.length; i++) {
-			Lotto lotto=lottoObj[i];
-			System.out.println(Arrays.toString(lotto.getLots())); 
-		}
+//		LottoStore lottoStore=new LottoStore(20);
+//		Lotto[] lottoObj=lottoStore.lottoObj;
+//		for (int i = 0; i < lottoObj.length; i++) {
+//			Lotto lotto=lottoObj[i];
+//			System.out.println(Arrays.toString(lotto.getLots())); 
+//		}
+		
+		LottoCompare compare=new LottoCompare(15);
+		compare.comapreBall();
 	}
 
 }
