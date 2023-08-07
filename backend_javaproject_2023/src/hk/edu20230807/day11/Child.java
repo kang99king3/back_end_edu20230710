@@ -22,6 +22,10 @@ public class Child extends Parent{
 		System.out.println("자식이 주변환경에 맞게 코드를 다시 재정의해서 사용한다.:parentMethod()");
 	}
 	
+	public void childMethod() {
+		System.out.println("자식 클래스에만 있는 메서드");
+	}
+	
 	@Override
 	public String toString() {
 		//기본기능: 기본타입에 경우는 값을 문자열로 반환
