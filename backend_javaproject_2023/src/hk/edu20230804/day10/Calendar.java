@@ -86,9 +86,6 @@ public class Calendar {
 			cal.calendarPrint(2023, i);
 			System.out.println("\n");
 		}
-		
-		
-		
 	}
 }
 
