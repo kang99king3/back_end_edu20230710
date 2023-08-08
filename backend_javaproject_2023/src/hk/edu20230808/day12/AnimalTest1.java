@@ -22,8 +22,36 @@ public class AnimalTest1{
 	public void moveAnimal(Animal animal) { // Animal animal=new Animal();
 		//부모의 메서드를 호출하면 자식의 메서드가 호출된다.
 		animal.move();                      //        animal.move();  
+		
+		Human human=(Human)animal;//오버라이딩 안하면 다운캐스팅해서 사용해야 함
+		human.move2();
+//		
+//		Tiger tiger=(Tiger)animal;
+//		tiger.move2();
+		
+		
+	}
+	
+	//다형성을 사용하지 않는다면?
+	public void moveAnimal(Human human) {
+		human.move();
+	}
+	
+	public void moveAnimal(Tiger tiger) {
+		tiger.move();
+	}
+
+	public void moveAnimal(Eagle eagle) {
+		eagle.move();
 	}
 	
 	
-	
 }
+
+
+
+
+
+
+
+
