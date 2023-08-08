@@ -11,6 +11,16 @@ public class VIPCustomer extends Customer {
 		saleRatio=0.1;
 	}
 	
+	public VIPCustomer(int customerID, String customerName, int agentID) {
+		super(customerID,customerName);//부모의 생성자를 호출
+		customerGrade="VIP";
+		bonusRatio=0.05;
+		saleRatio=0.1;
+		this.agentID = agentID;
+	}
+
+
+
 	public int getAgentID() {
 		return agentID;
 	}
@@ -21,6 +31,10 @@ public class VIPCustomer extends Customer {
 		return price-(int)(price*saleRatio) ;//할인율을 적용함
 	}
 	
+	@Override
+	public String showCustomerInfo() {
+		return super.showCustomerInfo()+"담당 상담원 아이디는 "+agentID+"입니다.";
+	}
 
 }
 

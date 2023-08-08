@@ -13,6 +13,14 @@ public class Customer {
 		bonusRatio = 0.01;
 	}
 	
+	public Customer(int customerID, String customerName) {
+		super();
+		this.customerID = customerID;
+		this.customerName = customerName;
+		customerGrade = "SILVER";//기본등급
+		bonusRatio = 0.01;
+	}
+
 	public int calcPrice(int price) {
 		bonusPoint+=price*bonusRatio;
 		return price;
@@ -27,7 +35,6 @@ public class Customer {
 	public String showCustomerInfo() {
 		return customerName+"님의 등급은"+ customerGrade
 				+"이며, 보너스 포인트는 "+bonusPoint +"입니다.";
-				
 	}
 
 	//다른 패키지에서 접근 할 수 있도록 메서드를 통해 접근 허용(메서드는 public 정의)
