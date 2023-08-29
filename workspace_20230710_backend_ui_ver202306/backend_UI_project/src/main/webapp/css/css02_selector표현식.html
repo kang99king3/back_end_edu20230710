@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	/*타입 선택자*/
+	p{
+		width: 800px;
+		background-color: orange;
+	}
+	strong{
+		color:pink;
+	}
+	
+	/*ID선택자*/
+	#a{
+		background-color: yellow;
+	}
+	#b{
+		color:red;
+	}
+	/*class선택자*/
+	.p{font-size: 25px;}
+	
+	/*자식선택자*/
+	#container1 #a > strong{
+		color:red;
+	}
+	
+	/*인접선택자*/
+	#container1 #c + p{ /*인접한 요소 하나만 선택*/
+		color:white;
+	}
+	#container2 #c ~ p{ /*인접한 요소 다음으로 계속 선택*/
+		color:rgb(255, 255, 0);
+	}
+	/*속성선택자*/
+	#container2 p[class]{ /*속성이 존재하는지 여부로 선택*/
+		background-color: green;
+	}
+	#container2 h1[title='기사의 제목입니다.']{
+		background-color: blueviolet;
+	}
+	/*가상선택자*/
+	a:link{ 
+		color:aqua;
+	}
+	a:visited{
+		color:brown;
+	}
+	a:active{
+		color:chartreuse;
+	}
+	#container2 p:hover{
+		background-color:yellow;
+		cursor: pointer;
+		width: 500px; 
+	}
+	/*수도클래스선택자*/
+	#container3 p:first-letter{
+		font-size: 40px;
+	}
+	#container3 p:first-line{
+		color:blue;
+	}
+	#container3 p:first-child{
+		background-color: greenyellow;
+	}
+	#container3 div > p:after{
+		content: "뒤에 가상의 요소가 있음";
+		color:red;
+	}
+</style>
+</head>
+<body>
+<div id="container1">
+	<h1 id="a">文, <strong>홍범도</strong> 등 <strong>흉상철거</strong> 논란에 "부디 숙고해주길"</h1>
+	<h1>文, <strong>홍범도</strong> 등 <strong>흉상철거</strong> 논란에 "부디 숙고해주길"</h1>
+	<p>
+	문재인 전 대통령은 27일 국방부가 <strong id="b">육군사관학교</strong> 내 홍범도 장군을 비롯한 독립군·광복군 
+	영웅 5인의 흉상 이전을 추진하는 것과 관련 "깊은 우려를 표한다"고 밝혔습니다.
+	</p>
+	<p class="p" id="c">
+	문 전 대통령은 이날 페이스북에 "대한민국의 뿌리가 임시정부에 있듯이 우리 국군의 뿌리도
+	 대한독립군과 광복군에 있음을 부정하는 것인가"라며 "깊은 우려를 표한다"고 적었습니다.
+	</p>
+	<p class="p">
+	그는 "국권을 잃고 만주로, 연해주로, 중앙아시아로 떠돌며 풍찬노숙했던 항일무장독립운동 
+	영웅들의 흉상이 오늘 대한민국에서도 이리저리 떠돌아야겠는가"라며 지적했습니다.
+	</p>
+</div>
+<hr/>
+<div id="container2">
+	<h1 id="a">文, <strong>홍범도</strong> 등 <strong>흉상철거</strong> 논란에 "부디 숙고해주길"</h1>
+	<h1 title="기사의 제목입니다.">文, <strong>홍범도</strong> 등 <strong>흉상철거</strong> 논란에 "부디 숙고해주길"</h1>
+	<p>
+	문재인 전 대통령은 27일 국방부가 <strong id="b">육군사관학교</strong> 내 홍범도 장군을 비롯한 독립군·광복군 
+	영웅 5인의 흉상 이전을 추진하는 것과 관련 "깊은 우려를 표한다"고 밝혔습니다.
+	</p>
+	<p class="p" id="c">
+	문 전 대통령은 이날 페이스북에 "대한민국의 뿌리가 임시정부에 있듯이 우리 국군의 뿌리도
+	 대한독립군과 광복군에 있음을 부정하는 것인가"라며 "깊은 우려를 표한다"고 적었습니다.
+	</p>
+	<p class="p">
+	그는 "국권을 잃고 만주로, 연해주로, 중앙아시아로 떠돌며 풍찬노숙했던 항일무장독립운동 
+	영웅들의 흉상이 오늘 대한민국에서도 이리저리 떠돌아야겠는가"라며 지적했습니다.
+	</p>
+	<p>
+	그는 "국권을 잃고 만주로, 연해주로, 중앙아시아로 떠돌며 풍찬노숙했던 항일무장독립운동 
+	영웅들의 흉상이 오늘 <a href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD">대한민국</a>에서도 이리저리 떠돌아야겠는가"라며 지적했습니다.
+	</p>
+</div>
+<hr/>
+<div id="container3">
+<!--	<p>자식요소중에서 첫번째요소가 p태그인 요소를 선택한다.</p>-->
+	<h1 id="a">文, <strong>홍범도</strong> 등 <strong>흉상철거</strong> 논란에 "부디 숙고해주길"</h1>
+	<h1 title="기사의 제목입니다.">文, <strong>홍범도</strong> 등 <strong>흉상철거</strong> 논란에 "부디 숙고해주길"</h1>
+	<div>
+		<p>
+		문재인 전 대통령은 27일 국방부가 <strong id="b">육군사관학교</strong> 내 홍범도 장군을 비롯한 독립군·광복군 
+		영웅 5인의 흉상 이전을 추진하는 것과 관련 "깊은 우려를 표한다"고 밝혔습니다.
+		</p>
+		<p class="p" id="c">
+		문 전 대통령은 이날 페이스북에 "대한민국의 뿌리가 임시정부에 있듯이 우리 국군의 뿌리도
+		 대한독립군과 광복군에 있음을 부정하는 것인가"라며 "깊은 우려를 표한다"고 적었습니다.
+		</p>
+		<p class="p">
+		그는 "국권을 잃고 만주로, 연해주로, 중앙아시아로 떠돌며 풍찬노숙했던 항일무장독립운동 
+		영웅들의 흉상이 오늘 대한민국에서도 이리저리 떠돌아야겠는가"라며 지적했습니다.
+		</p>
+		<p>
+		그는 "국권을 잃고 만주로, 연해주로, 중앙아시아로 떠돌며 풍찬노숙했던 항일무장독립운동 
+		영웅들의 흉상이 오늘 <a href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD">대한민국</a>에서도 이리저리 떠돌아야겠는가"라며 지적했습니다.
+		</p>
+	</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
