@@ -40,11 +40,22 @@
 		console.log(date.toLocaleString());
 		document.getElementById("resultDate").value=date.toLocaleString();
 	}
+	//D-Day 구현해보기
 	//현재날짜 , 수료날짜 사이에 일수를 구함
 	//Date객체에 getTime()를 사용 : 1970년1월1일 기준으로 ~~ new Date()까지의 경과 시간을 구함
+	//          반환값의 단위: ms 단위 --> 1초 --> 1000ms 
+	//          반환값(ms)   48시간/24(h)--> 2일  --> 24(h) --> ms단위로 환산
+	//   1*60*60*24 = 24시간을 초단위로 변환 
 	function testDate05(){
-		
-	}
+		var nowDate=new Date();//현재날짜 객체
+		var date=document.getElementById("d_day").value;//입력한 수료날짜 가져오기
+		console.log(date);
+		var afterDate=new Date(date);//수료날짜 객체
+		var period=Math.ceil((afterDate.getTime()-nowDate.getTime())/(1000*1*60*60*24));
+			//                    48h-> millisecond단위 --> 24h --> 1000*1*60*60*24
+		console.log(period);
+		document.getElementById("period").value=period;
+	} 
 	
 	onload=function(){
 		var date=new Date();
