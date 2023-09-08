@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js21_domcreate_활용</title>
+<style type="text/css">
+	
+</style>
+<script type="text/javascript">
+	function creatImg(){
+		//라디오 버튼을 탐색해서 선택된 버튼의 값(value속성)을 구하기
+		var rdo=document.getElementsByName("rbtn");
+		
+		
+		var val="";
+		//1번 방법: 라디오버튼 모두 구해서 각각 체크여부 확인해서 값 구하기
+		/*
+		for(var i=0;i<rdo.length;i++){
+			if(rdo[i].checked){
+				val=rdo[i].value;
+				break;
+			}
+		}
+		*/
+		//2번 방법: selector표현식으로 체크된 상태의 요소 구하기
+		val=document.querySelector("input:checked").value;
+		console.log(val);
+		
+		//태그 생성하는 코드작성
+	}
+</script>
+</head>
+<body>
+<h1>선택된 목록에 해당하는 이미지 보여주기</h1>
+<input type="radio" name="rbtn" value="img/0.jpg"/><label>자장면</label>
+<input type="radio" name="rbtn" value="img/1.jpg"/><label>치킨</label>
+<input type="radio" name="rbtn" value="img/2.jpg"/><label>떡볶이</label>
+<button onclick="creatImg()">이미지생성</button>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
