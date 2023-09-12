@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jq5_DOM탐색메서드_메뉴만들기</title>
+<style type="text/css">
+	.menu{
+		width:120px;
+		background-color: orange;
+		position: absolute;
+	}
+	#menu02{
+		left:140px;
+	}
+	#menu03{
+		left:270px;
+	}
+	div > a{
+		text-decoration: none;
+		width: 120px;
+		height: 30px;
+		display: inline-block;
+		text-align: center;
+		line-height: 30px;
+		font-weight: bold;
+		color:white;
+	}
+	
+	.menu > div{
+		display: none;
+	}
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+<h1>메뉴만들기</h1>
+<div id="menu01" class="menu">
+	<a href="#">필터링메서드</a>
+	<div>.eq()</div>
+	<div>.slice()</div>
+	<div>.first()</div>
+	<div>.last()</div>
+</div>
+<div id="menu02" class="menu">
+	<a href="#">트리탐색메서드</a>
+	<div>.find()</div>
+	<div>.children()</div>
+	<div>.parent()</div>
+	<div>.prev()</div>
+</div>
+<div id="menu03" class="menu">
+	<a href="#">기타메서드</a>
+	<div>.add()</div>
+	<div>.is()</div>
+	<div>.end()</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,10 +12,26 @@
 		//1.
 			$("#simpletest1").css("background-color","#ff0");
 		//2.
-			
+			$(".simpletest1").css("color","#f00");
 		//3.
-		
-		
+			//$("span").eq(1).css("font-size","30pt");
+			$("span:eq(1)").css("font-size","30pt");
+		//4.
+			$("div:eq(1)").css("font-style","italic");
+		//5.
+			var len=$("div").length;
+			//$("#count").text(len);    // textContent->text(), innerHTML -> html()	
+			$("#count").html("<strong>"+len+"</strong>");
+		//6.
+		   	$("div em").css("background-color","blue");
+		//7.
+		    $("span > em").css("color","red");   
+		//8.
+			$("div > p:first-child").css("background-color","yellow");
+		//9.
+			$("div > p:last-child").css("background-color","red");    
+		//10.
+			$("p[title]").css("border","1px solid red");		
 	});
 </script>
 </head>
