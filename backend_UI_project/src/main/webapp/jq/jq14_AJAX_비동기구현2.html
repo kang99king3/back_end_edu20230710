@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jq14_AJAX_비동기구현2</title>
+<script type="text/javascript" src="jquery_3.7.1.js"></script>
+<style type="text/css">
+	
+</style>
+<script type="text/javascript">
+	$(function(){
+		$("#emp_search").click(function(){
+			//사원번호 구함
+			var empId=$("input[name=empId]").val();// val() -> value속성을 의미
+			if(empId==""||!isNaN(empId)){
+				$.ajax({
+					url:"emplist.xml",
+					method:"get",
+					dataType:"xml",
+					async:false,
+					success:function(data){
+						var rows=$(data).find("ROW");// ROW,ROW,ROW
+						
+						//사원번호 입력값이 없는경우는 전체 출력
+						if(empId==""){
+							var table=$("<table border='1'></table>"); //table태그 생성(정의)
+							
+							//tr, td 생성 작업
+							for(var i=0;i<rows.length;i++){
+								var tr=$("<tr></tr>");//tr태그 생성
+								for(var j=0;j<rows.eq(0).children().length;j++){//rows.eq(0).children().length: td의 개수
+									var td=$("<td></td>");//td태그 생성
+									td.text(rows.eq(i).children().eq(j).text());
+									tr.append(td);
+								}
+								table.append(tr);
+							}
+							$("div").append(table);
+						}else{//사원번호 입력값이 있는경우는 해당 정보 출력
+							
+						}
+						
+						
+					},
+					error:function(){
+						alert("서버통신실패");
+					}
+				});
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<h1>사원정보조회하기(여러명조회)</h1>
+<fieldset>
+	<legend>사원정보조회</legend>
+	<label>사원번호:</label>
+	<input type="text" name="empId" value=""/>
+	<input type="button" value="조회" id="emp_search"/>
+</fieldset>
+<div></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
