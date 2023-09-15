@@ -42,8 +42,22 @@
 	//4. 선택된 메뉴의 이름을 id가 "message"인 div요소에 출력하는 기능
 	//        출력 형식 : "오늘의 메뉴는 치킨입니다."
 	$(function(){
+
+		var moveImg;
 		
 		$("button").click(function(){
+			if($(this).text()=="start"){
+				moveImg=setInterval(function(){
+					$("#menu").append($("#menu > img").first());				
+				},100);	
+				$(this).text("stop");//이미지 실행시켰으니.. 버튼의 이름은 stop으로..			
+			}else{
+				clearInterval(moveImg);
+				$(this).text("start");
+				var idx= ~~($("img").length/2);//중간 위치의 인덱스 구하기
+				var imgName=$("#menu > img").eq(idx).attr("alt");//선택된 이미지 이름 가져오기
+				$("#message").text("오늘의 메뉴는 "+imgName+"입니다.");
+			}
 			
 		});
 	});
