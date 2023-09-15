@@ -31,53 +31,55 @@
 			//사원번호 구함
 			var empId=$("input[name=empId]").val();// val() -> value속성을 의미
 			
-			if(empId숫자이면){
-				$.ajax메서드 실행
+			if(empId!=null && empId!="" && !isNaN(empId)){
+	// 			alert(empId);
+				$.ajax({
+					url:"emplist.xml",
+					method:"get",
+					async:false, //페이지를 동기/비동기처리하는 개념X -> ajax메서드의 실행방식을 의미
+	// 				data:{"id":"hk","name":"hankyung".....}
+					dataType:"xml",
+					success:function(data){// 파라미터인 data에 응답데이터가 받아짐
+	// 					alert(data);
+						var obj=$(data);
+	// 					alert(obj.find("ROW").length);
+	// 					alert(obj.find("ROW").eq(0).find("LAST_NAME").text());
+	
+						var empRow=null;// 검색한 사원의 정보를 담고 있는 ROW객체
+						
+						//입력한 사원번호가 존재하는지 확인하여 해당 ROW를 구하는 코드
+						obj.find("EMPLOYEE_ID").each(function(){
+							if($(this).text()==empId){
+								empRow=$(this).parent();//ROW[id,name,email..]
+								return false;//함수종료
+							}
+						});//each종료
+						
+						if(empRow==null){
+							alert("검색결과가 존재하지 않습니다.");
+						}else{
+							//ROW객체를 input요소에 출력만 하면 됨
+							$("table input").each(function(i){
+								$(this).val(empRow.children().eq(i).text());
+							});							
+						}
+							
+						
+						//문제1:
+						//사원번호는 숫자이기때문에 입력시 문자를 입력하면 알려주기("숫자만 입력가능합니다.")
+						//문제2:
+						//검색결과가 없는 경우에는 "검색결과가 존재하지 않습니다." 알려주기
+						
+					},//success종료
+					error:function(request,error){
+						alert("통신실패:"+request.status+","+error);
+					}
+				});//ajax메서드 종료
 			}else{
-				alert("숫자만 입력가능합니다.");
+				alert("반드시 입력해야하며, 숫자만 입력가능합니다.");
 			}
 			
-// 			alert(empId);
-			$.ajax({
-				url:"emplist.xml",
-				method:"get",
-				async:false, //페이지를 동기/비동기처리하는 개념X -> ajax메서드의 실행방식을 의미
-// 				data:{"id":"hk","name":"hankyung".....}
-				dataType:"xml",
-				success:function(data){// 파라미터인 data에 응답데이터가 받아짐
-// 					alert(data);
-					var obj=$(data);
-// 					alert(obj.find("ROW").length);
-// 					alert(obj.find("ROW").eq(0).find("LAST_NAME").text());
-
-					var empRow=null;// 검색한 사원의 정보를 담고 있는 ROW객체
-					
-					
-					//입력한 사원번호가 존재하는지 확인하여 해당 ROW를 구하는 코드
-					obj.find("EMPLOYEE_ID").each(function(){
-						if($(this).text()==empId){
-							empRow=$(this).parent();//ROW[id,name,email..]
-							return false;//함수종료
-						}
-					});//each종료
-					
-					if(empRow가 null인지..)
-						
-					//ROW객체를 input요소에 출력만 하면 됨
-					$("table input").each(function(i){
-						$(this).val(empRow.children().eq(i).text());
-					});
-					
-					//문제1:
-					//사원번호는 숫자이기때문에 입력시 문자를 입력하면 알려주기("숫자만 입력가능합니다.")
-					//문제2:
-					//검색결과가 없는 경우에는 "검색결과가 존재하지 않습니다." 알려주기
-					
-				},//success종료
-				error:function(request,error){
-					alert("통신실패:"+request.status+","+error);
-				}
-			});
+			
 		});
 	})
 </script>
