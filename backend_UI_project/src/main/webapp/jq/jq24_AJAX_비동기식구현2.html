@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-3.6.0.js"></script>
+<script type="text/javascript" src="makeTable.js"></script>
+<script type="text/javascript">
+//문제
+//2. 검색결과를 출력하는 표에서 컬럼을 표현하기---> 컬럼명은 태그이름에서 구해오기
+//  <tr><th>EMPLOYEE_ID</th><th>LAST_NAME</th><th>EMAIL</th><th>PHONE_NUMBER</th><th>HIRE_DATE</th></tr>
+//  <td>data</td>......
+// 관련 키워드 : 태그의 이름을 구하는 메서드??
+//3. XML 데이터를 구해서 표로 출력을 하는 코드의 중복 제거하기--> 메서드(함수)만들기
+// 함수로 정의해서 외부 파일(JS)에 작성하고 링크로 실행하기
+
+	$(function(){
+		$("#emp_search").click(function(){
+			var empId=$("input[name=empId]").val();//조회할 사원번호
+			if(empId==""||!isNaN(empId)){
+				$.ajax({
+					url:"emplist.xml",
+					method:"get",
+					async:false,
+					dataType:"xml",
+					success:function(data){
+// 						alert($(data).find("ROW").length);
+						var rows=$(data).find("ROW");//[ROW,ROW,ROW,ROW,....107]
+						
+						//---아래와 같이 줄일 수 도 있다--시작
+// 						if(empId!=""){
+// 							rows=rows.find("EMPLOYEE_ID:contains("+empId+")").parent();
+// 						}
+						
+// 						var table=makeTable(rows);
+// 						$("div").html(table);
+						//---종료
+						
+						if(empId==""){
+							//---- 중복되는 코드 시작
+// 							var table=$("<table border='1'></table>");//table태그 생성
+							
+// 							//tr, th로 구성된 행 하나 만드는 코드 작성--> 최종 만들어진 tr을 table에 append하면 된다.
+// 							//<EMPLOYEE_ID> 태그 이름가져오기 prop()활용
+// 							var trh=$("<tr></tr>");//tr태그 생성	
+// 							for (var j = 0; j < rows.eq(0).children().length; j++) {
+// 								var th=$("<th></th>");
+// 								th.text(rows.eq(0).children().eq(j).prop("tagName"));
+// 								trh.append(th);//<tr><th>컬럼명</th><th>컬럼명</th><th>컬럼명</th></tr>
+// 							}//for끝	
+// 							table.append(trh);
+							
+// 							for (var i = 0; i < rows.length; i++) {
+// 								var tr=$("<tr></tr>");//tr태그 생성	
+// 								for (var j = 0; j < rows.eq(0).children().length; j++) {
+// 									var td=$("<td></td>");
+// 									td.text(rows.eq(i).children().eq(j).text());
+// 									tr.append(td);//<tr><td>text</td>...</tr>
+// 								}//for끝	
+// 								table.append(tr);
+// 							}//for끝
+							//----중복되는 코드 종료
+							
+// 							$("div").append(table);
+							var table=makeTable(rows);
+							$("div").html(table);
+						}else{
+							
+							rows=rows.find("EMPLOYEE_ID:contains("+empId+")").parent();
+							
+// 							//---- 중복되는 코드 시작
+// 							var table=$("<table border='1'></table>");//table태그 생성
+// 							//tr, th로 구성된 행 하나 만드는 코드 작성--> 최종 만들어진 tr을 table에 append하면 된다.
+// 							//<EMPLOYEE_ID> 태그 이름가져오기 prop()활용
+// 							var trh=$("<tr></tr>");//tr태그 생성	
+// 							for (var j = 0; j < rows.eq(0).children().length; j++) {
+// 								var th=$("<th></th>");
+// 								th.text(rows.eq(0).children().eq(j).prop("tagName"));
+// 								trh.append(th);//<tr><th>컬럼명</th><th>컬럼명</th><th>컬럼명</th></tr>
+// 							}//for끝	
+// 							table.append(trh);
+					
+// 							for (var i = 0; i < rows.length; i++) {
+// 								var tr=$("<tr></tr>");//tr태그 생성	
+// 								for (var j = 0; j < rows.eq(0).children().length; j++) {
+// 									var td=$("<td></td>");
+// 									td.text(rows.eq(i).children().eq(j).text());
+// 									tr.append(td);//<tr><td>text</td>...</tr>
+// 								}//for끝	
+// 								table.append(tr);
+// 							}//for끝
+							
+// 							$("div").append(table);
+
+							var table=makeTable(rows);
+							$("div").html(table);
+						}
+						
+					}
+				});
+			}else{
+				alert("숫자만 입력가능합니다.");
+			}
+		});
+	})
+	
+// 	function makeTable(rows){
+// 		var table=$("<table border='1'></table>");//table태그 생성
+		
+// 		//tr, th로 구성된 행 하나 만드는 코드 작성--> 최종 만들어진 tr을 table에 append하면 된다.
+// 		//<EMPLOYEE_ID> 태그 이름가져오기 prop()활용
+// 		var trh=$("<tr></tr>");//tr태그 생성	
+// 		for (var j = 0; j < rows.eq(0).children().length; j++) {
+// 			var th=$("<th></th>");
+// 			th.text(rows.eq(0).children().eq(j).prop("tagName"));
+// 			trh.append(th);//<tr><th>컬럼명</th><th>컬럼명</th><th>컬럼명</th></tr>
+// 		}//for끝	
+// 		table.append(trh);
+		
+// 		for (var i = 0; i < rows.length; i++) {
+// 			var tr=$("<tr></tr>");//tr태그 생성	
+// 			for (var j = 0; j < rows.eq(0).children().length; j++) {
+// 				var td=$("<td></td>");
+// 				td.text(rows.eq(i).children().eq(j).text());
+// 				tr.append(td);//<tr><td>text</td>...</tr>
+// 			}//for끝	
+// 			table.append(tr);
+// 		}//for끝
+// 		return table;
+// 	}
+</script>
+</head>
+<body>
+<h1>사원정보가져오기</h1>
+<fieldset>
+	<legend>사원정보조회</legend>
+	<label>사원번호:</label><input type="text" name="empId"/>
+	<input type="button" value="조회" id="emp_search"/>
+</fieldset>
+<div></div>
+</body>
+</html>
