@@ -1,6 +1,7 @@
 package com.hk.board.daos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -97,7 +98,9 @@ public class UserDao {
 	}
 	
 	//회원등록하기: insert문, 파리미터 전달받을 값들(회원의 정보들)
-	public boolean insertUser() {
+	public boolean insertUser(UserDto dto) {
+		
+		int count=0;//쿼리실행 성공개수
 		
 		Connection conn=null;
 		PreparedStatement psmt=null;
@@ -114,14 +117,56 @@ public class UserDao {
 			conn=DriverManager.getConnection(url, user, password);
 			System.out.println("2단계:DB연결성공");
 			psmt=conn.prepareStatement(sql);
-			
+			psmt.setString(1, dto.getUserID());
+			psmt.setString(2, dto.getName());
+			psmt.setInt(3, dto.getBirthYear());
+			psmt.setString(4, dto.getAddr());
+			psmt.setString(5, dto.getMobile1());
+			psmt.setString(6, dto.getMobile2());
+			psmt.setInt(7, dto.getHeight());
+			System.out.println("3단계:쿼리준비성공");
+			//count에 실행된 행의 개수가 저장됨
+			count=psmt.executeUpdate();
+			System.out.println("4단계:쿼리실행성공");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("JDBC실패:해당클래스:"+getClass());
 			e.printStackTrace();
+		}finally {
+			//DB가 계속 연결되어 있으면 안되므로 닫아준다.
+			try {
+				if(psmt!=null) {
+					psmt.close();
+				}
+				if(conn!=null) {
+					conn.close();
+				}
+				System.out.println("6단계:DB닫기성공");
+				
+			} catch (SQLException e) {
+				System.out.println("6단계:DB닫기실패");
+				e.printStackTrace();
+			}
 		}
 		
+		return count>0?true:false;
+	}
+	
+	
+	//회원정보상세조회:select문
+	public UserDto getUser(String userId) {
+		UserDto dto=new UserDto();
 		
-		return false;
+		return dto;
+	}
+	
+	//회원정보 수정:update문
+	public boolean updateUser(UserDto dto) {
+		return true;	
+	}
+	
+	//회원삭제:delete문
+	public boolean deleteUser(String userId) {
+		return true;
 	}
 }
 

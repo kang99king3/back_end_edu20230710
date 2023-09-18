@@ -1,5 +1,6 @@
 package com.hk.board.main;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.hk.board.daos.UserDao;
@@ -20,7 +21,37 @@ public class MainTest {
 					          +list.get(i).getName()+"|"
 					          +list.get(i).getmDate());
 		}
+		
+		//회원정보 등록하기
+		UserDto dto=new UserDto();
+		dto.setUserID("KKP");
+		dto.setName("김경호");
+		dto.setBirthYear(1971);
+		dto.setAddr("전남");
+		dto.setMobile1("019");
+		dto.setMobile2("33333333");
+		dto.setHeight(177);
+		
+//		boolean isS=dao.insertUser(dto);
 	}
+	
+	//회원정보상세조회:select문
+	public void getUser() {
+		
+	}
+	
+	//회원정보 수정:update문
+	public void updateUser() {
+			
+	}
+	
+	//회원삭제:delete문
+	public void deleteUser() {
+		
+	}
+
+	
+	
 }
 
 

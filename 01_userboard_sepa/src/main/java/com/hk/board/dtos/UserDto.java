@@ -100,7 +100,8 @@ public class UserDto {
 	public String toString() {
 		return "UserDto [userID=" + userID + ", name=" + name + ", birthYear=" + birthYear + ", addr=" + addr
 				+ ", mobile1=" + mobile1 + ", mobile2=" + mobile2 + ", height=" + height + ", mDate=" + mDate + "]";
-	} 
+	}
+
 	
 	
 }
