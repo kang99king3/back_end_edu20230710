@@ -2,6 +2,8 @@ package com.hk.board.daos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,25 +26,102 @@ public class UserDao {
 	
 	//회원목록 조회기능
 	public List<UserDto> getAllUser(){
+		//List는 여러행의 정보(dto객체들)를 담기 위한 객체
 		List<UserDto> list=new ArrayList<>();
 		
 		//DB연결을 위한 정보 정의
 		String url="jdbc:mariadb://localhost:3306/hkedu";
 		String user="root";
 		String password="manager";
-		Connection conn=null;
+		Connection conn=null;//DB 연결 객체
+		PreparedStatement psmt=null;// 쿼리 준비 및 실행을 위한 객체
+		ResultSet rs=null;//쿼리 실행 결과를 받을 객체
+		
+		String sql=" SELECT userID , "
+				+ "			NAME , "
+				+ "			birthYear , "
+				+ "			addr , "
+				+ "			mobile1 , "
+				+ "			mobile2 , "
+				+ "			height , "
+				+ "			mDate  "
+				+ " FROM usertbl";
 		
 		// java.sql, java.io, java.net : 무조건 예외처리 해줘야 함
 		try {
 			conn=DriverManager.getConnection(url, user, password);
 			System.out.println("2단계:DB연결성공");
+			psmt=conn.prepareStatement(sql);//쿼리를 작성한 상태
+			System.out.println("3단계:쿼리준비성공");
+			rs=psmt.executeQuery();//쿼리 실행된 상태
+			System.out.println("4단계:쿼리실행성공");
+			//resultSet객체에 쿼리 결과를 받았지만 자바에서 바로 사용 못함
+			while(rs.next()) {
+				//[userID,name,addr,.........]
+				UserDto dto=new UserDto();
+				dto.setUserID(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setBirthYear(rs.getInt(3));
+				dto.setAddr(rs.getString(4));
+				dto.setMobile1(rs.getString(5));
+				dto.setMobile2(rs.getString(6));
+				dto.setHeight(rs.getInt(7));
+				dto.setmDate(rs.getDate(8));
+				list.add(dto);//list[dto(row),dto(row),dto(row),....]
+			}
+			System.out.println("5단계:쿼리결과받기 성공");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("2단계:DB연결실패");
+			System.out.println("JDBC실패:"+getClass());
+		}finally {
+			try {
+				if(rs!=null) {
+					rs.close();
+				}
+				if(psmt!=null) {
+					psmt.close();
+				}
+				if(conn!=null) {
+					conn.close();
+				}
+				System.out.println("6단계:DB닫기성공");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("6단계:DB닫기실패");
+			}
 		}
 	
 		return list;
+	}
+	
+	//회원등록하기: insert문, 파리미터 전달받을 값들(회원의 정보들)
+	public boolean insertUser() {
+		
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		
+		//DB연결을 위한 정보 정의
+		String url="jdbc:mariadb://localhost:3306/hkedu";
+		String user="root";
+		String password="manager";
+		
+		String sql=" INSERT INTO usertbl "
+				 + " VALUES(?,?,?,?,?,?,?,?)";
+		
+		try {
+			conn=DriverManager.getConnection(url, user, password);
+			System.out.println("2단계:DB연결성공");
+			psmt=conn.prepareStatement(sql);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return false;
 	}
 }
 
