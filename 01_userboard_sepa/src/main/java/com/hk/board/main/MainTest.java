@@ -1,8 +1,6 @@
 package com.hk.board.main;
 
-import java.sql.Timestamp;
 import java.util.List;
-
 import com.hk.board.daos.UserDao;
 import com.hk.board.dtos.UserDto;
 
