@@ -5,10 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	a{text-decoration: none;}
+</style>
 </head>
 <body>
 <h1>회원 관리 시스템</h1>
-<p><a href="">(1) 회원 조회(조회 후 수정/삭제 가능)</a></p>
+<p><a href="userList.jsp">(1) 회원 조회(조회 후 수정/삭제 가능)</a></p>
 <p><a href="">(2) 신규회원 등록</a></p>
 
 <form action="" method="get">
