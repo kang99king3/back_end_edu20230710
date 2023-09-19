@@ -156,6 +156,69 @@ public class UserDao {
 	public UserDto getUser(String userId) {
 		UserDto dto=new UserDto();
 		
+		Connection conn=null;//DB연결객체 저장
+		PreparedStatement psmt=null;//쿼리준비 객체 저장
+		ResultSet rs=null;//쿼리 결과 저장
+		
+		//DB연결을 위한 정보 정의
+		String url="jdbc:mariadb://localhost:3306/hkedu";
+		String user="root";
+		String password="manager";
+		
+		String sql=" SELECT userID ,"
+				+ "			NAME ,"
+				+ "			birthYear ,"
+				+ "			addr ,"
+				+ "			mobile1 ,"
+				+ "			mobile2 ,"
+				+ "			height ,"
+				+ "			mDate "
+				+ " FROM usertbl "
+				+ " WHERE userID = ? "; 
+
+		try {
+			conn=DriverManager.getConnection(url, user, password);
+			System.out.println("2단계:DB연결성공");
+			
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, userId);
+			System.out.println("3단계:쿼리준비성공");
+			
+			rs=psmt.executeQuery();//select문을 실행하며, 결과를 반환한다.
+			System.out.println("4단계:쿼리실행성공");
+			
+			while(rs.next()) {//결과가 있는지 행단위로 확인해서 true/false반환
+				dto.setUserID(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setBirthYear(rs.getInt(3));
+				dto.setAddr(rs.getString(4));
+				dto.setMobile1(rs.getString(5));
+				dto.setMobile2(rs.getString(6));
+				dto.setHeight(rs.getInt(7));
+				dto.setmDate(rs.getDate(8));
+				System.out.println(dto);
+			}
+			System.out.println("5단계:쿼리결과받기");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {
+					rs.close();
+				}
+				if(psmt!=null) {
+					psmt.close();
+				}
+				if(conn!=null) {
+					conn.close();
+				}
+				System.out.println("6단계:DB닫기성공");
+			} catch (SQLException e) {
+				System.out.println("6단계:DB닫기실패");
+				e.printStackTrace();
+			}
+		}
 		return dto;
 	}
 	

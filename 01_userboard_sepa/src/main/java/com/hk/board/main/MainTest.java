@@ -33,20 +33,7 @@ public class MainTest {
 //		boolean isS=dao.insertUser(dto);
 	}
 	
-	//회원정보상세조회:select문
-	public void getUser() {
-		
-	}
 	
-	//회원정보 수정:update문
-	public void updateUser() {
-			
-	}
-	
-	//회원삭제:delete문
-	public void deleteUser() {
-		
-	}
 
 	
 	
