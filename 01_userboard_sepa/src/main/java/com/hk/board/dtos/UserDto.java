@@ -32,7 +32,9 @@ public class UserDto {
 		this.mDate = mDate;
 	}
 	
-	public UserDto(String userID, String name, int birthYear, String addr, String mobile1, String mobile2, int height) {
+	public UserDto(String userID, String name, 
+			       int birthYear, String addr, String mobile1, 
+			       String mobile2, int height) {
 		super();
 		this.userID = userID;
 		this.name = name;

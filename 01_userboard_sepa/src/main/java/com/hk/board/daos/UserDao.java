@@ -111,7 +111,7 @@ public class UserDao {
 		String password="manager";
 		
 		String sql=" INSERT INTO usertbl "
-				 + " VALUES(?,?,?,?,?,?,?,?)";
+				 + " VALUES(?,?,?,?,?,?,?,SYSDATE())";
 		
 		try {
 			conn=DriverManager.getConnection(url, user, password);

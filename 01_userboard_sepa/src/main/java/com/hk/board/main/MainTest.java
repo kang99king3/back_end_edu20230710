@@ -22,7 +22,7 @@ public class MainTest {
 		
 		//회원정보 등록하기
 		UserDto dto=new UserDto();
-		dto.setUserID("KKP");
+		dto.setUserID("KKA");
 		dto.setName("김경호");
 		dto.setBirthYear(1971);
 		dto.setAddr("전남");
@@ -30,7 +30,7 @@ public class MainTest {
 		dto.setMobile2("33333333");
 		dto.setHeight(177);
 		
-//		boolean isS=dao.insertUser(dto);
+		boolean isS=dao.insertUser(dto);
 		
 		
 		//회원정보수정하기
