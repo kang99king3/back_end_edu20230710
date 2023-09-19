@@ -224,12 +224,99 @@ public class UserDao {
 	
 	//회원정보 수정:update문
 	public boolean updateUser(UserDto dto) {
-		return true;	
+		int count=0;//쿼리실행 성공개수
+		
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		
+		//DB연결을 위한 정보 정의
+		String url="jdbc:mariadb://localhost:3306/hkedu";
+		String user="root";
+		String password="manager";
+		
+		String sql="UPDATE usertbl SET 	NAME = ?,"
+				+ "						birthYear = ?,"
+				+ "						addr = ? ,"
+				+ "						mobile1 = ? ,"
+				+ "						mobile2 = ? ,"
+				+ "						height = ? "
+				+ "WHERE userID = ? ";
+				
+		try {
+			conn=DriverManager.getConnection(url, user, password);
+			System.out.println("2단계:DB연결성공");
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, dto.getName());
+			psmt.setInt(2, dto.getBirthYear());
+			psmt.setString(3, dto.getAddr());
+			psmt.setString(4, dto.getMobile1());
+			psmt.setString(5, dto.getMobile2());
+			psmt.setInt(6, dto.getHeight());
+			psmt.setString(7, dto.getUserID());
+			System.out.println("3단계:쿼리준비성공");
+			count=psmt.executeUpdate();
+			System.out.println("4단계:쿼리실행성공");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(psmt!=null) {
+					psmt.close();
+				}
+				if(conn!=null) {
+					conn.close();
+				}
+				System.out.println("6단계:DB닫기성공");
+			} catch (SQLException e) {
+				System.out.println("6단계:DB닫기실패");
+				e.printStackTrace();
+			}
+		}
+		return count>0?true:false;	
 	}
 	
 	//회원삭제:delete문
 	public boolean deleteUser(String userId) {
-		return true;
+		int count=0;//쿼리실행 성공개수
+		
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		
+		//DB연결을 위한 정보 정의
+		String url="jdbc:mariadb://localhost:3306/hkedu";
+		String user="root";
+		String password="manager";
+		
+		String sql="DELETE FROM usertbl WHERE userID=?";
+		try {
+			conn=DriverManager.getConnection(url, user, password);
+			System.out.println("2단계:DB연결성공");
+			
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, userId);
+			System.out.println("3단계:쿼리준비성공");
+			
+			count=psmt.executeUpdate();
+			System.out.println("4단계:쿼리실행성공");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(psmt!=null) {
+					psmt.close();
+				}
+				if(conn!=null) {
+					conn.close();
+				}
+				System.out.println("6단계:DB닫기성공");
+			} catch (SQLException e) {
+				System.out.println("6단계:DB닫기실패");
+				e.printStackTrace();
+			}
+		}
+		return count>0?true:false;
 	}
 }
 

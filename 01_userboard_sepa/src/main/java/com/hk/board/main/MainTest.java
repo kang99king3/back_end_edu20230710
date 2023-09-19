@@ -31,13 +31,30 @@ public class MainTest {
 		dto.setHeight(177);
 		
 //		boolean isS=dao.insertUser(dto);
-	}
-	
-	
-
-	
-	
-}
+		
+		
+		//회원정보수정하기
+		//생성자 오버로딩을 활용하여 값 초기화
+		boolean isS2= dao.updateUser(new UserDto("LSG", 
+								   "이승기",
+								   1988,
+								   "부산",
+								   "011",
+								   "11111111",
+						           184));	
+		
+		//회원정보상세조회
+		System.out.println("회원상세정보조회");
+		UserDto dto2 = dao.getUser("LSG");
+		System.out.println(dto2);
+		
+		//회원삭제
+		boolean isS3=dao.deleteUser("LSG");
+		if(isS3) {
+			System.out.println("회원삭제성공");
+		}
+	}//main메서드 종료
+}//class
 
 
 
