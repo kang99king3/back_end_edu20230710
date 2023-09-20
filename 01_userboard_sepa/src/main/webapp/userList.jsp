@@ -10,6 +10,12 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 // 	javascript code 작성 영역
+	//자바스크립트에서 삭제여부를 확인하고 삭제 진행한다.
+	function deleteUser(userId){
+		if(confirm("정말 삭제하겠습니까?")){
+			location.href="userDelete.jsp?userId="+userId;
+		}
+	}
 </script>
 </head>
 <% //java코드 실행부
@@ -35,7 +41,8 @@
 				<td><%=dto.getName()%></td>
 				<td><%=dto.getmDate()%></td>
 				<td><a href="userUpdateForm.jsp?userId=<%=dto.getUserID()%>">수정</a></td>
-				<td><a href="userDelete.jsp?userId=<%=dto.getUserID()%>">삭제</a></td>
+<%-- 			<td><a href="userDelete.jsp?userId=<%=dto.getUserID()%>">삭제</a></td> --%>
+				<td><a href="#" onclick="deleteUser('<%=dto.getUserID()%>')">삭제</a></td>
 			</tr>
 		<%
 		}

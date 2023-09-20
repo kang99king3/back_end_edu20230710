@@ -8,6 +8,14 @@
 <style type="text/css">
 	a{text-decoration: none;}
 </style>
+<script type="text/javascript">
+	function deleteUser(userId){
+		if(confirm("정말 삭제하겠습니까?")){
+			//javascript에서 form전송하는 방법: submit() 이용하기
+			document.forms[1].submit();
+		}
+	}
+</script>
 </head>
 <body>
 <h1>회원 관리 시스템</h1>
@@ -20,13 +28,18 @@
 	<input type="submit" value="수정"/>
 </form>
 <br/>
-<form action="" method="get">
+<form action="userDelete.jsp" method="get">
 	<label>(4) 회원삭제-회원아이디:</label>
 	<input type="text" name="userId"/>
-	<input type="submit" value="삭제"/>
+	<input type="button" value="삭제" onclick="deleteUser(userId.value)"/>
 </form>
 </body>
 </html>
+
+
+
+
+
 
 
 
