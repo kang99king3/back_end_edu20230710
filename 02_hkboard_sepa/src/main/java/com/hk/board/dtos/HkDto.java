@@ -29,6 +29,13 @@ public class HkDto implements Serializable{
 		this.content = content;
 		this.regDate = regDate;
 	}
+	
+	public HkDto(String id, String title, String content) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
 
 	public int getSeq() {
 		return seq;
