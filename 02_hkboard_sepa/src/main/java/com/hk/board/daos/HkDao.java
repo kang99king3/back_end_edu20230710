@@ -112,10 +112,72 @@ public class HkDao extends DataBase{
 		return dto;
 	}
 	
-	//글수정하기
+	//글수정하기: update문 실행, 파리미터(seq,title,content), regdate 는 쿼리에서 수정
+	//결과 X -> 테이블을 수정
+	public boolean updateBoard(HkDto dto) {
+		int count=0;
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		
+		String sql="UPDATE hkboard "
+				+ "SET title=?, content=?,regdate=SYSDATE() "
+				+ "WHERE seq = ? ";
+		
+		try {
+			conn=getConnection();//2
+			
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setInt(3, dto.getSeq());//3
+			
+			count=psmt.executeUpdate();//4: 수정된 행의 개수를 반환
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(null, psmt, conn);
+		}
+		return count>0?true:false;
+	}
 	
-	//글삭제
+	//글삭제: delete문 실행, 파리미터(seq)
+	//테이블 수정: ResultSet X  결과값이 없음
+	public boolean deleteBoard(int seq) {
+		int count=0;
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		
+		String sql="DELETE FROM hkboard WHERE seq=?";
+		
+		try {
+			conn=getConnection();
+			
+			psmt=conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			
+			count=psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(null, psmt, conn);
+		}
+		return count>0?true:false;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
