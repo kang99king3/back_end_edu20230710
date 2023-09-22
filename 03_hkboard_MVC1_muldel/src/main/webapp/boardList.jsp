@@ -13,7 +13,7 @@
 <title>글목록조회</title>
 <script type="text/javascript">
 	function insertBoardForm(){
-		location.href="insertBoardForm.jsp";
+		location.href="hkController.jsp?command=insertBoardForm";
 	}
 </script>
 </head>

@@ -10,7 +10,8 @@
 </head>
 <body>
 <h1>새글 작성하기</h1>
-<form action="insertBoard.jsp" method="get">
+<form action="hkController.jsp" method="post">
+<input type="hidden" name="command" value="insertBoard">
 	<table border="1">
 		<tr>
 			<th>작성자(ID)</th>
@@ -28,7 +29,7 @@
 			<td colspan="2">
 				<input type="submit" value="등록" />
 				<input type="button" value="글목록"
-						onclick="location.href='boardList.jsp'" />
+						onclick="location.href='hkController.jsp?command=boardList'" />
 			</td>
 		</tr>
 	</table>

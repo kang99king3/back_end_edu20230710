@@ -27,11 +27,41 @@
 		request.setAttribute("list", list);//requestScope에 저장: "list":list
 		//7단계:페이지 이동
 		pageContext.forward("boardList.jsp");
+	}else if(command.equals("insertBoardForm")){//글추가폼으로 이동 
+		response.sendRedirect("insertBoardForm.jsp");
+	}else if(command.equals("insertBoard")){//글추가하기 실행
+		//4단계:파리미터 받기
+		String id=request.getParameter("id");
+		String title=request.getParameter("title");
+		String content=request.getParameter("content");
+		
+		boolean isS=dao.insertBoard(new HkDto(id,title,content));
+		if(isS){
+			%>
+			<script type="text/javascript">
+				alert("글을 추가합니다.");
+				location.href="hkController.jsp?command=boardList";//글추가하고, 글목록 페이지로 이동하기
+			</script>
+			<%
+		}else{
+			%>
+			<script type="text/javascript">
+				alert("글추가실패!");
+				location.href="hkController.jsp?command=insertBoardForm";//글추가 실패하면, 글추가 페이지로 이동하기
+			</script>
+			<%
+		}
 	}
 	
 %>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
