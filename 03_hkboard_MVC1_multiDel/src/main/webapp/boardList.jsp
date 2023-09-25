@@ -58,7 +58,7 @@
 		}
 	%>
 	<tr>
-		<td colspan="4">
+		<td colspan="5">
 			<button type="button" onclick="insertBoardForm()">글추가</button>	
 			<input type="submit" value="삭제"/>	
 		</td>

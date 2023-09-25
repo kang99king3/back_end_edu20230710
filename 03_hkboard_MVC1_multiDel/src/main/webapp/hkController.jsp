@@ -88,6 +88,17 @@
 			response.sendRedirect("error.jsp?msg="
 					+URLEncoder.encode("글삭제실패", "utf-8"));
 		}
+	}else if(command.equals("muldel")){
+		//삭제를 할 글의 번호가 파라미터로 전달됨
+		String[]seqs=request.getParameterValues("chk");// chk=1,2,3,4,65,6
+		
+		boolean isS=dao.mulDel(seqs);
+		if(isS){
+			response.sendRedirect("hkController.jsp?command=boardList");
+		}else{
+			response.sendRedirect("error.jsp?msg="
+								+URLEncoder.encode("여러글삭제실패","utf-8"));
+		}
 	}
 	
 %>

@@ -79,9 +79,6 @@ public class HkDao extends DataBase {
 		}finally {
 			close(null, psmt, conn);
 		}
-		
-		
-		
 		return count<0?true:false;
 	}
 	//상세 조회: select문 실행, 파라미터(pk: seq)
