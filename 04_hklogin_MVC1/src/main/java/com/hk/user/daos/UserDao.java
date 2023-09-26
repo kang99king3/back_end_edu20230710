@@ -85,7 +85,47 @@ public class UserDao extends DataBase{
 	//3. 로그인 기능 : ID와 password를 통해 회원정보 조회
 	// 로그인 기능 만들어보기
 	// main 메서드에 지금 만든 메서드 실행해 보기
-	
+	public UserDto getLogin(String id, String password) {
+		UserDto dto=new UserDto();
+		
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		ResultSet rs=null;
+		
+//		String sql=" SELECT id,NAME,role "
+//				 + " FROM userinfo "
+//				 + " WHERE id=? AND password=? AND enabled='Y' ";
+		
+		//String 객체에 값이 빈번하게 변경되는 상황이라면.. 객체 생성해서 사용
+		//--> 메모리 효율이 더 좋음
+		StringBuffer sb=new StringBuffer();
+		sb.append(" SELECT id,NAME,role ");
+		sb.append(" FROM userinfo ");
+		sb.append(" WHERE id=? AND password=? AND enabled='Y' ");
+		
+		try {
+			conn=getConnection();
+			
+			psmt=conn.prepareStatement(sb.toString());
+			psmt.setString(1, id);
+			psmt.setString(2, password);
+			
+			rs=psmt.executeQuery();
+			
+			while(rs.next()) {
+				dto.setId(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setRole(rs.getString(3));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs, psmt, conn);
+		}
+		
+		return dto;
+	}
 	
 }
 
