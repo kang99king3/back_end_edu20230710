@@ -66,7 +66,7 @@
 	<form class="form-group" action="userController.jsp" method="post"
 												onsubmit="return isPW(this)">
 		<input type="hidden" name="command" value="addUser"/>
-		<input type="text" name="id" placeholder="ID" required="required"/>
+		<input style="width:700px;" type="text" name="id" placeholder="ID" required="required"/>
 		<span id="idChk" style="display: none;">n</span>
 		<a href="#" onclick="idChk()">중복체크</a>
 		<input type="text" name="name" placeholder="이름" required="required"/>
