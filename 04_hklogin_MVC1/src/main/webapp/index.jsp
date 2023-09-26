@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/loginpage.css" />
+<script type="text/javascript">
+	//회원가입폼 이동
+	function registForm(){
+		location.href="userController.jsp?command=registForm";
+	}
+</script>
 </head>
 <body>
 <form action="userController.jsp" method="post">
