@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="com.hk.user.dtos.UserDto"%>
 <%@page import="com.hk.user.daos.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -56,7 +57,8 @@
 		UserDto dto=dao.getLogin(id, password);
 		
 		if(dto==null||dto.getId()==null){//회원이 존재하지 않는 경우
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("index.jsp?msg="
+						+URLEncoder.encode("회원가입을 해주세요", "utf-8"));
 		}else{
 			//회원이라면
 			session.setAttribute("ldto", dto);//sessionScope에 저장(로그인정보)
