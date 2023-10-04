@@ -127,6 +127,90 @@ public class UserDao extends DataBase{
 		return dto;
 	}
 	
+	//나의 정보 조회
+	public UserDto getUserInfo(String id) {
+		UserDto dto=new UserDto();
+		
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		ResultSet rs=null;
+		
+		String sql=" SELECT id, NAME, address, email, role, regdate "
+				 + " FROM userinfo "
+				 + " WHERE id=? ";
+		
+		try {
+			conn=getConnection();
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs=psmt.executeQuery();
+			while(rs.next()) {
+				dto.setId(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setAddress(rs.getString(3));
+				dto.setEmail(rs.getString(4));
+				dto.setRole(rs.getString(5));
+				dto.setRegDate(rs.getDate(6));
+				System.out.println(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs, psmt, conn);
+		}
+		return dto;
+	}
+	
+	//나의 정보 수정하기 : update문, 파라미터:UserDto
+	public boolean updateUser(UserDto dto) {
+		int count=0;
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		
+		String sql=" UPDATE userinfo "
+				 + " SET address=? , email=? "
+				 + " WHERE id = ? ";
+		
+		try {
+			conn=getConnection();
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, dto.getAddress());
+			psmt.setString(2, dto.getEmail());
+			psmt.setString(3, dto.getId());
+			count=psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(null, psmt, conn);
+		}
+		return count>0?true:false;
+	}
+	
+	//회원 탈퇴하기: update문 작성, enabled='N'
+	public boolean delUser(String id) {
+		int count=0;
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		
+		String sql=" UPDATE userinfo "
+				 + " SET enabled = 'N' "
+				 + " WHERE id =? ";
+		
+		try {
+			conn=getConnection();
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			count=psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(null, psmt, conn);
+		}
+		return count>0?true:false;
+	}
 }
 
 

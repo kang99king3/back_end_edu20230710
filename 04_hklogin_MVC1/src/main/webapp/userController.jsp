@@ -48,7 +48,7 @@
 			</script>
 			<%
 		}
-	}else if(command.equals("login")){
+	}else if(command.equals("login")){//로그인하기
 		String id=request.getParameter("id");
 		String password=request.getParameter("password");
 		
@@ -71,10 +71,26 @@
 				response.sendRedirect("user_main.jsp");
 			}
 		}
+	}else if(command.equals("logout")){//로그아웃하기
+		//로그아웃은 session에 로그인 정보를 삭제한다.
+// 		session.removeAttribute("ldto");//"ldto"라는 이름으로 저장된 객체 삭제
+		session.invalidate();//session안에 저장된 모든 정보 삭제
+		System.out.println("로그아웃함");
+		response.sendRedirect("index.jsp");//request에 저장된 정보는 사라짐
 	}
 %>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
 
