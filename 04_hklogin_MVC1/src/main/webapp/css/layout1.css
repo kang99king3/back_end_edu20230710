@@ -77,7 +77,7 @@ input, button{
 
 
 
-#myinfo{
+#myinfo,#userAllList{
 	width:1000px;
 	margin:0 auto;
 }

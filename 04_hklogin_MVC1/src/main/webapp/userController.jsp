@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="com.hk.user.dtos.UserDto"%>
 <%@page import="com.hk.user.daos.UserDao"%>
@@ -66,7 +67,7 @@
 			
 			//등급[ADMIN, MAMANGER, USER]을 확인해서 해당 MAIN 페이지로 이동하자
 			if(dto.getRole().toUpperCase().equals("ADMIN")){
-				//나중에 처리
+				response.sendRedirect("admin_main.jsp");
 			}else if(dto.getRole().toUpperCase().equals("MANAGER")){
 				
 			}else if(dto.getRole().toUpperCase().equals("USER")){
@@ -130,6 +131,12 @@
 			</script>
 			<%
 		}
+	}else if(command.equals("getAllUserList")){//회원전체조회
+		List<UserDto>list=dao.getAllUserList();
+	
+		request.setAttribute("list", list);
+		
+		pageContext.forward("userAllList.jsp");
 	}
 %>
 </body>

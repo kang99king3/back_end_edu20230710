@@ -14,11 +14,11 @@
 	<div class="main">
 		<div class="lead">
 			<span><%=ldto.getId()%>[<%=ldto.getRole()%>]님이 로그인 함</span> |
-			<span><a href="userController.jsp?command=myinfo&id=<%=ldto.getId()%>">나의정보</a></span> |
+			<span><a href="userController.jsp?command=getAllUserList">회원전체조회</a></span> |
 			<span><a href="userController.jsp?command=logout">로그아웃</a></span>
 		</div>
 		<div class="contents">
-			<h1>사용자 페이지</h1>
+			<h1>관리자 페이지</h1>
 			
 		</div>
 	</div>

@@ -1,9 +1,4 @@
-<%
-response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
-response.setHeader("Cache-Control", "no-store"); //HTTP 1.1
-response.setDateHeader("Expires", 0L); // Do not cache in proxy server
-%>
+<%@include file="header.jsp" %>
 <%@page import="com.hk.user.dtos.UserDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
@@ -14,7 +9,6 @@ response.setDateHeader("Expires", 0L); // Do not cache in proxy server
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/layout.css" />
 <script type="text/javascript">
 	function delUser(id){
 		location.href="userController.jsp?command=delUser&id="+id;
@@ -22,27 +16,10 @@ response.setDateHeader("Expires", 0L); // Do not cache in proxy server
 </script>
 </head>
 <%
-	UserDto ldto=(UserDto)session.getAttribute("ldto");
-	
-	//로그인 정보가 없는 경우 화면 처리--> 로그인 정보가 null인경우 오류가 발생하기 때문
-	if(ldto==null){
-		pageContext.forward("index.jsp");
-	}
-	
 	//나의 정보
 	UserDto dto=(UserDto)request.getAttribute("dto");
 %>
 <body>
-<nav class="navbar">
-	<div id="navbar">
-		<ul class="navbar-nav">
-			<li><a href="user_main.jsp">HOME</a></li>
-			<li>ABOUT</li>
-			<li>CONTECT</li>
-		</ul>
-	</div>
-</nav>
-
 <div id="container">
 	<div class="main">
 		<div class="lead">
@@ -94,10 +71,7 @@ response.setDateHeader("Expires", 0L); // Do not cache in proxy server
 		</div>
 	</div>
 </div>
-
-<div class="footer">
-	Copyright 1999-2023. 한경닷컴 All rights reserved.
-</div>
+<%@include file="footer.jsp" %>
 </body>
 </html>
 
