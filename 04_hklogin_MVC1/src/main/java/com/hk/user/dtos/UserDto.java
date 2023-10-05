@@ -51,10 +51,18 @@ public class UserDto implements Serializable {
 		this.address = address;
 		this.email = email;
 	}
-
+	//나의정보 수정 초기화
+	public UserDto(String id, String address, String email) {
+		super();
+		this.id = id;
+		this.address = address;
+		this.email = email;
+	}
+	
 	public int getSeq() {
 		return seq;
 	}
+
 
 	public void setSeq(int seq) {
 		this.seq = seq;

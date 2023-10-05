@@ -28,7 +28,7 @@ response.setDateHeader("Expires", 0L); // Do not cache in proxy server
 <nav class="navbar">
 	<div id="navbar">
 		<ul class="navbar-nav">
-			<li><a href="index.jsp">HOME</a></li>
+			<li><a href="user_main.jsp">HOME</a></li>
 			<li>ABOUT</li>
 			<li>CONTECT</li>
 		</ul>

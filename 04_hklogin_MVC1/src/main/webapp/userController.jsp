@@ -85,6 +85,51 @@
 		
 		request.setAttribute("dto", dto);
 		pageContext.forward("userInfo.jsp");
+	}else if(command.equals("updateUser")){
+		String address=request.getParameter("address");
+		String email=request.getParameter("email");
+		
+		//해당 페이지에서 파리미터로 전달받기
+		String id=request.getParameter("id");
+		
+		//session에서 ID값을 가져올 경우 : session에 저장되어있어서 어디에서든 가져올수있다
+// 		UserDto ldto=(UserDto)session.getAttribute("ldto");
+// 		String id=ldto.getId();
+		
+		boolean isS=dao.updateUser(new UserDto(id,address,email));
+		if(isS){
+			%>
+			<script type="text/javascript">
+				alert("수정완료");
+				location.href="userController.jsp?command=myinfo&id=<%=id%>";
+			</script>
+			<%
+		}else{
+			%>
+			<script type="text/javascript">
+				alert("수정실패");
+				location.href="error.jsp";
+			</script>
+			<%
+		}
+	}else if(command.equals("delUser")){//회원탈퇴하기
+		String id=request.getParameter("id");
+		boolean isS=dao.delUser(id);
+		if(isS){
+			%>
+			<script type="text/javascript">
+				alert("회원탈퇴 성공!!");
+				location.href="index.jsp";
+			</script>
+			<%
+		}else{
+			%>
+			<script type="text/javascript">
+				alert("회원탈퇴 실패");
+				location.href="error.jsp";
+			</script>
+			<%
+		}
 	}
 %>
 </body>
