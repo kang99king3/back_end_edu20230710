@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 *{
 	margin:0px;
 	padding:0px;
@@ -56,8 +57,28 @@ input, button{
 	margin:2px;
 }
 
+.lead{
+	text-align: right;
+	padding: 10px;
+}
 
+.table{
+	width:100%;
+	border-collapse: collapse;
+}
 
+.table tr>th, .table tr>td {
+	padding:5px;
+} 
+
+.table tr:nth-child(odd){
+	background-color: #dcdcdc;
+}
+
+#myinfo{
+	width:1000px;
+	margin:0 auto;
+}
 
 
 

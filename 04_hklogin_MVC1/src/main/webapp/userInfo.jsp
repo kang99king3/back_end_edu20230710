@@ -23,6 +23,9 @@ response.setDateHeader("Expires", 0L); // Do not cache in proxy server
 	if(ldto==null){
 		pageContext.forward("index.jsp");
 	}
+	
+	//나의 정보
+	UserDto dto=(UserDto)request.getAttribute("dto");
 %>
 <body>
 <nav class="navbar">
@@ -44,7 +47,37 @@ response.setDateHeader("Expires", 0L); // Do not cache in proxy server
 		</div>
 		<div class="contents">
 			<h1>사용자 페이지</h1>
-			
+			<h2>나의 정보</h2>
+			<div id="myinfo">
+				<table class="table">
+					<tr>
+						<th>아이디</th>
+						<td><%=dto.getId()%></td>
+					</tr>
+					<tr>
+						<th>이름</th>
+						<td><%=dto.getName()%></td>
+					</tr>
+					<tr>
+						<th>등급</th>
+						<td><%=dto.getRole()%></td>
+					</tr>
+					<tr>
+						<th>주소</th>
+						<td><%=dto.getAddress()%></td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td><%=dto.getEmail()%></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button>수정</button>
+							<button>탈퇴</button>
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>

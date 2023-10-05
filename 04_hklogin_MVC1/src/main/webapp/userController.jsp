@@ -79,6 +79,12 @@
 		session.invalidate();//session안에 저장된 모든 정보 삭제
 		System.out.println("로그아웃함");
 		response.sendRedirect("index.jsp");//request에 저장된 정보는 사라짐
+	}else if(command.equals("myinfo")){//나의 정보 조회하기
+		String id=request.getParameter("id");
+		UserDto dto=dao.getUserInfo(id);
+		
+		request.setAttribute("dto", dto);
+		pageContext.forward("userInfo.jsp");
 	}
 %>
 </body>
