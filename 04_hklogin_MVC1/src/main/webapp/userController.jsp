@@ -108,7 +108,7 @@
 			%>
 			<script type="text/javascript">
 				alert("수정실패");
-				location.href="error.jsp";
+				location.href="error.jsp?msg="+encodeURIComponent("나의정보 수정실패");
 			</script>
 			<%
 		}
