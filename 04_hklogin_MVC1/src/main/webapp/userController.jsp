@@ -148,6 +148,16 @@
 		
 		request.setAttribute("dto", dto);
 		pageContext.forward("userRoleForm.jsp");//등급수정 폼으로 이동
+	}else if(command.equals("userUpdateRole")){//등급수정하기
+		String id=request.getParameter("id");
+		String role=request.getParameter("role");
+		
+		boolean isS=dao.userUpdateRole(id, role);
+		if(isS){
+			response.sendRedirect("userController.jsp?command=getUserList");
+		}else{
+			response.sendRedirect("error.jsp?msg="+URLEncoder.encode("등급수정실패","utf-8"));
+		}
 	}
 %>
 </body>

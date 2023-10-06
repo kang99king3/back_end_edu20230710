@@ -12,7 +12,7 @@
 
 </head>
 <%
-	
+	UserDto dto=(UserDto)request.getAttribute("dto");
 %>
 <body>
 <div id="container">
@@ -27,9 +27,35 @@
 			<h1>관리자 페이지</h1>
 			<h2>회원등급수정</h2>
 			<div id="userAllList">
-				<table class="table">
-					
-				</table>
+				<form action="userController.jsp" method="post">
+					<input type="hidden" name="command" value="userUpdateRole"/>
+					<input type="hidden" name="id" value="<%=dto.getId()%>"/>
+					<table class="table">
+						<tr>
+							<th>아이디</th>
+							<td><%=dto.getId()%></td>
+						</tr>
+						<tr>
+							<th>이름</th>
+							<td><%=dto.getName()%></td>
+						</tr>
+						<tr>
+							<th>등급</th>
+							<td>
+								<select name="role">
+									<option value="ADMIN" <%=dto.getRole().equals("ADMIN")?"selected":""%> >관리자</option>
+									<option value="MANAGER" <%=dto.getRole().equals("MANAGER")?"selected":""%>>정회원</option>
+									<option value="USER" <%=dto.getRole().equals("USER")?"selected":""%>>일반회원</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button type="submit">수정</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 			</div>
 		</div>
 	</div>

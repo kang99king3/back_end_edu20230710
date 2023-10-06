@@ -55,7 +55,13 @@
 									<td><%=dto.getName()%></td>
 									<td>
 										<%=dto.getRole()%>
-										<button type="button" onclick="roleForm('<%=dto.getId()%>')">변경</button>
+										<%
+											if(!(dto.getId().equals(ldto.getId()))){
+											%>
+											<button type="button" onclick="roleForm('<%=dto.getId()%>')">변경</button>
+											<%	
+											}
+										%>
 									</td>
 									<td><%=dto.getRegDate()%></td>
 								</tr>
