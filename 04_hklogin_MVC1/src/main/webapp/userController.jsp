@@ -137,6 +137,17 @@
 		request.setAttribute("list", list);
 		
 		pageContext.forward("userAllList.jsp");
+	}else if(command.equals("getUserList")){//회원목록조회[등급수정을 위한 조회]
+		List<UserDto>list=dao.getUserList();
+	
+		request.setAttribute("list", list);
+		pageContext.forward("userList.jsp");
+	}else if(command.equals("roleForm")){//등급수정폼으로 이동
+		String id=request.getParameter("id");
+		UserDto dto=dao.getUserInfo(id);//나의정보조회하기 기능
+		
+		request.setAttribute("dto", dto);
+		pageContext.forward("userRoleForm.jsp");//등급수정 폼으로 이동
 	}
 %>
 </body>

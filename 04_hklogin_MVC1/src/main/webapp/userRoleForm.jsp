@@ -9,9 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <%
-	List<UserDto> list=(List<UserDto>)request.getAttribute("list");
+	
 %>
 <body>
 <div id="container">
@@ -24,41 +25,10 @@
 		</div>
 		<div class="contents">
 			<h1>관리자 페이지</h1>
-			<h2>회원전체목록</h2>
+			<h2>회원등급수정</h2>
 			<div id="userAllList">
 				<table class="table">
-					<tr>
-						<th>회원번호</th>
-						<th>아이디</th>
-						<th>이름</th>
-						<th>주소</th>
-						<th>이메일</th>
-						<th>회원등급</th>
-						<th>탈퇴여부</th>
-						<th>가입일</th>
-					</tr>
-					<%
-						if(list==null||list.size()==0){
-							out.print("<tr>"
-									 +"<td colspan='8'>--회원이 존재하지 않습니다.--</td>"	
-									 +"</tr>");					
-						}else{
-							for(UserDto dto:list){//향상된 for문
-								%>
-								<tr>
-									<td><%=dto.getSeq()%></td>
-									<td><%=dto.getId()%></td>
-									<td><%=dto.getName()%></td>
-									<td><%=dto.getAddress()%></td>
-									<td><%=dto.getEmail()%></td>
-									<td><%=dto.getRole()%></td>
-									<td><%=dto.getEnabled().equals("Y")?"가입중":"탈퇴"%></td>
-									<td><%=dto.getRegDate()%></td>
-								</tr>
-								<%
-							}
-						}
-					%>
+					
 				</table>
 			</div>
 		</div>
