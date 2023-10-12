@@ -90,10 +90,64 @@ public class HkController extends HttpServlet {
 			
 			request.setAttribute("dto", dto);
 			dispatch("board/detailBoard.jsp", request, response);
+		}else if(command.equals("/updateBoardForm.board")) {//수정폼이동
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			HkDto dto=dao.getBoard(seq);
+			request.setAttribute("dto", dto);
+			dispatch("board/updateBoardForm.jsp", request, response);
+		}else if(command.equals("/updateBoard.board")) {
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			String title=request.getParameter("title");
+			String content=request.getParameter("content");
+			
+			boolean isS=dao.updateBoard(new HkDto(seq,title,content));
+			//html출력용 프린터 구현
+			PrintWriter out=response.getWriter();
+			String str="";
+			if(isS) {
+				    str="<script type='text/javascript'>" 
+					+   "alert('글 수정완료');"
+					+   "location.href='detailBoard.board?seq="+seq+"';"
+					+   "</script>";	
+			}else {
+			       str=jsForward("글수정실패","error.board?msg=글수정실패");
+			}
+			out.print(str);
+		}else if(command.equals("/deleteBoard.board")) {
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			boolean isS=dao.deleteBoard(seq);
+			
+			PrintWriter out=response.getWriter();
+			String str="";
+			if(isS) {
+				str=jsForward("글삭제성공", "boardList.board");
+			}else {
+				str=jsForward("글삭제실패", "error.board?msg=글삭제실패");
+			}
+			out.print(str);
+		}else if(command.equals("/muldel.board")) {
+			String [] chks=request.getParameterValues("chk");
+			boolean isS=dao.mulDel(chks);
+			
+			PrintWriter out=response.getWriter();
+			String str="";
+			if(isS) {
+				str=jsForward("글삭제성공", "boardList.board");
+			}else {
+				str=jsForward("글삭제실패", "error.board?msg=글삭제실패");
+			}
+			out.print(str);
 		}
 		
 	}
 	
+	public String jsForward(String msg,String url) {
+		String str="<script type='text/javascript'>" 
+				+   "alert('"+msg+"');"
+				+   "location.href='"+url+"';"
+				+   "</script>";
+		return str;
+	}
 	
 	//forward구현
 	public void dispatch(String url, HttpServletRequest request, 

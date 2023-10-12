@@ -12,12 +12,12 @@
 <script type="text/javascript">
 	function updateForm(seq){
 		//수정폼으로 이동하기--> 수정폼에 게시글 데이터는 계속 보여지게 하기위해 상세조회기능 실행
-		location.href="hkController.jsp?command=updateBoardForm&seq="+seq;
+		location.href="updateBoardForm.board?seq="+seq;
 	}
 	
 	//삭제하기
 	function deleteBoard(seq){
-		location.href="hkController.jsp?command=deleteBoard&seq="+seq;
+		location.href="deleteBoard.board?seq="+seq;
 	}
 	
 </script>
@@ -45,7 +45,7 @@
 		<td colspan="2">
 			<button onclick="updateForm(<%=dto.getSeq()%>)">수정</button>
 			<button onclick="deleteBoard(<%=dto.getSeq()%>)">삭제</button>
-			<button type="button" onclick="location.href='hkController.jsp?command=boardList'">글목록</button>
+			<button type="button" onclick="location.href='boardList.board'">글목록</button>
 		</td>
 	</tr>
 </table>
