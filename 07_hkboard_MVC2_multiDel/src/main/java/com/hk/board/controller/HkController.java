@@ -1,6 +1,7 @@
 package com.hk.board.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.CoderMalfunctionError;
 import java.util.List;
 
@@ -66,8 +67,31 @@ public class HkController extends HttpServlet {
 			
 			boolean isS=dao.insertBoard(new HkDto(id,title,content));
 			
+			//html출력용 프린터 구현
+			PrintWriter out=response.getWriter();
+			String str="";
+			if(isS) {
+				    str="<script type='text/javascript'>" 
+					+   "alert('글을 추가합니다.');"
+					+   "location.href='boardList.board';"
+					+   "</script>";	
+			}else {
+			        str="<script type='text/javascript'>" 
+					+   "alert('글 삭제 실패.');"
+					+   "location.href='error.board?msg=글추가실패';"
+					+   "</script>";
+			}
+			out.print(str);
+		}else if(command.equals("/error.board")) {//오류페이지 이동
+			dispatch("board/error.jsp", request, response);
+		}else if(command.equals("/detailBoard.board")) {//글상세조회
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			HkDto dto=dao.getBoard(seq);
 			
+			request.setAttribute("dto", dto);
+			dispatch("board/detailBoard.jsp", request, response);
 		}
+		
 	}
 	
 	

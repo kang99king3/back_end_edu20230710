@@ -79,7 +79,7 @@ public class HkDao extends DataBase {
 		}finally {
 			close(null, psmt, conn);
 		}
-		return count<0?true:false;
+		return count>0?true:false;
 	}
 	//상세 조회: select문 실행, 파라미터(pk: seq)
 	// 조회기능이니깐 결과가 있음 -> ResultSet 필요 
