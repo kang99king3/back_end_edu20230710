@@ -53,8 +53,8 @@ public class HelloServletOld extends HttpServlet{
 	protected void doPost(HttpServletRequest request, 
 						  HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
+//		request.setCharacterEncoding("utf-8");
+//		response.setContentType("text/html;charset=utf-8");
 		
 		//파라미터 받기:jsp와 완전 동일
 		String param=request.getParameter("param");
