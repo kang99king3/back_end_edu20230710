@@ -1,4 +1,4 @@
-package com.hk.hello;
+package com.hk.board.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -11,12 +11,12 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpFilter;
 
-//urlMapping하는 방법2가지 (XML, 어노테이션 )  여기서는 XML방식을 사용했음
-//@WebFilter(urlPatterns = {"/*","/a","/bbb"},
-//		   initParams = {
-//				   @WebInitParam(name="encoding",value="utf-8")
-//		   }
-//		)
+//urlMapping하는 방법2가지 (XML, 어노테이션 )  여기서는 어노테이션방식을 사용했음
+@WebFilter(urlPatterns = {"/*"},
+		   initParams = {
+				   @WebInitParam(name="encoding",value="utf-8")
+		   }
+		)
 public class EncodeFilter extends HttpFilter implements Filter {
 
 	private String encode;
