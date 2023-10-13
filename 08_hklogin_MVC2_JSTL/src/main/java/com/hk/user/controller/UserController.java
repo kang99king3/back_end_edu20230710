@@ -106,6 +106,23 @@ public class UserController extends HttpServlet {
 			}else {
 				jsForward("탈퇴실패", "error.jsp?msg=탈퇴실패", response);
 			}
+		}else if(command.equals("/idChk.user")) {
+			String id=request.getParameter("id");
+			System.out.println("id:"+id);
+			
+			//id가 DB에 존재하는지 여부를 조회
+			String resultId=dao.idCheck(id);
+			
+			//java의 결과값(text)를 브라우저로 출력시키면 
+			//$.ajax()가 받는다.
+			PrintWriter out=response.getWriter();
+			out.print(resultId);
+			
+			// java  ---> JS에서 사용할 수 있는 객체로 변환해야 한다.
+			// 변환하려면 특정 라이브러리가 필요함 -> json.jar...
+			// java --> json과 비슷한 자료 구조 --> Map (key:value)
+			// json객체 전달: {"list":list}, {"dto":dto}
+			
 		}
 		
 	}
