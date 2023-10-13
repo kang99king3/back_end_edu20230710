@@ -1,7 +1,9 @@
 /**
  *  js/cookieFunc.js
  */
-
+onload=function(){
+	alert("aaa");
+}
  function setCookie(name,value,expires,domain,path,secure){
 		
 		var cookies='';

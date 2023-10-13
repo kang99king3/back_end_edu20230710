@@ -179,7 +179,7 @@ public class UserDao extends DataBase{
 			psmt=conn.prepareStatement(sql);
 			psmt.setString(1, dto.getAddress());
 			psmt.setString(2, dto.getEmail());
-//			psmt.setString(3, dto.getId());
+			psmt.setString(3, dto.getId());
 			count=psmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

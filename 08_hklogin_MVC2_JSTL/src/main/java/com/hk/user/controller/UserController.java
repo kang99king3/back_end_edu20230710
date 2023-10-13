@@ -77,6 +77,35 @@ public class UserController extends HttpServlet {
 					dispatch("user_main.jsp", request, response);
 				}
 			}
+		}else if(command.equals("/logout.user")) {//로그아웃
+			session.invalidate();
+			response.sendRedirect("home.user");
+		}else if(command.equals("/myinfo.user")) {//나의정보조회
+			String id=request.getParameter("id");
+			UserDto dto=dao.getUserInfo(id);
+			request.setAttribute("dto", dto);
+			dispatch("userInfo.jsp", request, response);
+		}else if(command.equals("/updateUser.user")) {//나의 정보 수정
+			String id=request.getParameter("id");
+			String address=request.getParameter("address");
+			String email=request.getParameter("email");
+			
+			boolean isS=dao.updateUser(new UserDto(id,address,email));
+			if(isS) {
+				//        /path: 상위root에서, ../path:현재위치에서 한단계 위 ,
+				//       ./path:현재경로에서  ,    path: 왼쪽과 동일
+				jsForward("수정완료", "myinfo.user?id="+id, response);
+			}else {
+				jsForward("수정실패", "error.jsp?msg=수정실패",response);
+			}
+		}else if(command.equals("/delUser.user")) {//탈퇴
+			String id=request.getParameter("id");
+			boolean isS=dao.delUser(id);
+			if(isS) {
+				jsForward("탈퇴합니다.~~ ", "home.user", response);
+			}else {
+				jsForward("탈퇴실패", "error.jsp?msg=탈퇴실패", response);
+			}
 		}
 		
 	}
