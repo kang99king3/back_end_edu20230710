@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.hk.user.daos.UserDao;
+import com.hk.user.dtos.UserDto;
 
 //url mapping : 클라이언트에서 ~.user라고 요청하면 해당 서블릿이 실행된다.
 @WebServlet("*.user")
@@ -36,8 +37,46 @@ public class UserController extends HttpServlet {
 		//로그인관리:session객체 구하기
 		HttpSession session=request.getSession();
 		
-		if(command.equals("/registForm.user")) {
+		if(command.equals("/registForm.user")) {//회원가입폼이동
 			dispatch("registForm.jsp", request, response);
+		}else if(command.equals("/home.user")) {//index(로그인화면)이동
+			dispatch("index.jsp", request, response);
+		}else if(command.equals("/addUser.user")) {
+			//회원가입 폼에서 입력한 정보를 받기
+			String id=request.getParameter("id");
+			String name=request.getParameter("name");
+			String password=request.getParameter("password");
+			String address=request.getParameter("address");
+			String email=request.getParameter("email");
+			
+			boolean isS=dao.insertUser(new UserDto(id,name,password,address,email));
+			if(isS) {
+				jsForward("회원가입성공", "home.user", response);
+			}else {
+				jsForward("회원가입실패", "registForm.user", response);
+			}
+		}else if(command.equals("/login.user")) {
+			String id=request.getParameter("id");
+			String password=request.getParameter("password"); 
+			
+			UserDto ldto=dao.getLogin(id, password);
+			if(ldto==null||ldto.getId()==null) {
+				request.setAttribute("msg", "회원이 아닙니다. 가입해주세요");
+				dispatch("index.jsp", request, response);
+			}else {
+				//회원이면 session객체에 회원정보를 저장
+				session.setAttribute("ldto", ldto);
+				session.setMaxInactiveInterval(10*60);
+				
+				//회원에 등급에 따라 메인 페이지 이동
+				if(ldto.getRole().toUpperCase().equals("ADMIN")) {
+					dispatch("admin_main.jsp", request, response);
+				}else if(ldto.getRole().toUpperCase().equals("MANAGER")) {
+					dispatch("manager_main.jsp", request, response);
+				}else if(ldto.getRole().toUpperCase().equals("USER")) {
+					dispatch("user_main.jsp", request, response);
+				}
+			}
 		}
 		
 	}

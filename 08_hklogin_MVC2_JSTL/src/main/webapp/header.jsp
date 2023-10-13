@@ -14,7 +14,7 @@ response.setDateHeader("Expires", 0L); // Do not cache in proxy server
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/layout1.css" />
+<link rel="stylesheet" href="css/layout.css" />
 </head>
 <%
 	UserDto ldto=(UserDto)session.getAttribute("ldto");

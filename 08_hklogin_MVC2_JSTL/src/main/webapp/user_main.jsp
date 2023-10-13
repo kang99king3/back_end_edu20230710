@@ -13,8 +13,8 @@
 <div id="container">
 	<div class="main">
 		<div class="lead">
-			<span><%=ldto.getId()%>[<%=ldto.getRole()%>]님이 로그인 함</span> |
-			<span><a href="userController.jsp?command=myinfo&id=<%=ldto.getId()%>">나의정보</a></span> |
+			<span>${sessionScope.ldto.id}[${sessionScope.ldto.role}]님이 로그인 함</span> |
+			<span><a href="userController.jsp?command=myinfo&id=${sessionScope.ldto.id}">나의정보</a></span> |
 			<span><a href="userController.jsp?command=logout">로그아웃</a></span>
 		</div>
 		<div class="contents">

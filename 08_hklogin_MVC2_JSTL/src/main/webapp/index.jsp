@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/loginpage.css" />
+<link rel="stylesheet" href="css/loginpage1.css" />
 <script type="text/javascript" src="js/cookieFunc.js"></script>
 <script type="text/javascript">
 	//회원가입폼 이동
@@ -39,8 +39,8 @@
 </head>
 <% String msg=request.getParameter("msg"); %>
 <body>
-<form action="userController.jsp" method="post" onsubmit="return userIdCookie()" >
-	<input type="hidden" name="command" value="login"/>
+<form action="login.user" method="post" onsubmit="return userIdCookie()" >
+<!-- 	<input type="hidden" name="command" value="login"/> -->
 	<h1>Login in</h1>
 	<input class="loginVal" type="text" name="id" placeholder="ID" required="required"/>
 	<input class="loginVal" type="password" name="password" placeholder="PASSWORD" required="required"/>

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/layout1.css" />
+<link rel="stylesheet" href="css/layout.css" />
 <script type="text/javascript">
 	onload=function(){
 		//아이디 중복체크를 완료한 후에 다른 정보를 입력할 수 있게 처리
@@ -55,7 +55,7 @@
 <nav class="navbar">
 	<div id="navbar">
 		<ul class="navbar-nav">
-			<li><a href="index.jsp">HOME</a></li>
+			<li><a href="home.user">HOME</a></li>
 			<li>ABOUT</li>
 			<li>CONTECT</li>
 		</ul>
@@ -63,9 +63,9 @@
 </nav>
 <div class="container">
 	<h1>회원 가입</h1>
-	<form class="form-group" action="userController.jsp" method="post"
+	<form class="form-group" action="addUser.user" method="post"
 												onsubmit="return isPW(this)">
-		<input type="hidden" name="command" value="addUser"/>
+
 		<input style="width:700px;" type="text" name="id" placeholder="ID" required="required"/>
 		<span id="idChk" style="display: none;">n</span>
 		<a href="#" onclick="idChk()">중복체크</a>
@@ -75,7 +75,7 @@
 		<input type="text" name="address" placeholder="주소" required="required"/>
 		<input type="email" name="email" placeholder="email" required="required"/>
 		<button type="submit">가입완료</button>
-		<button type="button" onclick="location.href='index.jsp'" >메인</button>
+		<button type="button" onclick="location.href='home.user'" >메인</button>
 	</form>
 </div>
 
