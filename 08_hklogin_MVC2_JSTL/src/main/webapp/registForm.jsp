@@ -135,6 +135,7 @@ input, button{
 						$("#enabledId").css("color","red")
 									   .text("사용가능합니다.");
 						$("#idChk").text("y");
+						$("input[name=name]").focus();
 					}else{
 						//사용 못함
 						$("#enabledId").css("color","red")
