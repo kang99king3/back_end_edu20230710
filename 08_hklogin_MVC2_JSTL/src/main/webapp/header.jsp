@@ -9,6 +9,7 @@ response.setDateHeader("Expires", 0L); // Do not cache in proxy server
     pageEncoding="UTF-8" %>
 <% request.setCharacterEncoding("utf-8"); %>
 <% response.setContentType("text/html; charset=utf-8"); %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,28 +18,28 @@ response.setDateHeader("Expires", 0L); // Do not cache in proxy server
 <link rel="stylesheet" href="layout2.css" />
 </head>
 <%
-	UserDto ldto=(UserDto)session.getAttribute("ldto");
+// 	UserDto ldto=(UserDto)session.getAttribute("ldto");
 	
 	//로그인 정보가 없는 경우 화면 처리--> 로그인 정보가 null인경우 오류가 발생하기 때문
-	if(ldto==null){
-		pageContext.forward("index.jsp");
-	}
+// 	if(ldto==null){
+// 		pageContext.forward("index.jsp");
+// 	}
 %>
+<c:if test="${sessionScope.ldto==null}">
+	<jsp:forward page="index.jsp" />
+</c:if>
 <body>
 <nav class="navbar">
 	<div id="navbar">
 		<ul class="navbar-nav">
-			<%
-				if(ldto.getRole().equals("ADMIN")){
-					%>
+			<c:choose>
+				<c:when test="${sessionScope.ldto.role eq 'ADMIN'}">
 					<li><a href="admin_main.jsp">HOME</a></li>
-					<%
-				}else if(ldto.getRole().equals("USER")){
-					%>
+				</c:when>
+				<c:when test="${sessionScope.ldto.role eq 'USER'}">
 					<li><a href="user_main.jsp">HOME</a></li>
-					<%
-				}
-			%>
+				</c:when>
+			</c:choose>	
 			<li>ABOUT</li>
 			<li>CONTECT</li>
 		</ul>
