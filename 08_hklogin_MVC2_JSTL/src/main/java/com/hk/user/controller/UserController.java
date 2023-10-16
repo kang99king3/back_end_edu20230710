@@ -132,6 +132,21 @@ public class UserController extends HttpServlet {
 			List<UserDto>list=dao.getUserList();
 			request.setAttribute("list", list);
 			dispatch("userList.jsp", request, response);
+		}else if(command.equals("/roleForm.user")) {//회원등급수정폼이동
+			String id=request.getParameter("id");
+			UserDto dto=dao.getUserInfo(id);
+			request.setAttribute("dto", dto);
+			dispatch("userRoleForm.jsp", request, response);
+		}else if(command.equals("/userUpdateRole.user")) {
+			String id=request.getParameter("id");
+			String role=request.getParameter("role");
+			boolean isS=dao.userUpdateRole(id, role);
+			if(isS) {
+				//등급수정후 등급수정폼으로 돌아간다. 이때 id값이 필요함
+				jsForward("등급수정성공", "roleForm.user?id="+id, response);
+			}else {
+				jsForward("등급수정실패", "error.jsp?msg=등급수정실패", response);
+			}
 		}
 		
 	}
