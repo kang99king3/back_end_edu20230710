@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hk.ans">
+
+<!-- 글목록 조회된 결과를 AnsDto에 저장한다. -->
+	<select id="boardList" resultType="AnsDto">
+		SELECT  seq, id, title, content, regdate
+        refer,step,depth,readcount,delflag
+		FROM answerboard
+		ORDER BY refer DESC ,step
+	</select>
+	
+</mapper>
