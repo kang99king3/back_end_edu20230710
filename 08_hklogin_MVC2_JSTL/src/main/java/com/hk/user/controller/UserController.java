@@ -2,6 +2,7 @@ package com.hk.user.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -123,6 +124,14 @@ public class UserController extends HttpServlet {
 			// java --> json과 비슷한 자료 구조 --> Map (key:value)
 			// json객체 전달: {"list":list}, {"dto":dto}
 			
+		}else if(command.equals("/getAllUserList.user")) {//회원전체조회
+			List<UserDto>list=dao.getAllUserList();//회원목록가져오기
+			request.setAttribute("list", list);//저장소에 list객체 저장
+			dispatch("userAllList.jsp", request, response);
+		}else if(command.equals("/getUserList.user")) {//회원정보조회[등급수정]
+			List<UserDto>list=dao.getUserList();
+			request.setAttribute("list", list);
+			dispatch("userList.jsp", request, response);
 		}
 		
 	}
