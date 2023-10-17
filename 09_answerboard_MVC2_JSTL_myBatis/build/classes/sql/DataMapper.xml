@@ -12,7 +12,7 @@
 	</select>  
 	
 	<insert id="insertBoard" parameterType="AnsDto"  >
-		INSERT INTO answerboard
+		INSERT INTO answerboard 
 		VALUES(NULL,#{id},#{title},#{content},SYSDATE(),
 		(SELECT NVL(MAX(refer),0)+1 
 		FROM answerboard alias_for_subquery),
