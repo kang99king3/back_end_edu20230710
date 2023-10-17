@@ -17,8 +17,12 @@ public class AnsDao extends SqlMapConfig{
 		List<AnsDto> list=new ArrayList<>();
 		SqlSession sqlSession=null;//쿼리를 실행시켜주는 객체
 		try {
-			//                                 true:autocommit설정
+			//sqlSessionFactory객체의 openSession()를 통해 
+			//sqlSession객체를 구한다 (true:autocommit설정)
 			sqlSession=getSqlSessionFactory().openSession(true);
+			
+			//sqlSession객체에 쿼리 실행 메서드를 통해 쿼리실행
+			// 쿼리실행메서드(쿼리이름,파라미터)
 			list=sqlSession.selectList(namespace+"boardList");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -26,6 +30,23 @@ public class AnsDao extends SqlMapConfig{
 			sqlSession.close();
 		}
 		return list;
+	}
+	
+	//2.새글추가하기
+	public boolean insertBoard(AnsDto dto) {
+		int count=0;
+		SqlSession sqlSession=null;
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			//파리미터 타입: DTO,Array,Map(파라미터 기본 타입)
+			//            값한개(int,String해당타입으로 정의)
+			count=sqlSession.insert(namespace+"insertBoard",dto);
+		} catch (Exception e) {
+			e.printStackTrace();// <--이게 없으면 오류 출력안됨
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
 	}
 	
 	

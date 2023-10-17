@@ -5,11 +5,11 @@
 
 <!-- 글목록 조회된 결과를 AnsDto에 저장한다. -->
 	<select id="boardList" resultType="AnsDto">
-		SELECT  seq, id, title, content, regdate
+		SELECT  seq, id, title, content, regdate,
         refer,step,depth,readcount,delflag
 		FROM answerboard
 		ORDER BY refer DESC ,step
-	</select>
+	</select>  
 	
 	<insert id="insertBoard" parameterType="AnsDto"  >
 		INSERT INTO answerboard
