@@ -10,11 +10,11 @@
 <h1>답변형게시판</h1>
 <div id="container">
 	<h2>새글추가하기</h2>
-	<form action="">
+	<form action="insertBoard.board" method="post">
 		<table border="1">
 			<tr>
 				<th>작성자[ID]</th>
-				<td><input type="text" name="id" required="required"/></td>
+				<td><input type="text" name="id" pattern="^[a-zA-Z]+$" required="required"/></td>
 			</tr>
 			<tr>
 				<th>글제목</th>

@@ -41,6 +41,18 @@ public class AnsController extends HttpServlet{
 			dispatch("board/boardList.jsp", request, response);
 		}else if(command.equals("/insertForm.board")) {//글추가폼 이동
 			dispatch("board/insertForm.jsp", request, response);
+		}else if(command.equals("/insertBoard.board")) {//글추가하기
+			String id=request.getParameter("id");
+			String title=request.getParameter("title");
+			String content=request.getParameter("content");
+			
+			boolean isS=dao.insertBoard(new AnsDto(id, title, content));
+			if(isS) {
+				response.sendRedirect("boardList.board");
+			}else {
+				request.setAttribute("msg", "글추가실패");
+				dispatch("error.jsp", request, response);
+			}
 		}
 		
 	}

@@ -35,6 +35,13 @@ public class AnsDto {
 		this.delflag = delflag;
 	}
 
+	public AnsDto(String id, String title, String content) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
+
 	public int getSeq() {
 		return seq;
 	}
