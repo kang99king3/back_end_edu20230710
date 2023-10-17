@@ -15,7 +15,7 @@ public class SqlMapConfig {
 	
 	//작업을 하기 위한 객체를 구하는 메서드
 	public SqlSessionFactory getSqlSessionFactory() {
-		String resource="com/hk/sql/Configuration.xml";
+		String resource="sql/Configuration.xml";
 		
 		try {
 			//Reader:작업메뉴얼, Resources: 작업메뉴얼을 만드는 객체

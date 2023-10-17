@@ -1,5 +1,6 @@
 package com.hk.ans.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +10,25 @@ import com.hk.ans.dtos.AnsDto;
 
 public class AnsDao extends SqlMapConfig{
 
+	private String namespace="com.hk.ans.";
+	
+	//1.글목록 조회하기
+	public List<AnsDto> getAllList(){
+		List<AnsDto> list=new ArrayList<>();
+		SqlSession sqlSession=null;//쿼리를 실행시켜주는 객체
+		try {
+			//                                 true:autocommit설정
+			sqlSession=getSqlSessionFactory().openSession(true);
+			list=sqlSession.selectList(namespace+"boardList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
+	
+	
 	public void test() {
 		//쿼리를 실행시킬 수 있는 객체 : sqlSession객체를 구함
 		SqlSession sqlSession=getSqlSessionFactory().openSession();

@@ -11,4 +11,27 @@
 		ORDER BY refer DESC ,step
 	</select>
 	
+	<insert id="insertBoard" parameterType="AnsDto"  >
+		INSERT INTO answerboard
+		VALUES(NULL,#{id},#{title},#{content},SYSDATE(),
+		(SELECT NVL(MAX(refer),0)+1 
+		FROM answerboard alias_for_subquery),
+		 0,0,0,'N')
+	</insert>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
