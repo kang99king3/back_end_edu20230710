@@ -35,10 +35,12 @@ public class AnsController extends HttpServlet{
 		AnsDao dao=new AnsDao();
 		
 		//3단계:if 분기
-		if(command.equals("/boardList.board")) {
+		if(command.equals("/boardList.board")) {//글목록 조회
 			List<AnsDto>list=dao.getAllList();
 			request.setAttribute("list", list);
 			dispatch("board/boardList.jsp", request, response);
+		}else if(command.equals("/insertForm.board")) {//글추가폼 이동
+			dispatch("board/insertForm.jsp", request, response);
 		}
 		
 	}
