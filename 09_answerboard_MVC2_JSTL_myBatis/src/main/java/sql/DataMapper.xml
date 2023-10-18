@@ -18,8 +18,8 @@
 		FROM answerboard alias_for_subquery),
 		 0,0,0,'N')
 	</insert>
-	
-	<select id="getBoard" parameterType="int" resultType="AnsDto">
+<!-- 	<select id="getBoard" parameterType="int" resultType="AnsDto"> -->
+	<select id="getBoard" parameterType="Map" resultType="AnsDto">
 		select seq, id, title, content, regdate, readcount
 		from answerboard
 		where seq=#{seq}

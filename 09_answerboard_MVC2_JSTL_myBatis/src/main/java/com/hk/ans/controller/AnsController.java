@@ -55,7 +55,16 @@ public class AnsController extends HttpServlet{
 			}
 		}else if(command.equals("/detailBoard.board")) {
 			int seq=Integer.parseInt(request.getParameter("seq"));
+			AnsDto dto=dao.getBoard(seq);
 			
+			request.setAttribute("dto", dto);
+			dispatch("board/detailBoard.jsp", request, response);
+		}else if(command.equals("/updateBoardForm.board")) {
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			AnsDto dto=dao.getBoard(seq);
+			
+			request.setAttribute("dto", dto);
+			dispatch("board/updateBoard.jsp", request, response);
 		}
 		
 	}

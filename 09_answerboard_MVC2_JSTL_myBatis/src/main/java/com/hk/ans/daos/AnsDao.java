@@ -1,7 +1,9 @@
 package com.hk.ans.daos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -55,9 +57,14 @@ public class AnsDao extends SqlMapConfig{
 		//쿼리를 실행하려면 필요한 객체는 뭐다?
 		SqlSession sqlSession=null;
 		
+		//Map에 담아서 파라미터 전달하기
+		Map<String, Integer>map=new HashMap<>();
+		map.put("seq", seq);
+		
 		try {
 			sqlSession=getSqlSessionFactory().openSession(true);
-			dto=sqlSession.selectOne(namespace+"getBoard", seq);
+//			dto=sqlSession.selectOne(namespace+"getBoard", seq);
+			dto=sqlSession.selectOne(namespace+"getBoard", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
