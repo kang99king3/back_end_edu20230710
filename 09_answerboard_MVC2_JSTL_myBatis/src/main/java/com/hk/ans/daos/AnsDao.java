@@ -102,6 +102,25 @@ public class AnsDao extends SqlMapConfig{
 		return count>0?true:false;
 	}
 	
+	//6.삭제하기
+	public boolean mulDel(String[] seqs) {
+		int count=0;
+		SqlSession sqlSession=null;
+		Map<String, String[]>map=new HashMap<>();
+		map.put("seqs", seqs);
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.update(namespace+"mulDel", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
+	
+	
 	public void test() {
 		//쿼리를 실행시킬 수 있는 객체 : sqlSession객체를 구함
 		SqlSession sqlSession=getSqlSessionFactory().openSession();

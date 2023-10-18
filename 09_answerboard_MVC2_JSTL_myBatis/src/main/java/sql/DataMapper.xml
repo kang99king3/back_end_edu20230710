@@ -37,6 +37,15 @@
 		WHERE seq = #{seq}
 	</update>
 	
+	<update id="mulDel" parameterType="Map">
+		UPDATE answerboard
+		SET delflag = 'Y'
+		WHERE seq IN 
+		<foreach collection="seqs" item="seq" open="(" close=")" 
+											  separator=",">
+			#{seq}
+		</foreach>
+	</update>
 	
 </mapper>
 

@@ -97,15 +97,6 @@ public class AnsController extends HttpServlet{
 				dao.readCount(seq);//조회수 증가
 				//--조회수 코드 종료
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			request.setAttribute("dto", dto);
 			dispatch("board/detailBoard.jsp", request, response);
 		}else if(command.equals("/updateBoardForm.board")) {//수정폼이동
@@ -124,6 +115,15 @@ public class AnsController extends HttpServlet{
 				response.sendRedirect("detailBoard.board?seq="+seq);
 			}else {
 				request.setAttribute("msg", "수정실패");
+				dispatch("error.jsp", request, response);
+			}
+		}else if(command.equals("/mulDel.board")) {
+			String[]seqs=request.getParameterValues("chk");
+			boolean isS=dao.mulDel(seqs);
+			if(isS) {
+				response.sendRedirect("boardList.board");
+			}else {
+				request.setAttribute("msg", "글삭제실패");
 				dispatch("error.jsp", request, response);
 			}
 		}
