@@ -53,18 +53,34 @@ public class AnsController extends HttpServlet{
 				request.setAttribute("msg", "글추가실패");
 				dispatch("error.jsp", request, response);
 			}
-		}else if(command.equals("/detailBoard.board")) {
+		}else if(command.equals("/detailBoard.board")) {//상세내용조회
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			AnsDto dto=dao.getBoard(seq);
 			
+			//---조회수 올리기 코드
+			dao.readCount(seq);//조회수 증가
+			//--조회수 코드 종료
+			
 			request.setAttribute("dto", dto);
 			dispatch("board/detailBoard.jsp", request, response);
-		}else if(command.equals("/updateBoardForm.board")) {
+		}else if(command.equals("/updateBoardForm.board")) {//수정폼이동
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			AnsDto dto=dao.getBoard(seq);
 			
 			request.setAttribute("dto", dto);
 			dispatch("board/updateBoard.jsp", request, response);
+		}else if(command.equals("/updateBoard.board")) {
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			String title=request.getParameter("title");
+			String content=request.getParameter("content");
+			
+			boolean isS=dao.updateBoard(new AnsDto(seq,title,content));
+			if(isS) {
+				response.sendRedirect("detailBoard.board?seq="+seq);
+			}else {
+				request.setAttribute("msg", "수정실패");
+				dispatch("error.jsp", request, response);
+			}
 		}
 		
 	}

@@ -25,6 +25,19 @@
 		where seq=#{seq}
 	</select>
 	
+	<update id="readCount" parameterType="int">
+		UPDATE answerboard
+		SET readcount=readcount+1
+		WHERE seq=#{seq}
+	</update>
+	
+	<update id="updateBoard" parameterType="AnsDto">
+		UPDATE answerboard
+		SET title=#{title}, content=#{content}, regdate=SYSDATE()
+		WHERE seq = #{seq}
+	</update>
+	
+	
 </mapper>
 
 

@@ -19,11 +19,11 @@
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="title" value="${dto.title}"/></td>
+			<td><input type="text" name="title" value="${dto.title}" required="required"/></td>
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea name="content" rows="10" cols="60">${dto.content}</textarea></td>
+			<td><textarea name="content" rows="10" cols="60" required="required">${dto.content}</textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2">

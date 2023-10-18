@@ -73,6 +73,35 @@ public class AnsDao extends SqlMapConfig{
 		return dto;
 	}
 	
+	//4.수정하기
+	public boolean updateBoard(AnsDto dto) {
+		int count=0;
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.update(namespace+"updateBoard", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
+	
+	//5.조회수
+	public boolean readCount(int seq) {
+		int count=0;
+		SqlSession sqlSession=null;
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.update(namespace+"readCount", seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count>0?true:false;
+	}
+	
 	public void test() {
 		//쿼리를 실행시킬 수 있는 객체 : sqlSession객체를 구함
 		SqlSession sqlSession=getSqlSessionFactory().openSession();
