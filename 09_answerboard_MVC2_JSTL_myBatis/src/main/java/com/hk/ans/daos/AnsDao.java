@@ -49,6 +49,22 @@ public class AnsDao extends SqlMapConfig{
 		return count>0?true:false;
 	}
 	
+	//3.상세조회
+	public AnsDto getBoard(int seq) {
+		AnsDto dto=null;
+		//쿼리를 실행하려면 필요한 객체는 뭐다?
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			dto=sqlSession.selectOne(namespace+"getBoard", seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return dto;
+	}
 	
 	public void test() {
 		//쿼리를 실행시킬 수 있는 객체 : sqlSession객체를 구함

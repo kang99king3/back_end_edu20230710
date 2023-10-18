@@ -19,6 +19,12 @@
 		 0,0,0,'N')
 	</insert>
 	
+	<select id="getBoard" parameterType="int" resultType="AnsDto">
+		select seq, id, title, content, regdate, readcount
+		from answerboard
+		where seq=#{seq}
+	</select>
+	
 </mapper>
 
 

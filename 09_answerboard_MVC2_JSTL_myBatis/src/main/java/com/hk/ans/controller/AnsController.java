@@ -53,6 +53,9 @@ public class AnsController extends HttpServlet{
 				request.setAttribute("msg", "글추가실패");
 				dispatch("error.jsp", request, response);
 			}
+		}else if(command.equals("/detailBoard.board")) {
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			
 		}
 		
 	}
