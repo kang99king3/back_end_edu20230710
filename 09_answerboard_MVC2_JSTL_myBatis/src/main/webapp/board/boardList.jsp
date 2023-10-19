@@ -78,6 +78,12 @@ function isAllCheck(){
 								---삭제된 글입니다.---
 							</c:when>
 							<c:otherwise>
+<%-- 								<c:forEach begin="1" end="${dto.depth}" var="i"  step="1"> --%>
+<!-- 									&nbsp;&nbsp;&nbsp;&nbsp; -->
+<%-- 									<c:if test="${i==dto.depth}"> --%>
+<!-- 										<img width="10px" height="10px" src="img/arrow_icon.png" alt="답글"/> -->
+<%-- 									</c:if> --%>
+<%-- 								</c:forEach> --%>
 								<a href="detailBoard.board?seq=${dto.seq}">${title}</a>
 							</c:otherwise>
 						</c:choose>
@@ -101,6 +107,13 @@ function isAllCheck(){
 	</table>
 	</form>
 </div>
+<%-- <jsp:useBean id="util" class="com.hk.ans.util.Util"/> --%>
+<%-- <jsp:setProperty property="id" name="util" value="${dto.depth}"/> --%>
+<!-- setId()실행 -->
+<%-- <jsp:getProperty property="id" name="util"/> --%>
+<!-- getId()실행 -->
+<!-- Util util=new Util() -->
+<!-- util.method() -->
 </body>
 </html>
 
