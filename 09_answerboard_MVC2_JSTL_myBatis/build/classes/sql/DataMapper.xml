@@ -4,12 +4,12 @@
 <mapper namespace="com.hk.ans">
 
 <!-- 글목록 조회된 결과를 AnsDto에 저장한다. -->
-	<select id="boardList" resultType="AnsDto">
-		SELECT  seq, id, title, content, regdate,
-        refer,step,depth,readcount,delflag
-		FROM answerboard
-		ORDER BY refer DESC ,step
-	</select>  
+<!-- 	<select id="boardList" resultType="AnsDto"> -->
+<!-- 		SELECT  seq, id, title, content, regdate, -->
+<!--         refer,step,depth,readcount,delflag -->
+<!-- 		FROM answerboard -->
+<!-- 		ORDER BY refer DESC ,step -->
+<!-- 	</select>   -->
 <!-- 		<where> -->
 <!-- 			<if test="seq!=null"> -->
 <!-- 				seq=#{seq} -->
@@ -71,6 +71,32 @@
 		  0,'N')
 		]]>  
 	</insert>
+	
+	<select id="getPcount" resultType="int">
+		SELECT CEIL(COUNT(*)/10) pageCount 
+		FROM answerboard
+	</select>
+	
+	<select id="boardList" parameterType="Map" resultType="AnsDto">
+		SELECT rn, seq, id, title, content, regdate,refer,step,depth,
+		 readcount,delflag
+		FROM (
+				SELECT ROW_NUMBER() OVER(ORDER BY refer DESC,step) rn,
+						 seq, id, title, content, regdate,refer,step,depth,
+						 readcount,delflag
+				FROM answerboard) a
+		<where>
+			<choose>
+				<when test="seq!=null">
+					seq=#{seq}
+				</when>
+				<otherwise>
+					WHERE CEIL(rn/10)=#{pnum}				
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
 	
 </mapper>
 
