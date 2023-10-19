@@ -8,6 +8,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	a{text-decoration: none;}
+	.active{
+		background-color: yellow;
+	}
+</style>
 <script type="text/javascript">
 //전체선택박스구현
 function allSel(bool){
@@ -101,6 +107,13 @@ function isAllCheck(){
 				</c:forEach>				
 			</c:otherwise>
 		</c:choose>
+		<tr>
+			<td colspan="10" style="text-align: center;">
+				<c:forEach begin="1" end="${pcount}" var="i" step="1">
+					<a ${pnum == i?"class='active'":""}  href="boardList.board?pnum=${i}">${i}</a>&nbsp;&nbsp;
+				</c:forEach>
+			</td>
+		</tr>
 		<tr>
 			<td colspan="10">
 				<button type="button" onclick="location.href='insertForm.board'">글추가</button>

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="boardList.board">글목록</a>
+<a href="boardList.board?pnum=1">글목록</a>
 </body>
 </html>
 

@@ -72,7 +72,7 @@
 		]]>  
 	</insert>
 	
-	<select id="getPcount" resultType="int">
+	<select id="getPCount" resultType="int">
 		SELECT CEIL(COUNT(*)/10) pageCount 
 		FROM answerboard
 	</select>
@@ -91,7 +91,7 @@
 					seq=#{seq}
 				</when>
 				<otherwise>
-					WHERE CEIL(rn/10)=#{pnum}				
+					CEIL(rn/10)=#{pnum}				
 				</otherwise>
 			</choose>
 		</where>

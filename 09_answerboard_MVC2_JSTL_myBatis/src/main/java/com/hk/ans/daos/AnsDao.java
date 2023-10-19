@@ -15,23 +15,58 @@ public class AnsDao extends SqlMapConfig{
 	private String namespace="com.hk.ans.";
 	
 	//1.글목록 조회하기
-	public List<AnsDto> getAllList(){
-		List<AnsDto> list=new ArrayList<>();
-		SqlSession sqlSession=null;//쿼리를 실행시켜주는 객체
+//	public List<AnsDto> getAllList(){
+//		List<AnsDto> list=new ArrayList<>();
+//		SqlSession sqlSession=null;//쿼리를 실행시켜주는 객체
+//		try {
+//			//sqlSessionFactory객체의 openSession()를 통해 
+//			//sqlSession객체를 구한다 (true:autocommit설정)
+//			sqlSession=getSqlSessionFactory().openSession(true);
+//			
+//			//sqlSession객체에 쿼리 실행 메서드를 통해 쿼리실행
+//			// 쿼리실행메서드(쿼리이름,파라미터)
+//			list=sqlSession.selectList(namespace+"boardList");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//			sqlSession.close();
+//		}
+//		return list;
+//	}
+	
+	//1.글목록조회[페이징처리]
+	public List<AnsDto> getAllList(String pnum){
+		List<AnsDto>list=new ArrayList<>();
+		
+		SqlSession sqlSession=null;
+		
+		Map<String,String>map=new HashMap<>();
+		map.put("pnum", pnum);//페이지 번호 저장
 		try {
-			//sqlSessionFactory객체의 openSession()를 통해 
-			//sqlSession객체를 구한다 (true:autocommit설정)
 			sqlSession=getSqlSessionFactory().openSession(true);
-			
-			//sqlSession객체에 쿼리 실행 메서드를 통해 쿼리실행
-			// 쿼리실행메서드(쿼리이름,파라미터)
-			list=sqlSession.selectList(namespace+"boardList");
+			list=sqlSession.selectList(namespace+"boardList", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			sqlSession.close();
 		}
 		return list;
+	}
+	
+	//1-2.페이지수 구하기
+	public int getPCount() {
+		int count=0;
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.selectOne(namespace+"getPCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count;
 	}
 	
 	//2.새글추가하기

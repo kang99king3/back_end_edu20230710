@@ -46,8 +46,17 @@ public class AnsController extends HttpServlet{
 			}
 			//쿠키 삭제 코드 종료------------
 			
-			List<AnsDto>list=dao.getAllList();
+			//페이지번호 받기
+			String pnum=request.getParameter("pnum");
+			
+			//글목록 
+			List<AnsDto>list=dao.getAllList(pnum);
 			request.setAttribute("list", list);
+			
+			//페이지 수
+			int pcount=dao.getPCount();
+			request.setAttribute("pcount", pcount);
+			
 			dispatch("board/boardList.jsp", request, response);
 		}else if(command.equals("/insertForm.board")) {//글추가폼 이동
 			dispatch("board/insertForm.jsp", request, response);
