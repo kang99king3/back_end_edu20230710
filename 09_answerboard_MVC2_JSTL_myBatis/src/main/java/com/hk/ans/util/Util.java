@@ -1,5 +1,6 @@
 package com.hk.ans.util;
 
+//action Tag : <useBean /> --> DTO객체를 구현하는 태그 
 public class Util {
 
 	private String arrowNbsp;//공백과화살표를 출력할 문자열

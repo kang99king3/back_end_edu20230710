@@ -38,6 +38,7 @@ function isAllCheck(){
 </script>
 </head>
 <body>
+<jsp:useBean id="util" class="com.hk.ans.util.Util" />
 <h1>답변형 게시판</h1>
 <div id="container">
 	<h2>글목록조회</h2>
@@ -84,6 +85,8 @@ function isAllCheck(){
 <!-- 										<img width="10px" height="10px" src="img/arrow_icon.png" alt="답글"/> -->
 <%-- 									</c:if> --%>
 <%-- 								</c:forEach> --%>
+								<jsp:setProperty property="arrowNbsp" name="util" value="${dto.depth}"/>
+								<jsp:getProperty property="arrowNbsp" name="util"/>
 								<a href="detailBoard.board?seq=${dto.seq}">${title}</a>
 							</c:otherwise>
 						</c:choose>
