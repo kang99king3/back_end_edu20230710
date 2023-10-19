@@ -5,6 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	$(function(){
+// 		alert("jquery 연결");
+		$("#replyBtn").click(function(){
+			$("#replyForm").toggle();//답글폼 보여주기
+			document.getElementsByTagName("form")[0].reset();//JS 초기화
+// 			$("#replyForm").reset()// X
+		});
+	});
+</script>
+<style type="text/css">
+	/*답글 폼 안보이게 처리*/
+	#replyForm{
+		display: none;
+	}
+</style>
 </head>
 <body>
 <h1>답변형 게시판</h1>
@@ -25,7 +42,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button type="button">답글</button>
+				<button type="button" id="replyBtn">답글</button>
 				<button type="button"
 						onclick="location.href='updateBoardForm.board?seq=${dto.seq}'">수정</button>
 				<button type="button"
