@@ -49,6 +49,14 @@ public class AnsDto {
 		this.content = content;
 	}
 
+	public AnsDto(int seq, String id, String title, String content) {
+		super();
+		this.seq = seq;
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
+
 	public int getSeq() {
 		return seq;
 	}

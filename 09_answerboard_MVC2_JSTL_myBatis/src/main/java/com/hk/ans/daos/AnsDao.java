@@ -120,6 +120,29 @@ public class AnsDao extends SqlMapConfig{
 		return count>0?true:false;
 	}
 	
+	//7.답글추가하기: update문, insert문 실행 --> transaction 처리 필요
+	public boolean replyBoard(AnsDto dto) {
+		int count=0;
+		SqlSession sqlSession=null;
+		
+		try {
+			//      //autocommit:false 이유는 transaction 처리를 위해
+			sqlSession=getSqlSessionFactory().openSession(false);
+			//같은 그룹에서 부모의 step보다 큰 글들의 step+1을 해줌
+			//update문 실행
+			sqlSession.update(namespace+"replyUpdate", dto);
+			//insert문 실행
+			count=sqlSession.insert(namespace+"replyInsert", dto);
+			sqlSession.commit();//쿼리가 정상처리됐다면 DB에 반영
+		} catch (Exception e) {
+			sqlSession.rollback();//여러작업중 실패가 있다면 모두 되돌려~~
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return count>0?true:false;
+	}
 	
 	public void test() {
 		//쿼리를 실행시킬 수 있는 객체 : sqlSession객체를 구함

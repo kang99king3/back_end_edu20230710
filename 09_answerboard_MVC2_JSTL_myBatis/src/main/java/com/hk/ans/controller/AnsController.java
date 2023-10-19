@@ -126,6 +126,21 @@ public class AnsController extends HttpServlet{
 				request.setAttribute("msg", "글삭제실패");
 				dispatch("error.jsp", request, response);
 			}
+		}else if(command.equals("/replyBoard.board")) {
+			//seq값은 어떤 글의 답글을 추가하는지 알아야 하므로 전달(부모의 seq)
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			String id=request.getParameter("id");
+			String title=request.getParameter("title");
+			String content=request.getParameter("content");
+			
+			boolean isS=dao.replyBoard(new AnsDto(seq,id,title,content));
+			
+			if(isS) {
+				response.sendRedirect("boardList.board");
+			}else{
+				request.setAttribute("msg", "답글추가실패");
+				dispatch("error.jsp", request, response);
+			}
 		}
 		
 	}
