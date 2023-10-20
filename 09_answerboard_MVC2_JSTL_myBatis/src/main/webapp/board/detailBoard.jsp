@@ -48,7 +48,7 @@
 				<button type="button"
 						onclick="location.href='mulDel.board?chk=${dto.seq}'">삭제</button>
 				<button type="button"
-				        onclick="location.href='boardList.board?pnum=1'">목록</button>
+				        onclick="location.href='boardList.board'">목록</button>
 			</td>
 		</tr>
 	</table>

@@ -110,9 +110,14 @@ function isAllCheck(){
 		<tr>
 			<td colspan="10" style="text-align: center;">
 				
+<%-- 				<c:forEach begin="1" end="${pcount}" var="i" step="1"> --%>
+<%-- 					<a ${(sessionScope.pnum == i||param.pnum == i)?"class='active'":""}  href="boardList.board?pnum=${i}">${i}</a>&nbsp;&nbsp; --%>
+<%-- 				</c:forEach> --%>
+				<a href="#">◀</a>
 				<c:forEach begin="1" end="${pcount}" var="i" step="1">
-					<a ${param.pnum == i?"class='active'":""}  href="boardList.board?pnum=${i}">${i}</a>&nbsp;&nbsp;
+					<a ${(sessionScope.pnum == i||param.pnum == i)?"class='active'":""}  href="boardList.board?pnum=${i}">${i}</a>&nbsp;&nbsp;
 				</c:forEach>
+				<a href="#">▶</a>
 			</td>
 		</tr>
 		<tr>

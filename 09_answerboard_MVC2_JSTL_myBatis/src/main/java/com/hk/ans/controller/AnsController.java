@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.hk.ans.daos.AnsDao;
 import com.hk.ans.dtos.AnsDto;
@@ -35,6 +36,9 @@ public class AnsController extends HttpServlet{
 		//2단계:Dao객체생성
 		AnsDao dao=new AnsDao();
 		
+		//Session 객체 생성
+		HttpSession session=request.getSession();
+		
 		//3단계:if 분기
 		if(command.equals("/boardList.board")) {//글목록 조회
 			
@@ -49,6 +53,16 @@ public class AnsController extends HttpServlet{
 			//페이지번호 받기
 			String pnum=request.getParameter("pnum");
 			
+			//---페이지번호 유지를 위한 코드----------------------
+			//페이지번호를 전달하지 않으면 세션에 저장된 페이지번호를 사용
+			if(pnum==null) {
+				pnum=(String)session.getAttribute("pnum");//현재 조회중인 페이지번호
+			}else {
+				//새로 페이지를 요청할 경우 세션에 저장
+				session.setAttribute("pnum", pnum);
+			}
+			//---페이지번호 유지를 위한 코드 종료-------------------
+		
 			//글목록 
 			List<AnsDto>list=dao.getAllList(pnum);
 			request.setAttribute("list", list);
