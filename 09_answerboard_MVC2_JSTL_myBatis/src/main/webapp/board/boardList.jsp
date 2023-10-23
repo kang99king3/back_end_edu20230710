@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -8,16 +9,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/layout1.css" >
+<link rel="stylesheet" href="./css/test.css?<%=LocalTime.now()%>" type="text/css" >
 <style type="text/css">
+/* 	@import url("css/layout1.css"); */
 	a{text-decoration: none;}
 	.active{
 		background-color: yellow;
 	}
-/* 	table{ */
-/* 		border:1px solid gray; */
-/* 		border-collapse: collapse; */
-/* 	} */
+/*  	table{  */
+/*  		border:1px solid gray;  */
+/*  		border-collapse: collapse;  */
+/*  	}  */
 </style>
 <script type="text/javascript">
 //전체선택박스구현
