@@ -8,11 +8,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/layout1.css" >
 <style type="text/css">
 	a{text-decoration: none;}
 	.active{
 		background-color: yellow;
 	}
+/* 	table{ */
+/* 		border:1px solid gray; */
+/* 		border-collapse: collapse; */
+/* 	} */
 </style>
 <script type="text/javascript">
 //전체선택박스구현
@@ -113,11 +118,11 @@ function isAllCheck(){
 <%-- 				<c:forEach begin="1" end="${pcount}" var="i" step="1"> --%>
 <%-- 					<a ${(sessionScope.pnum == i||param.pnum == i)?"class='active'":""}  href="boardList.board?pnum=${i}">${i}</a>&nbsp;&nbsp; --%>
 <%-- 				</c:forEach> --%>
-				<a href="#">◀</a>
-				<c:forEach begin="1" end="${pcount}" var="i" step="1">
+				<a href="boardList.board?pnum=${pMap.prePageNum}">◀</a>
+				<c:forEach begin="${pMap.startPage}" end="${pMap.endPage}" var="i" step="1">
 					<a ${(sessionScope.pnum == i||param.pnum == i)?"class='active'":""}  href="boardList.board?pnum=${i}">${i}</a>&nbsp;&nbsp;
 				</c:forEach>
-				<a href="#">▶</a>
+				<a href="boardList.board?pnum=${pMap.nextPageNum}">▶</a>
 			</td>
 		</tr>
 		<tr>

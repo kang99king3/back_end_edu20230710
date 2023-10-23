@@ -2,6 +2,7 @@ package com.hk.ans.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.hk.ans.daos.AnsDao;
 import com.hk.ans.dtos.AnsDto;
+import com.hk.ans.util.Paging;
 
 @WebServlet("*.board")
 public class AnsController extends HttpServlet{
@@ -70,6 +72,11 @@ public class AnsController extends HttpServlet{
 			//페이지 수
 			int pcount=dao.getPCount();
 			request.setAttribute("pcount", pcount);
+			
+			//---페이지에 페이징 처리 기능 추가
+			//필요한 값: 페이지수, 페이지번호, 페이지범위(페이지수)
+			Map<String, Integer> map=Paging.pagingValue(pcount, pnum, 5);
+			request.setAttribute("pMap", map);
 			
 			dispatch("board/boardList.jsp", request, response);
 		}else if(command.equals("/insertForm.board")) {//글추가폼 이동
