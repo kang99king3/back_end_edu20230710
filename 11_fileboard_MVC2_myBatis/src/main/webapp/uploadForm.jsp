@@ -15,6 +15,9 @@
 			<th>파일:</th>
 			<td><input type="file" name="filename" /> </td>
 		</tr>
+		<tr>
+			<td colspan="2"><input type="submit" value="업로드"/> </td>
+		</tr>
 	</table>
 </form>
 </body>
