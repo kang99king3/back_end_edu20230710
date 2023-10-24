@@ -16,6 +16,10 @@
 			<td><input type="file" name="filename" /> </td>
 		</tr>
 		<tr>
+			<th>다운로드:</th>
+			<td><a href="upload/${param.filename}">${param.filename}</a> </td>
+		</tr>
+		<tr>
 			<td colspan="2"><input type="submit" value="업로드"/> </td>
 		</tr>
 	</table>

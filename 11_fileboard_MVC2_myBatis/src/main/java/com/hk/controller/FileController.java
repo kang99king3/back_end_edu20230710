@@ -1,5 +1,6 @@
 package com.hk.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hk.daos.FileDao;
+import com.hk.dtos.FileDto;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -38,10 +40,15 @@ public class FileController extends HttpServlet {
 			
 			//1.경로 정의(상대경로, 절대경로)
 			//- 절대경로지정
-			String saveDirectory
-					="C:/Users/user/git/back_end_edu20230710_web/"
-				   + "11_fileboard_MVC2_myBatis/src/main/webapp/upload";
+//			String saveDirectory
+//					="C:/Users/user/git/back_end_edu20230710_web/"
+//				   + "11_fileboard_MVC2_myBatis/src/main/webapp/upload";
+		
+			//- 상대경로지정
+			String saveDirectory=request.getSession().getServletContext()
+					 			.getRealPath("upload");
 			
+			System.out.println("상대경로:"+saveDirectory);
 			//2.file 업로드 사이즈: 1b->1024b->1kb->1024kb->1MB * 10 = 10MB
 			int maxPostSize=1*1024*1024*10;//10MB
 			
@@ -50,6 +57,8 @@ public class FileController extends HttpServlet {
 				//파라미터내용(요청객체,저장경로,최대업로드 사이즈, 인코딩, 중복파일명 재정의)
 				multi=new MultipartRequest(request, saveDirectory, maxPostSize, 
 										  "utf-8", new DefaultFileRenamePolicy());
+//				multi.getParameter("title");//text들도 multi객체로 받아야함.
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -69,11 +78,21 @@ public class FileController extends HttpServlet {
 			System.out.println("저장파일명:"+stored_name);
 			// 3.파일사이즈 구하기: length()는 long타입으로 반환 --> int로 형변환 필요
 			int file_size=(int)multi.getFile("filename").length();
+			System.out.println("파일사이즈:"+file_size);
 			// 4.DB에 정보 추가하기
-			
+			boolean isS=dao.insertFile(
+				          new FileDto(0, origin_name, stored_name, file_size, null));
 			// 5.저장된 파일명 변경하기(old이름 --> stored이름)
-			
-			response.sendRedirect("uploadForm.jsp");
+			//                           getFilesystemName():실제 저장되어 있는 파일명 
+			File oldFile=new File(saveDirectory+"/"+multi.getFilesystemName("filename"));
+		    File newFile=new File(saveDirectory+"/"+stored_name);
+		    oldFile.renameTo(newFile);//old파일명을 new파일명으로 변경
+		    
+		    if(isS) {
+		    	response.sendRedirect("uploadForm.jsp?filename="+stored_name);		    	
+		    }else {
+		    	response.sendRedirect("error.jsp");
+		    }
 		}
 		
 	}
