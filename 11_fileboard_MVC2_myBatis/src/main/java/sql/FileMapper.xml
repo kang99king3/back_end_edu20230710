@@ -20,7 +20,7 @@
 	</select>
 	
 	<sql id="paramSeq">
-		seq=#{seq}
+		 seq=#{seq}
 	</sql>
 </mapper>
 
