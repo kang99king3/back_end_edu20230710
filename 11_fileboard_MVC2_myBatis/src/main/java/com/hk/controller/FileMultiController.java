@@ -63,30 +63,31 @@ public class FileMultiController extends HttpServlet {
 			while(files.hasMoreElements()) { // 객체 안에 값이 있는지 확인해서 실행하는 방식
 				String fileName=(String)files.nextElement();//각각의 파일 name값을 구한다.
 				System.out.println("file name속성값:"+fileName);
-				
-				//DB에 파일정보 추가하기
-				// 1.원본파일명 구하기
-				// "filename"은 페이지에서 전달될때 정의했던 이름 name="filename"
-				String origin_name=multi.getOriginalFileName(fileName);
-				System.out.println("원본파일명:"+origin_name);
-				// 2.저장 파일명 구하기: UUID객체 ---> 32자리 값을 구해서 저장
-				// "12345678-12345678-12345678-12345678"
-				String random32=UUID.randomUUID().toString().replace("-", "");//"-"제거
-				String stored_name=random32   //abc.jpg -> random32+.jpg 추출
-						+(origin_name.substring(origin_name.lastIndexOf(".")));
-				
-				System.out.println("저장파일명:"+stored_name);
-				// 3.파일사이즈 구하기: length()는 long타입으로 반환 --> int로 형변환 필요
-				int file_size=(int)multi.getFile(fileName).length();
-				System.out.println("파일사이즈:"+file_size);
-				// 4.DB에 정보 추가하기
-				isS=dao.insertFile(
-						new FileDto(0, origin_name, stored_name, file_size, null));
-				// 5.저장된 파일명 변경하기(old이름 --> stored이름)
-				//                           getFilesystemName():실제 저장되어 있는 파일명 
-				File oldFile=new File(saveDirectory+"/"+multi.getFilesystemName(fileName));
-				File newFile=new File(saveDirectory+"/"+stored_name);
-				oldFile.renameTo(newFile);//old파일명을 new파일명으로 변경
+				if(multi.getFile(fileName)!=null) {//실제 첨부된 파일만 처리
+					//DB에 파일정보 추가하기
+					// 1.원본파일명 구하기
+					// "filename"은 페이지에서 전달될때 정의했던 이름 name="filename"
+					String origin_name=multi.getOriginalFileName(fileName);
+					System.out.println("원본파일명:"+origin_name);
+					// 2.저장 파일명 구하기: UUID객체 ---> 32자리 값을 구해서 저장
+					// "12345678-12345678-12345678-12345678"
+					String random32=UUID.randomUUID().toString().replace("-", "");//"-"제거
+					String stored_name=random32   //abc.jpg -> random32+.jpg 추출
+							+(origin_name.substring(origin_name.lastIndexOf(".")));
+					
+					System.out.println("저장파일명:"+stored_name);
+					// 3.파일사이즈 구하기: length()는 long타입으로 반환 --> int로 형변환 필요
+					int file_size=(int)multi.getFile(fileName).length();
+					System.out.println("파일사이즈:"+file_size);
+					// 4.DB에 정보 추가하기
+					isS=dao.insertFile(
+							new FileDto(0, origin_name, stored_name, file_size, null));
+					// 5.저장된 파일명 변경하기(old이름 --> stored이름)
+					//                           getFilesystemName():실제 저장되어 있는 파일명 
+					File oldFile=new File(saveDirectory+"/"+multi.getFilesystemName(fileName));
+					File newFile=new File(saveDirectory+"/"+stored_name);
+					oldFile.renameTo(newFile);//old파일명을 new파일명으로 변경
+				}
 			}
 		    
 		    if(isS) {
