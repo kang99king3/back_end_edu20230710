@@ -1,11 +1,14 @@
 package com.hk.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -134,6 +137,31 @@ public class FileController extends HttpServlet {
 			
 			//다운로드할 파일 읽어와서 클라이언트로 출력하기
 			// 디렉토리에 있는 저장파일 ----> JAVA ----> 클라이언트 출력
+			
+			File file=new File(filePath);//file객체 생성
+			
+			//java가 한번에 읽을 수 있는 양의 크기만큼 배열을 생성
+//			byte[] b= {1,2,3,4};
+			byte[] b=new byte[(int)file.length()];
+			
+			FileInputStream in=null;//파일을 읽어들이는 파이프(입력)
+			ServletOutputStream out=null;//내보내기 위한 파이프(출력)
+			
+			try {
+				in=new FileInputStream(file);
+				out=response.getOutputStream();
+				int numRead=0;//읽어들이는 값의 개수를 저장할 변수
+				while((numRead=in.read(b,0, b.length))!=-1) {//입력
+					out.write(b, 0, numRead);//출력
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				out.flush();//남은 데이터가 있으면 모두 밀어내서 내보내기
+				out.close();
+				in.close();
+			}
 		}
 		
 	}
