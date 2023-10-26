@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 	DB연결에 관련된 설정 작성(myBatis 등등) -->
+	
+	<!-- db.properties 파일 관리를 위한 객체 설정 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:properties/db.properties"/>
+	</bean>
+	
+	<!-- dataSource에 대한 관리를 위한 객체 설정 -->
+	
+	<!-- SqlSessionFactory 객체 설정 -->
+	
+	<!-- SqlSessionTemplate 객체 설정 -->
+</beans>
+
+
+
+
+
+
+
+
+
+
+
