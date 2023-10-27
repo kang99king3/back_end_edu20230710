@@ -1,6 +1,8 @@
 package com.hk.board.daos;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,14 @@ public class HkDaoImp implements IHkDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;//spring이 객체를 주입시킨다.
 	
+	//기존 방식
+//	public HkDaoImp() {
+//		sqlSession=new SqlSessionTemplate(null);
+//	}
+//	public HkDaoImp(SqlSessionTemplate sqlSession) {
+//		sqlSession=sqlSession;
+//	}
+	
 	private String namespace="com.hk.board.";
 	
 	@Override
@@ -28,26 +38,30 @@ public class HkDaoImp implements IHkDao{
 
 	@Override
 	public boolean insertBoard(HkDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+		int count=sqlSession.insert(namespace+"insertBoard", dto);
+		return count>0?true:false;
 	}
 
 	@Override
 	public HkDto getBoard(int seq) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(namespace+"getBoard", seq);
 	}
 
 	@Override
 	public boolean updateBoard(HkDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+		int count=sqlSession.update(namespace+"updateBoard", dto);
+		return count>0?true:false;
 	}
 
 	@Override
 	public boolean mulDel(String[] seqs) {
-		// TODO Auto-generated method stub
-		return false;
+		Map<String, String[]>map=new HashMap<>();
+		map.put("seqs", seqs);
+		int count=sqlSession.delete(namespace+"mulDel", map);
+		return count>0?true:false;
 	}
 
 }
+
+
+
