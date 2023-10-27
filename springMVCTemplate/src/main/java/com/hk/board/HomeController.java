@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 //DispatcherServlet 객체가 @Controller로 선언된 클래스를 찾는다.
 //"home.do"라고 요청했으면, 매핑되어 있는 메서드를 실행한다.
+@RequestMapping(value="/board")
 @Controller
 public class HomeController {
 
@@ -37,8 +38,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/boardList.do",method = RequestMethod.GET)
 	public String boardList() {
-		
-		return "";
+		System.out.println("글목록조회");
+		return "home";
 	}
 }
 
