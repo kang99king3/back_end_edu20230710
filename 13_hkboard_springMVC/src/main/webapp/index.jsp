@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/test.css">
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/board/home.do">HOME</a>
+<a href="home.do">HOME</a>
+<a href="boardList.do">글목록</a>
 </body>
 </html>

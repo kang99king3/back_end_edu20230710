@@ -10,7 +10,6 @@
 <body>
 <h1>HOME</h1>
 <h2>${str}</h2>
-<a href="${pageContext.request.contextPath}/board/boardList.do">글목록</a>
 </body>
 </html>
 
