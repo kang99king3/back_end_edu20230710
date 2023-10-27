@@ -23,7 +23,19 @@
 	<!-- base-package는 기본적으로 3뎁스로 구성한다. -->
 	<context:component-scan base-package="com.hk.board" />
 
+<!-- 	<bean id="hkDao" class="com.hk.board.daos.HkDaoImp" /> -->
+	
+	
+	
 </beans>
+
+
+
+
+
+
+
+
 
 
 
