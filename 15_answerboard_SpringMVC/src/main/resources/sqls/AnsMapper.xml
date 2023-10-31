@@ -61,7 +61,7 @@
 	
 	<select id="getPCount" resultType="int">
 		SELECT CEIL(COUNT(*)/10) pageCount 
-		FROM answerboard
+		FROM answerboard 
 	</select>
 	
 	<select id="getAllList" parameterType="Map" resultType="AnsDto">

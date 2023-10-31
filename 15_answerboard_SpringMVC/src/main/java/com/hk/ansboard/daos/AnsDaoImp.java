@@ -27,44 +27,58 @@ public class AnsDaoImp implements IAnsDao{
 
 	@Override
 	public int getPCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne(namespace+"getPCount");
 	}
 
 	@Override
 	public boolean insertBoard(AnsDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+		int count=sqlSession.insert(namespace+"insertBoard",dto);
+		return count>0?true:false;
 	}
 
 	@Override
 	public AnsDto getBoard(int seq) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(namespace+"getBoard", seq);
 	}
 
 	@Override
 	public boolean updateBoard(AnsDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+		int count=sqlSession.update(namespace+"updateBoard", dto);
+		return count>0?true:false;
 	}
 
 	@Override
 	public boolean readCount(int seq) {
-		// TODO Auto-generated method stub
-		return false;
+		int count=sqlSession.update(namespace+"readCount", seq);
+		return count>0?true:false;
 	}
 
 	@Override
 	public boolean mulDel(String[] seqs) {
-		// TODO Auto-generated method stub
-		return false;
+		Map<String, String[]>map=new HashMap<>();
+		map.put("seqs", seqs);
+		int count=sqlSession.update(namespace+"mulDel", map);
+		return count>0?true:false;
 	}
-
 	@Override
-	public boolean replyBoard(AnsDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+	public int replyUpdate(AnsDto dto) {
+		return sqlSession.update(namespace+"replyUpdate", dto);
+	}
+	@Override
+	public int replyInsert(AnsDto dto) {
+		return sqlSession.update(namespace+"replyInsert", dto);
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

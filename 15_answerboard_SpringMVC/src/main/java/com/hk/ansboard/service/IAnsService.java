@@ -1,10 +1,10 @@
-package com.hk.ansboard.daos;
+package com.hk.ansboard.service;
 
 import java.util.List;
+
 import com.hk.ansboard.dtos.AnsDto;
 
-public interface IAnsDao {
-
+public interface IAnsService {
 	//1.글목록조회[페이징처리]
 	public List<AnsDto> getAllList(String pnum);
 	//1-2.페이지수 구하기
@@ -19,12 +19,9 @@ public interface IAnsDao {
 	public boolean readCount(int seq) ;
 	//6.삭제하기
 	public boolean mulDel(String[] seqs) ;
-	//7.답글추가하기: update문, insert문 실행 --> transaction 처리 필요
-	public int replyUpdate(AnsDto dto);
-	public int replyInsert(AnsDto dto);
+	//7.답글달기
+	public boolean replyBoard(AnsDto dto);
 }
-
-
 
 
 
