@@ -4,6 +4,7 @@
   <artifactId>13_hkboard_springMVC</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  
   <properties>
 	<java-version>11</java-version>
 	<org.springframework-version>5.3.14</org.springframework-version>
@@ -43,7 +44,33 @@
 		 <artifactId>jstl-api</artifactId>
 		 <version>1.2</version>
 		</dependency>
-		
+		<!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+<!--		<dependency>-->
+<!--		    <groupId>jakarta.servlet</groupId>-->
+<!--		    <artifactId>jakarta.servlet-api</artifactId>-->
+<!--		    <version>5.0.0</version>-->
+<!--		    <scope>provided</scope>-->
+<!--		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api -->
+<!--		<dependency>-->
+<!--		    <groupId>jakarta.servlet.jsp</groupId>-->
+<!--		    <artifactId>jakarta.servlet.jsp-api</artifactId>-->
+<!--		    <version>3.0.0</version>-->
+<!--		    <scope>provided</scope>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--		    <groupId>jakarta.servlet.jsp.jstl</groupId>-->
+<!--		    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>-->
+<!--		    <version>1.2.7</version>-->
+<!--		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl -->
+		<dependency>
+		    <groupId>org.apache.taglibs</groupId>
+		    <artifactId>taglibs-standard-impl</artifactId>
+		    <version>1.2.5</version>
+		    <scope>runtime</scope>
+		</dependency>
 		<!--DB 설정관련 라이브러리 -->
 		<!--mariaDB driver -->
 		<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
