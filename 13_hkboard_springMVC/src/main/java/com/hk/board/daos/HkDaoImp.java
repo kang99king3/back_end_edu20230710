@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,7 @@ public class HkDaoImp implements IHkDao{
 	//쿼리를 실행해야 함:myBatis객체
 	//Autowired : 객체의 타입으로 구분해서 주입시켜 주는 기능
 	@Autowired
+	@Qualifier("sqlSessionTemplate")
 	private SqlSessionTemplate sqlSession;//spring이 객체를 주입시킨다.
 	
 	//기존 방식

@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -27,7 +28,8 @@ import com.hk.ansboard.dtos.AnsDto;
 @WebAppConfiguration
 public class AnsDaoImpTest {
 
-	@Autowired
+//	@Autowired
+	@Qualifier(value="sqlSessionTemplate")
 	public SqlSessionTemplate sqlSession;
 	
 	public String namespace="com.hk.ansboard.";
@@ -37,7 +39,8 @@ public class AnsDaoImpTest {
 		System.out.println("before실행");
 	}
 	
-	@Test
+	//time=ms , expected=Exception
+	@Test(timeout = 1000)
 	public void getAllListTest() {
 		Map<String, String>map=new HashMap<>();
 		map.put("pnum", "1");
@@ -52,7 +55,7 @@ public class AnsDaoImpTest {
 	public void afterMethod() {
 		System.out.println("after실행");
 	}
-
+ 
 }
 
 
