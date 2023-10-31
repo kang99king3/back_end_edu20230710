@@ -64,7 +64,7 @@
 		FROM answerboard
 	</select>
 	
-	<select id="boardList" parameterType="Map" resultType="AnsDto">
+	<select id="getAllList" parameterType="Map" resultType="AnsDto">
 		SELECT rn, seq, id, title, content, regdate,refer,step,depth,
 		 readcount,delflag
 		FROM (
