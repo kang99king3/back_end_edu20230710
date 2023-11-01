@@ -42,11 +42,11 @@ public class AnsController {
 			,HttpServletRequest request
 			,HttpServletResponse response) {
 		//글목록으로 이동하면 쿠키 rseq값을 삭제하자
-//		Cookie cookie=getCookie("rseq", request);
-//		if(cookie!=null) {
-//			cookie.setMaxAge(0);//유효기간 0 --> 삭제됨
-//			response.addCookie(cookie);//클라이언트로 변경사항을 전달
-//		}
+		Cookie cookie=getCookie("rseq", request);
+		if(cookie!=null) {
+			cookie.setMaxAge(0);//유효기간 0 --> 삭제됨
+			response.addCookie(cookie);//클라이언트로 변경사항을 전달
+		}
 		//쿠키 삭제 코드 종료------------
 		
 		//---페이지번호 유지를 위한 코드----------------------
@@ -76,6 +76,44 @@ public class AnsController {
 		return "board/boardList";//"WEB-INF/views/"+boardList+".jsp"
 	}
 	
+	@RequestMapping(value = "/detailBoard.do",method = RequestMethod.GET)
+	public String detailBoard(int seq,Model model
+							,HttpServletRequest request
+							,HttpServletResponse response) {
+		
+		//상세내용 조회
+		AnsDto dto=ansService.getBoard(seq);
+		model.addAttribute("dto", dto);
+		
+		String s=null;
+		
+		//getCookie메서드 구현해서 활용하기
+//		Cookie cookieObj=getCookie("rseq", request);
+		
+//		if(cookieObj!=null) {//cookie가 null이 아닐 경우 실행
+//			s=cookieObj.getValue();				
+//		}
+		
+		//"rseq"라는 이름의 값이 있는지 확인(쿠키값이 없는 경우)
+		if(s==null||!s.equals(String.valueOf(seq))) {
+			//쿠키객체 생성하기
+			//                    cookie에 값을 저장할때 타입은 String 이다
+			Cookie cookie=new Cookie("rseq", String.valueOf(seq));
+			cookie.setMaxAge(60*10);//유효기간 설정
+			response.addCookie(cookie);//클라이언트로 cookie객체 전달
+			
+			//---조회수 올리기 코드
+			ansService.readCount(seq);//조회수 증가
+			//--조회수 코드 종료
+		}
+		
+		return "board/detailBoard";
+	}
+	
+	@RequestMapping(value = "/insertBoardForm.do",method = RequestMethod.GET)
+	public String insertBoardForm() {
+		return "board/insertBoardForm";
+	}
 	
 	@GetMapping(value = "/home.do")
 	public String home() {
@@ -83,3 +121,8 @@ public class AnsController {
 		return "home";
 	}
 }
+
+
+
+
+

@@ -43,6 +43,10 @@ public class AnsControllerTest {
 		assertEquals(HttpStatus.OK.value(), statusCode);
 	}
 
+	//글 상세보기
+	
+	//글 추가 폼 이동
+	
 }
 
 
