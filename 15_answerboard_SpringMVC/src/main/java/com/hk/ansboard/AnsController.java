@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hk.ansboard.dtos.AnsDto;
 import com.hk.ansboard.service.IAnsService;
@@ -29,10 +30,12 @@ public class AnsController {
 	public Cookie getCookie(String cookieName, HttpServletRequest request) {
 		Cookie[] cookies=request.getCookies();
 		Cookie cookie=null;
-		for (int i = 0; i < cookies.length; i++) {
-			if(cookies[i].getName().equals(cookieName)) {
-				cookie=cookies[i];
-			}
+		if(cookies!=null) {
+			for (int i = 0; i < cookies.length; i++) {
+				if(cookies[i].getName().equals(cookieName)) {
+					cookie=cookies[i];
+				}
+			}			
 		}
 		return cookie;
 	}
@@ -88,11 +91,11 @@ public class AnsController {
 		String s=null;
 		
 		//getCookie메서드 구현해서 활용하기
-//		Cookie cookieObj=getCookie("rseq", request);
+		Cookie cookieObj=getCookie("rseq", request);
 		
-//		if(cookieObj!=null) {//cookie가 null이 아닐 경우 실행
-//			s=cookieObj.getValue();				
-//		}
+		if(cookieObj!=null) {//cookie가 null이 아닐 경우 실행
+			s=cookieObj.getValue();				
+		}
 		
 		//"rseq"라는 이름의 값이 있는지 확인(쿠키값이 없는 경우)
 		if(s==null||!s.equals(String.valueOf(seq))) {
@@ -110,9 +113,58 @@ public class AnsController {
 		return "board/detailBoard";
 	}
 	
-	@RequestMapping(value = "/insertBoardForm.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/insertForm.do",method = RequestMethod.GET)
 	public String insertBoardForm() {
-		return "board/insertBoardForm";
+		return "board/insertForm";
+	}
+	
+	@RequestMapping(value = "/insertBoard.do",method = RequestMethod.GET)
+	public String insertBoard(Model model, @RequestParam AnsDto dto) { // param=id, title, content -> AnsDto로 받음 
+	
+		boolean isS = ansService.insertBoard(dto);
+	
+		if(isS) {
+//			return "boardList"; // WEB-INF/views/boardList.jsp --> 오류500
+			return "redirect:boardList.do";
+		}else {
+			model.addAttribute("msg", "글추가 실패");
+			return "error";
+		}
+
+	}
+	
+	@RequestMapping(value = "/updateBoardForm.do",method = RequestMethod.GET)
+	public String updateBoardForm(Model model, @RequestParam(value="seq")int seq) {
+		AnsDto dto=ansService.getBoard(seq);
+		model.addAttribute("dto", dto);
+		return "board/updateBoardForm";
+	}
+	
+	@RequestMapping(value = "/updateBoard.do",method = RequestMethod.POST)
+	public String updateBoard(Model model, @RequestParam AnsDto dto) {
+		boolean isS=ansService.updateBoard(dto);
+		
+		if(isS) {
+			return "redirect:detailBoard.do?seq="+dto.getSeq();
+		}else {
+			model.addAttribute("msg", "수정실패");
+			return "error";
+		}
+	
+	}
+	
+	@RequestMapping(value = "/mulDel.do",method = {RequestMethod.POST
+			                                      ,RequestMethod.GET})
+	public String mulDel(Model model, @RequestParam String[] chk) {
+		boolean isS=ansService.mulDel(chk);
+		
+		if(isS) {
+			return "redirect:boardList.do";
+		}else {
+			model.addAttribute("msg", "삭제실패");
+			return "error";
+		}
+	
 	}
 	
 	@GetMapping(value = "/home.do")
