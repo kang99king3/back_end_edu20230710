@@ -3,14 +3,14 @@
 <configuration>
 
 <!-- 	변수설정 -->
-	<typeAliases>
-		<typeAlias type="com.hk.ansboard.dtos.AnsDto" alias="AnsDto"/>
-	</typeAliases>
+<!-- 	<typeAliases> -->
+<!-- 		<typeAlias type="com.hk.dtos.FileDto" alias="FileDto"/> -->
+<!-- 	</typeAliases> -->
 	
 	<mappers>
-		<mapper resource="sqls/AnsMapper.xml"/>
+		<mapper resource="sqls/FileMapper.xml"/>
 	</mappers>
-</configuration>  
+</configuration>
 
 
 

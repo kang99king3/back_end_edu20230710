@@ -167,6 +167,21 @@ public class AnsController {
 	
 	}
 	
+	@RequestMapping(value = "/replyBoard.do",method = {RequestMethod.POST
+            								,RequestMethod.GET})
+	public String replyBoard(Model model, @RequestParam AnsDto dto) {
+		
+		boolean isS=ansService.replyBoard(dto);
+		
+		if(isS) {
+			return "redirect:boardList.do";
+		}else {
+			model.addAttribute("msg", "답글추가실패");
+			return "error";
+		}
+	
+	}
+	
 	@GetMapping(value = "/home.do")
 	public String home() {
 		System.out.println("HOME요청");
