@@ -28,7 +28,7 @@ import com.hk.ansboard.dtos.AnsDto;
 @WebAppConfiguration
 public class AnsDaoImpTest {
 
-//	@Autowired
+	@Autowired
 	@Qualifier(value="sqlSessionTemplate")
 	public SqlSessionTemplate sqlSession;
 	
@@ -39,8 +39,8 @@ public class AnsDaoImpTest {
 		System.out.println("before실행");
 	}
 	
-	//time=ms , expected=Exception
-	@Test(timeout = 1000)
+	//timeout=ms , expected=Exception
+	@Test(expected=NumberFormatException.class)
 	public void getAllListTest() {
 		Map<String, String>map=new HashMap<>();
 		map.put("pnum", "1");
