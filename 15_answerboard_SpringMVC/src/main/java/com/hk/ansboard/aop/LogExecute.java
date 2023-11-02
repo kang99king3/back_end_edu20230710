@@ -1,5 +1,7 @@
 package com.hk.ansboard.aop;
 
+import java.util.Arrays;
+
 import org.aspectj.lang.JoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +29,32 @@ public class LogExecute {
 	}
 	
 	//target메서드가 실행 후 값을 성공적으로 리턴했을 경우에 실행될 메서드
-	
+	public void afterReturning(JoinPoint join) {
+		Logger log=LoggerFactory.getLogger(join.getTarget()+"");
+		log.info("afterReturning실행(info):시작:"+join.getSignature().getName());
+		log.debug("afterReturning실행(debug):시작:"+join.toLongString());
+		Object[] args=join.getArgs();
+		log.debug("전달 파리미터:"+Arrays.toString(args));
+	}
 	//target메서드에서 오류가 발생했을 때 실행될 메서드
+	public void daoError(JoinPoint join) {
+		Logger log=LoggerFactory.getLogger(join.getTarget()+"");
+		log.info("daoError실행(info):시작:"+join.getSignature().getName());
+		log.debug("daoError실행(debug):시작:"+join.toLongString());
+		log.debug("debug실행:오류발생");
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
