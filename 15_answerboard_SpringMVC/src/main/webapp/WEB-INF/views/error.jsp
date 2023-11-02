@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="home.do">HOME</a>
-<a href="boardList.do?pnum=1">글목록</a>
+<h1>시스템오류입니다.</h1>
+<h2>오류내용:${msg}</h2>
+<h3><a href="index.jsp">메인</a></h3>
 </body>
 </html>
+
+

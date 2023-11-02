@@ -13,7 +13,7 @@ public class Util {
 			nbsp+="&nbsp;&nbsp;&nbsp;&nbsp;";
 		}
 		//           답글인 조건: depth>0
-		this.arrowNbsp=nbsp+(depthInt>0?"<img src='img/arrow_icon.png'/>":"");
+		this.arrowNbsp=nbsp+(depthInt>0?"<img src='resources/img/arrow_icon.png'/>":"");
 		//            "&nbsp;&nbsp;&nbsp;&nbsp;->"
 	}
 	
