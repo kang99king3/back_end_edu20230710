@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,11 +17,14 @@ public class AnsDaoImp implements IAnsDao{
 
 	private String namespace="com.hk.ansboard.";
 	
+	private Logger logger=LoggerFactory.getLogger(AnsDaoImp.class);
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
 	public List<AnsDto> getAllList(String pnum) {
+//		logger.info("getAllList실행");
 		Map<String,String>map=new HashMap<>();
 		map.put("pnum", pnum);
 		return sqlSession.selectList(namespace+"getAllList", map) ;
