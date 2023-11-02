@@ -1,3 +1,4 @@
+<%@include file="../header.jsp" %>
 <%@page import="java.time.LocalTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -56,7 +57,7 @@ function isAllCheck(){
 <div id="container">
 	<h2>글목록조회</h2>
 	<form action="mulDel.do" method="post" onsubmit="return isAllCheck()">
-	<table border="1">
+	<table class="table table-striped">
 		<tr>
 			<th><input type="checkbox" name="all" onclick="allSel(this.checked)" /> </th>
 			<th>번호</th>
@@ -110,17 +111,28 @@ function isAllCheck(){
 		</c:choose>
 		<tr>
 			<td colspan="10" style="text-align: center;">
-				<a href="boardList.do?pnum=${pMap.prePageNum}">◀</a>
-				<c:forEach begin="${pMap.startPage}" end="${pMap.endPage}" var="i" step="1">
-					<a ${(sessionScope.pnum == i||param.pnum == i)?"class='active'":""}  href="boardList.do?pnum=${i}">${i}</a>&nbsp;&nbsp;
-				</c:forEach>
-				<a href="boardList.do?pnum=${pMap.nextPageNum}">▶</a>
+<%-- 				<a href="boardList.do?pnum=${pMap.prePageNum}">◀</a> --%>
+<%-- 				<c:forEach begin="${pMap.startPage}" end="${pMap.endPage}" var="i" step="1"> --%>
+<%-- 					<a ${(sessionScope.pnum == i||param.pnum == i)?"class='active'":""}  href="boardList.do?pnum=${i}">${i}</a>&nbsp;&nbsp; --%>
+<%-- 				</c:forEach> --%>
+<%-- 				<a href="boardList.do?pnum=${pMap.nextPageNum}">▶</a> --%>
+				<!-- 페이징 처리부분 시작 -->
+				<nav>
+				  <ul class="pagination">
+				    <li ><a href="boardList.do?pnum=${pMap.prePageNum}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+				    <c:forEach var="i" begin="${pMap.startPage}" end="${pMap.endPage}">
+				    	<li ${sessionScope.pnum==i?"class='active'":""}><a href="boardList.do?pnum=${i}">${i}<span class="sr-only">(current)</span></a></li>
+				    </c:forEach> 
+				    <li ><a href="boardList.do?pnum=${pMap.nextPageNum}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+				  </ul>
+				</nav>
+				<!-- 페이징 처리부분 종료 -->
 			</td>
 		</tr>
 		<tr>
 			<td colspan="10">
-				<button type="button" onclick="location.href='insertForm.do'">글추가</button>
-				<button type="submit">삭제</button>
+				<button class="btn btn-primary" type="button" onclick="location.href='insertForm.do'">글추가</button>
+				<button class="btn btn-primary"  type="submit">삭제</button>
 			</td>
 		</tr>
 	</table>
@@ -129,7 +141,7 @@ function isAllCheck(){
 
 </body>
 </html>
-
+<%@include file="../footer.jsp" %>
 
 
 

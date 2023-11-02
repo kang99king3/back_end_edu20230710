@@ -54,7 +54,7 @@ public class AnsServiceImp implements IAnsService{
 	//transaction 처리하는 방법2
 	// - 선언적 처리 방법 : 어노테이션 작성 방식 
 	// - AOP 처리 방법 : AOP 적용 처리 방식
-	@Transactional(propagation = Propagation.REQUIRED)
+//	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public boolean replyBoard(AnsDto dto) {
 		int count=0;

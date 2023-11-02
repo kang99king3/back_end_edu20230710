@@ -38,7 +38,7 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
-	<!-- 선언적 처리 @transactional 어노테이션을 사용 -->
+	<!-- 선언적 처리 @transactional 어노테이션을 사용: AOP이용시 필요없음 -->
 	<tx:annotation-driven transaction-manager="transactionManager"
 		                  proxy-target-class="true" />
 	

@@ -18,7 +18,7 @@ public class ExceptionAdvice {
 		model.addAttribute("msg","오류가 발생하여 확인중");
 		return "error";
 	}
-}
+} 
 
 
 

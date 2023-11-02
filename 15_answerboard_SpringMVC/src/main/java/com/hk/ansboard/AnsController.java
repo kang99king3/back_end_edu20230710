@@ -118,8 +118,8 @@ public class AnsController {
 		return "board/insertForm";
 	}
 	
-	@RequestMapping(value = "/insertBoard.do",method = RequestMethod.GET)
-	public String insertBoard(Model model, @RequestParam AnsDto dto) { // param=id, title, content -> AnsDto로 받음 
+	@RequestMapping(value = "/insertBoard.do",method = RequestMethod.POST)
+	public String insertBoard(Model model, AnsDto dto) { // param=id, title, content -> AnsDto로 받음 
 	
 		boolean isS = ansService.insertBoard(dto);
 	
@@ -137,11 +137,11 @@ public class AnsController {
 	public String updateBoardForm(Model model, @RequestParam(value="seq")int seq) {
 		AnsDto dto=ansService.getBoard(seq);
 		model.addAttribute("dto", dto);
-		return "board/updateBoardForm";
+		return "board/updateBoard";
 	}
 	
 	@RequestMapping(value = "/updateBoard.do",method = RequestMethod.POST)
-	public String updateBoard(Model model, @RequestParam AnsDto dto) {
+	public String updateBoard(Model model, AnsDto dto) {
 		boolean isS=ansService.updateBoard(dto);
 		
 		if(isS) {
@@ -169,7 +169,7 @@ public class AnsController {
 	
 	@RequestMapping(value = "/replyBoard.do",method = {RequestMethod.POST
             								,RequestMethod.GET})
-	public String replyBoard(Model model, @RequestParam AnsDto dto) {
+	public String replyBoard(Model model, AnsDto dto) {
 		
 		boolean isS=ansService.replyBoard(dto);
 		
