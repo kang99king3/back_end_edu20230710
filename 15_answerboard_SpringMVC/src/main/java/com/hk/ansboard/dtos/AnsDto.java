@@ -31,6 +31,17 @@ public class AnsDto {
 	private String readCount;
 	private String delflag;
 	
+	//date를 String 형식으로 변환하여 저장해줄 변수
+	private String regDateStr;
+
+	public String getRegDateStr() {
+		return regDateStr;
+	}
+
+	public void setRegDateStr(String regDateStr) {
+		this.regDateStr = regDateStr;
+	}
+
 	public AnsDto() {
 		super();
 		// TODO Auto-generated constructor stub

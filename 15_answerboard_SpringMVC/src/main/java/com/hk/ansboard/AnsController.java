@@ -1,5 +1,7 @@
 package com.hk.ansboard;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hk.ansboard.dtos.AnsDto;
 import com.hk.ansboard.service.IAnsService;
@@ -185,12 +188,21 @@ public class AnsController {
 	
 	}
 	
+	//@ResponseBody : 요청했던 페이지로 값을 출력하는 기능
+	//servlet에서 사용하던 printWriter pw=response.getWriter(); pw.print("<p>t</p>")
+	@ResponseBody
 	@RequestMapping(value="/detailBoardAjax.do",method = RequestMethod.POST
 			        ,produces = "application/json;charset=utf-8")
 	public Map<String, AnsDto> detailBoardAjax(int seq){
 		AnsDto dto=ansService.getBoard(seq);
+		
+		//날짜를 원하는 형식의 문자열으로 변환 처리
+		Date regDate=dto.getRegDate();//Date타입 값 가져오기
+		SimpleDateFormat sf=new SimpleDateFormat("yyyy년MM월dd일");
+		String regDateStr=sf.format(regDate);
+		dto.setRegDateStr(regDateStr);//문자열 타입 값 저장
+		
 		//JS: json객체사용--> {key:value,key:value,key:value}
-		dto.setRegDate(null);
 		Map<String, AnsDto> map=new HashMap<>();
 		map.put("dto", dto);// {"dto":{seq:5,id:"hk",title:"제목"..}}
 		return map;

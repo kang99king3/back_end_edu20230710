@@ -65,12 +65,22 @@ $(function(){ //onload이벤트 기능 --> window.onload=function(){}
 			dataType:"json",//받을 값의 타입
 			async:false,//ajax메서드를 동기식으로 실행
 			success:function(obj){//통신 성공하면 실행
-				alert(obj["dto"]["seq"]);
+				//obj={"dto":{seq:5,id:"hk",title:"제목"..}}
+// 				alert(obj["dto"]["regDateStr"]);
+				$("#regdate").val(obj.dto.regDateStr);
+				$("#id").val(obj.dto.id);
+				$("#title").val(obj.dto.title);
+				$("#content").val(obj.dto.content);
 			},error:function(){
 				alert("통신실패");
 			}
 		});
-	},function(){});
+	},function(){//마우스가 나갔을때..
+		$("#regdate").val("");
+		$("#id").val("");
+		$("#title").val("");
+		$("#content").val("");
+	});
 });
 </script>
 </head>
