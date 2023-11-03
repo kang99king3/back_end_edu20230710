@@ -21,6 +21,7 @@ import com.hk.ansboard.service.IAnsService;
 import com.hk.ansboard.utils.Paging;
 
 @Controller
+//@RequestMapping(value = "/board")
 public class AnsController {
 
 	@Autowired

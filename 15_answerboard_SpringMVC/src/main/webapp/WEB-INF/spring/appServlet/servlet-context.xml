@@ -25,8 +25,13 @@
 
 <!-- 	<bean id="hkDao" class="com.hk.board.daos.HkDaoImp" /> -->
 	
-	
-	
+	<!-- 인터셉터 설정하기 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<bean class="com.hk.ansboard.interceptor.TestInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
 
 

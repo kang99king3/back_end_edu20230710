@@ -49,6 +49,27 @@ function isAllCheck(){
 	}
 	return true;
 }
+//jquery ajax()사용하여 구현
+$(function(){ //onload이벤트 기능 --> window.onload=function(){}
+// 	alert("test");
+	//상세내용 조회: ajax로 구현
+	//해당 제목에 마우스 올리면 내용 보여주기
+	$("td>a").hover(function(){
+		//상세조회하려면 seq값이 필요함: detailBoard.do?seq=21
+		//  a      td	  td      td	
+		var seq=$(this).parent().prev().prev().text();
+		$.ajax({
+			url:"detailBoardAjax.do", //요청 URL
+			method:"post", //전송방식
+			data:{"seq",seq},//서버로 전송할 값
+			dataType:"json",//받을 값의 타입
+			async:false,//ajax메서드를 동기식으로 실행
+			success:function(obj){//통신 성공하면 실행
+				
+			}
+		});
+	},function(){});
+});
 </script>
 </head>
 <body>
@@ -131,12 +152,19 @@ function isAllCheck(){
 		</tr>
 		<tr>
 			<td colspan="10">
-				<button class="btn btn-primary" type="button" onclick="location.href='insertForm.do'">글추가</button>
+				<button class="btn btn-primary" type="button" onclick="location.href='insertForm1.do'">글추가</button>
 				<button class="btn btn-primary"  type="submit">삭제</button>
 			</td>
 		</tr>
 	</table>
 	</form>
+	<div id="ajaxForm">
+		<label>작성일:</label><input class="form-control" type="text" id="regdate">
+		<label>작성자:</label><input class="form-control" type="text" id="id">
+		<label>제목:</label><input class="form-control" type="text" id="title">
+		<label>내용:</label><textarea class="form-control" rows="3" cols="60" id="content"></textarea>
+		<label></label>
+	</div>
 </div>
 
 </body>
