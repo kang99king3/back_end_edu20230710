@@ -1,5 +1,6 @@
 package com.hk.ansboard;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -181,6 +183,17 @@ public class AnsController {
 			return "error";
 		}
 	
+	}
+	
+	@RequestMapping(value="/detailBoardAjax.do",method = RequestMethod.POST
+			        ,produces = "application/json;charset=utf-8")
+	public Map<String, AnsDto> detailBoardAjax(int seq){
+		AnsDto dto=ansService.getBoard(seq);
+		//JS: json객체사용--> {key:value,key:value,key:value}
+		dto.setRegDate(null);
+		Map<String, AnsDto> map=new HashMap<>();
+		map.put("dto", dto);// {"dto":{seq:5,id:"hk",title:"제목"..}}
+		return map;
 	}
 	
 	@GetMapping(value = "/home.do")

@@ -61,11 +61,13 @@ $(function(){ //onload이벤트 기능 --> window.onload=function(){}
 		$.ajax({
 			url:"detailBoardAjax.do", //요청 URL
 			method:"post", //전송방식
-			data:{"seq",seq},//서버로 전송할 값
+			data:{"seq":seq},//서버로 전송할 값
 			dataType:"json",//받을 값의 타입
 			async:false,//ajax메서드를 동기식으로 실행
 			success:function(obj){//통신 성공하면 실행
-				
+				alert(obj["dto"]["seq"]);
+			},error:function(){
+				alert("통신실패");
 			}
 		});
 	},function(){});
