@@ -3,10 +3,16 @@ package com.hk.calboard.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.hk.calboard.command.InsertCalCommand;
 import com.hk.calboard.dtos.CalDto;
 
 public interface ICalService {
+	
+	//달력생성시 필요한 값 구하는 메서드
+	public Map<String, Integer> makeCalendar(HttpServletRequest request);
+	
 	//일정 추가
 	public boolean insertCalBoard(InsertCalCommand insertCalCommand);
 	//일정 목록

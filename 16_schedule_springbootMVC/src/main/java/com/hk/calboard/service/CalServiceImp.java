@@ -1,7 +1,11 @@
 package com.hk.calboard.service;
 
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.hk.calboard.command.InsertCalCommand;
 import com.hk.calboard.dtos.CalDto;
@@ -13,6 +17,37 @@ public class CalServiceImp implements ICalService{
 	// 화면 --> command --> 컨트롤러/서비스 (command-> dto)--> Mapper로 전달
    	//         command에 저장된 값을 확인하여 오류가 있으면 화면으로 보내고 
 	//         오류가 없으면 서비스로 보냄
+	
+	public Map<String, Integer> makeCalendar(HttpServletRequest request){
+		Map<String ,Integer> map=new HashMap<>();
+		
+		//달력의 날짜를 바꾸기 위해 전달된 year와 month 파라미터를 받는 코드
+		String paramYear=request.getParameter("year");
+		String paramMonth=request.getParameter("month");
+		
+		Calendar cal=Calendar.getInstance(); // 추상클래스이고, static 메서드 new(X)
+		
+		//                          기본 오늘날짜로 저장할지  :  요청된 날짜로 저장할지
+		int year=(paramYear==null)?cal.get(Calendar.YEAR):Integer.parseInt(paramYear) ;
+		int month=(paramMonth==null)?cal.get(Calendar.MONTH)+1:Integer.parseInt(paramMonth) ;
+		//                         calendar객체에서 month는 0~11월임
+		
+		
+		//1.월의 1일에 대한 요일 구하기
+		cal.set(year, month-1,1);// 원하는 날짜로 셋팅
+		int dayOfWeek=cal.get(Calendar.DAY_OF_WEEK);//1~7중에 반환(1:일요일~7:토요일)
+		
+		//2.월의 마지막 날 구하기
+		int lastDay=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		
+		map.put("year", year);
+		map.put("month", month);
+		map.put("dayOfWeek", dayOfWeek);
+		map.put("lastDay", lastDay);
+		
+		return map;
+	}
+	
 	@Override
 	public boolean insertCalBoard(InsertCalCommand insertCalCommand) {
 		// command --> dto로  값을 이동
