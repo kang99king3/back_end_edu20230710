@@ -3,11 +3,12 @@ package com.hk.calboard.service;
 import java.util.List;
 import java.util.Map;
 
+import com.hk.calboard.command.InsertCalCommand;
 import com.hk.calboard.dtos.CalDto;
 
 public interface ICalService {
 	//일정 추가
-	public int insertCalBoard(CalDto dto);
+	public boolean insertCalBoard(InsertCalCommand insertCalCommand);
 	//일정 목록
 	public List<CalDto> calBoardList(String id,String yyyyMMdd);
 	//일정 상세조회

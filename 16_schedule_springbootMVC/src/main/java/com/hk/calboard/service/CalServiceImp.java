@@ -3,6 +3,7 @@ package com.hk.calboard.service;
 import java.util.List;
 import java.util.Map;
 
+import com.hk.calboard.command.InsertCalCommand;
 import com.hk.calboard.dtos.CalDto;
 
 public class CalServiceImp implements ICalService{
@@ -13,9 +14,12 @@ public class CalServiceImp implements ICalService{
    	//         command에 저장된 값을 확인하여 오류가 있으면 화면으로 보내고 
 	//         오류가 없으면 서비스로 보냄
 	@Override
-	public int insertCalBoard(CalDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean insertCalBoard(InsertCalCommand insertCalCommand) {
+		// command --> dto로  값을 이동
+		
+		
+		
+		return true;
 	}
 
 	@Override
