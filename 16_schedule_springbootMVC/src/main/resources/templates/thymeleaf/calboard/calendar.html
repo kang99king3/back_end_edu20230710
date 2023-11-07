@@ -9,7 +9,21 @@
 	.cal{width: 100%;}
 	.cal #thead > div, .cal #tbody > div{display: inline-block;
 										 width: 140px;
-										 background-color: yellow;}
+										 }
+/*     날짜표현 div */
+    .cal #tbody > div{
+    	height: 120px;
+    	vertical-align: top;
+    	border-top:1px solid gray;
+    }				
+    #ctitle{
+    	text-align: center;
+    }			
+    
+    .pen{
+    	width: 20px;
+    	height: 20px;
+    }			 
 </style>
 <script type="text/javascript">
 
@@ -35,7 +49,20 @@
 				<div>목</div><div>금</div><div>토</div>
 			</div>
 			<div id="tbody">
-			
+				<th:block th:if="${calMap.dayOfWeek>1}">
+					<div th:each="num:${#numbers.sequence(1,calMap.dayOfWeek-1)}">&nbsp;</div>				
+				</th:block>
+				<th:block th:each="i:${#numbers.sequence(1,calMap.lastDay)}">
+					<div>
+						<a class="d" th:text="${i}" 
+						   th:href="@{/schedule/calBoardList(year=${calMap.year},month=${calMap.month},date=${i})}"	 
+						></a>
+						<a th:href="@{/schedule/addCalBoardForm(year=${calMap.year},month=${calMap.month},date=${i})}">
+							<img class="pen" th:src="@{/img/pen.png}" />
+						</a>
+					</div>
+				</th:block>
+				
 			</div>
 		</div>
 	</div>
