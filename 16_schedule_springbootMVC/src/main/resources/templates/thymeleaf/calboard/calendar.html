@@ -1,22 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{thymeleaf/layouts/layout}">
 <head>
 <meta charset="UTF-8">
 <title></title>
 <style type="text/css">
-	
+	.cal{width: 100%;}
+	.cal #thead > div, .cal #tbody > div{display: inline-block;
+										 width: 140px;
+										 background-color: yellow;}
 </style>
 <script type="text/javascript">
 
 </script>
 </head>
 <body>
-<!-- <%  -->
-<!--    lastDay 31, 30, 29  -->
-<!--    1일의 요일 -->
-<!--    토요일을 구분하는 식 -->
-<!-- %> -->
+<div layout:fragment="content">
+	<div id="container">
+		<h1>일정관리[달력보기]</h1>
+		<div class="cal">
+			<div id="ctitle">
+				<a>◁</a>
+				<a>◀</a>
+				<span class="y" th:text="${calMap.year}"></span>
+				<span>년</span>
+				<span class="m" th:text="${calMap.month}"></span>
+				<span>월</span>
+				<a>▶</a>
+				<a>▷</a>
+			</div>
+			<div id="thead">
+				<div>일</div><div>월</div><div>화</div><div>수</div>
+				<div>목</div><div>금</div><div>토</div>
+			</div>
+			<div id="tbody">
+			
+			</div>
+		</div>
+	</div>
+</div>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
 

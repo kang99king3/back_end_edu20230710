@@ -5,11 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
+
+import org.springframework.stereotype.Service;
 
 import com.hk.calboard.command.InsertCalCommand;
 import com.hk.calboard.dtos.CalDto;
 
+import jakarta.servlet.http.HttpServletRequest;
+
+@Service
 public class CalServiceImp implements ICalService{
 
 	//Validated 유효값처리 라이브러리 사용

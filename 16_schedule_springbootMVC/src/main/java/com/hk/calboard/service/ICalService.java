@@ -3,10 +3,11 @@ package com.hk.calboard.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 
 import com.hk.calboard.command.InsertCalCommand;
 import com.hk.calboard.dtos.CalDto;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface ICalService {
 	
