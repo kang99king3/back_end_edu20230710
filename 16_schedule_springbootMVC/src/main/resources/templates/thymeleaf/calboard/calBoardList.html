@@ -6,7 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
+	function allSel(bool){
+		var chks=document.getElementsByName("seq");// [seq,seq,seq,seq..]
+		for (var i = 0; i < chks.length; i++) {
+			chks[i].checked=bool;//각각의 체크박스에 체크여부를 true/false로 적용
+		}
+	}
 </script>
 <style type="text/css">
 
@@ -36,11 +41,22 @@
 				<th:block th:unless="${#lists.isEmpty(list)}">
 					<tr th:each="dto:${list}">
 						<td><input type="checkbox" name="seq" th:value="${dto.seq}"/></td>
-						<td th:text="${dto.mdate}"></td>
+						<td th:text="${@util.toDates(dto.mdate)}"></td>
 						<td th:text="${dto.title}"></td>
-						<td th:text="${dto.regdate}"></td>
+						<td th:text="${#dates.format(dto.regdate, 'yyyy-MM-dd')}"></td>
 					</tr>				
 				</th:block>
+				<tr>
+					<td colspan="4">
+						<button type="submit" title="일정삭제" class="btn btn-default" >
+						  <span class="glyphicon glyphicon-trash" ></span>
+						</button>
+						<button type="button" title="달력보기" class="btn btn-default"
+								th:onclick="|location.href='@{/schedule/calendar}'|" >
+						  <span class="glyphicon glyphicon-calendar" ></span>
+						</button>
+					</td>
+				</tr>
 			</table>
 		</form>
 	</div>
