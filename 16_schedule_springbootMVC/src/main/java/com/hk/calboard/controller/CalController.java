@@ -1,5 +1,6 @@
 package com.hk.calboard.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hk.calboard.command.DeleteCalCommand;
 import com.hk.calboard.command.InsertCalCommand;
 import com.hk.calboard.dtos.CalDto;
 import com.hk.calboard.service.ICalService;
@@ -73,8 +75,19 @@ public class CalController {
 //		String id=session.getAttribute("id");
 		String id="kbj";//임시로 id 저장
 		
+		//command 유효값 처리를 위해 기본 생성해서 보내줌
+		model.addAttribute("deleteCalCommand", new DeleteCalCommand());
 		
+		//일정목록을 조회할때마다 year, month, date를 세션에 저장
+		HttpSession session=request.getSession();
 		
+		if(map.get("year")==null) {
+			//조회한 상태이기때문에 ymd가 저장되어 있어서 값을 가져옴
+			map=(Map<String, String>)session.getAttribute("ymdMap");
+		}else {
+			//일정을 처음 조회했을때 ymd를 저장함
+			session.setAttribute("ymdMap", map);
+		}
 		
 		//달력에서 전달받은 파라미터 year, month, date를 8자리로 만든다.
 		String yyyyMMdd=map.get("year")
@@ -84,6 +97,37 @@ public class CalController {
 		model.addAttribute("list", list);
 		
 		return "thymeleaf/calboard/calBoardList";
+	}
+	
+	@PostMapping(value = "/calMulDel")
+	public String calMulDel(@Validated DeleteCalCommand deleteCalCommand,
+							BindingResult result,
+							HttpServletRequest request,
+							Model model) {
+		
+		if(result.hasErrors()) {
+			System.out.println("최소 하나 이상 체크하기");
+			
+			HttpSession session=request.getSession();
+//			String id=session.getAttribute("id");
+			String id="kbj";//임시로 id 저장
+			
+			//session에 저장된 ymd 값은 목록 조회할때 추가되는 코드임
+			Map<String, String>map=(Map<String, String>)session.getAttribute("ymdMap");
+			
+			//달력에서 전달받은 파라미터 year, month, date를 8자리로 만든다.
+			String yyyyMMdd=map.get("year")
+					       +Util.isTwo(map.get("month"))
+					       +Util.isTwo(map.get("date"));
+			List<CalDto> list= calService.calBoardList(id, yyyyMMdd);
+			model.addAttribute("list", list);
+			return "thymeleaf/calboard/calBoardList";
+		}
+		Map<String,String[]>map=new HashMap<>();
+		map.put("seqs", deleteCalCommand.getSeq());
+		calService.calMulDel(map);
+		
+		return "redirect:/schedule/calBoardList";
 	}
 }
 

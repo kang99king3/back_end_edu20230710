@@ -109,8 +109,7 @@ public class CalServiceImp implements ICalService{
 
 	@Override
 	public boolean calMulDel(Map<String, String[]> map) {
-		// TODO Auto-generated method stub
-		return false;
+		return calMapper.calMulDel(map);
 	}
 
 	@Override

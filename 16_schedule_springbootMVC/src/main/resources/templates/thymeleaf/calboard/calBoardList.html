@@ -12,6 +12,13 @@
 			chks[i].checked=bool;//각각의 체크박스에 체크여부를 true/false로 적용
 		}
 	}
+	
+	function isCheck(){
+		if(confirm("정말 삭제 하시겠습니까?")){
+			return true;
+		}
+		return false;
+	}
 </script>
 <style type="text/css">
 
@@ -21,7 +28,8 @@
 <div layout:fragment="content">
 	<div id="container">
 		<h1>일정목록보기</h1>
-		<form>
+		<form th:action="@{/schedule/calMulDel}" method="post"
+			  th:object="${deleteCalCommand}" onsubmit="return isCheck()">
 			<table class="table">
 				<col width="50px"/>
 				<col width="200px"/>
@@ -55,6 +63,8 @@
 								th:onclick="|location.href='@{/schedule/calendar}'|" >
 						  <span class="glyphicon glyphicon-calendar" ></span>
 						</button>
+						<span class="errorField" th:if="${#fields.hasErrors('seq')}"
+												 th:errors="*{seq}"></span>
 					</td>
 				</tr>
 			</table>
