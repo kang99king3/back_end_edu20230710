@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{thymeleaf/layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+<div layout:fragment="content">
+<div id="container">
+	<h1>일정 추가하기</h1>
+	<form th:action="@{/schedule/addCalBoard}" method="post" 
+											   th:object="${insertCalCommand}">
+		<table class="table">
+			<tr>
+				<th>아이디</th>
+				<td>
+					<input type="text" name="id" />
+					<span class="errorField" th:if="${#fields.hasErrors('id')}" 
+											 th:errors="*{id}"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>일정</th>
+				<td>
+					<select name="year" >
+						<th:block th:each="i:${#numbers.sequence(insertCalCommand.year-5,insertCalCommand.year+5)}">
+							<th:block th:if="${insertCalCommand.year == i}">
+								<option th:value="${i}" th:text="${i}" selected="selected"></option>
+							</th:block>
+							<th:block th:unless="${insertCalCommand.year == i}">
+								<option th:value="${i}" th:text="${i}"></option>
+							</th:block>
+						</th:block>
+					</select>년
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
