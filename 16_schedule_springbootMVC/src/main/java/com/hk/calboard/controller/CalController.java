@@ -7,7 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hk.calboard.command.InsertCalCommand;
@@ -41,6 +44,19 @@ public class CalController {
 		return "thymeleaf/calboard/addCalBoardForm";
 	}
 	
+	@PostMapping(value = "/addCalBoard")
+	public String addCalBoard(@Validated InsertCalCommand insertCalCommand,
+							  BindingResult result) {
+		logger.info("일정추가하기");
+		System.out.println(insertCalCommand);
+		if(result.hasErrors()) {
+			System.out.println("글을 모두 입력해야 함");
+			return "thymeleaf/calboard/addCalBoardForm";
+		}
+		calService.insertCalBoard(insertCalCommand);
+		
+		return "redirect:/schedule/calendar";
+	}
 }
 
 
