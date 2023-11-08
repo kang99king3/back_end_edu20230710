@@ -5,12 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hk.calboard.command.InsertCalCommand;
 import com.hk.calboard.dtos.CalDto;
+import com.hk.calboard.mapper.CalMapper;
+import com.hk.calboard.utils.Util;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -22,6 +23,8 @@ public class CalServiceImp implements ICalService{
 	// 화면 --> command --> 컨트롤러/서비스 (command-> dto)--> Mapper로 전달
    	//         command에 저장된 값을 확인하여 오류가 있으면 화면으로 보내고 
 	//         오류가 없으면 서비스로 보냄
+	@Autowired
+	private CalMapper calMapper;// interface 객체 생성해줌
 	
 	public Map<String, Integer> makeCalendar(HttpServletRequest request){
 		Map<String ,Integer> map=new HashMap<>();
@@ -66,10 +69,25 @@ public class CalServiceImp implements ICalService{
 	@Override
 	public boolean insertCalBoard(InsertCalCommand insertCalCommand) {
 		// command --> dto로  값을 이동
+		// DB에서는 mdate 컬럼 , command에서는 year, month... : 12자리로 변환작업
+		String mdate=insertCalCommand.getYear()
+				    +Util.isTwo(insertCalCommand.getMonth()+"")
+				    +Util.isTwo(insertCalCommand.getDate()+"")
+				    +Util.isTwo(insertCalCommand.getHour()+"")
+				    +Util.isTwo(insertCalCommand.getMin()+"");
+		// 202311151335 12자리
+		// 20231181110  11자리....ㅜㅜ
 		
+		//command --> dto 값 복사 
+		CalDto dto=new CalDto();
+		dto.setId(insertCalCommand.getId());
+		dto.setTitle(insertCalCommand.getTitle());
+		dto.setContent(insertCalCommand.getContent());
+		dto.setMdate(mdate);
 		
+		int count=calMapper.insertCalBoard(dto);
 		
-		return true;
+		return count>0?true:false;
 	}
 
 	@Override

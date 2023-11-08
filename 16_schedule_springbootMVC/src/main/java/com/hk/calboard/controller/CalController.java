@@ -53,6 +53,7 @@ public class CalController {
 			System.out.println("글을 모두 입력해야 함");
 			return "thymeleaf/calboard/addCalBoardForm";
 		}
+		
 		calService.insertCalBoard(insertCalCommand);
 		
 		return "redirect:/schedule/calendar";
