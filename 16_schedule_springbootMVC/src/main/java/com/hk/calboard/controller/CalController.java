@@ -1,5 +1,6 @@
 package com.hk.calboard.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -12,11 +13,15 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hk.calboard.command.InsertCalCommand;
+import com.hk.calboard.dtos.CalDto;
 import com.hk.calboard.service.ICalService;
+import com.hk.calboard.utils.Util;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value="/schedule")
@@ -57,6 +62,28 @@ public class CalController {
 		calService.insertCalBoard(insertCalCommand);
 		
 		return "redirect:/schedule/calendar";
+	}
+	
+	@GetMapping(value = "/calBoardList")
+	public String calBoardList(@RequestParam Map<String, String>map
+							, HttpServletRequest request
+							, Model model) {
+		logger.info("일정목록보기");
+//		HttpSession session=request.getSession();
+//		String id=session.getAttribute("id");
+		String id="kbj";//임시로 id 저장
+		
+		
+		
+		
+		//달력에서 전달받은 파라미터 year, month, date를 8자리로 만든다.
+		String yyyyMMdd=map.get("year")
+				       +Util.isTwo(map.get("month"))
+				       +Util.isTwo(map.get("date"));
+		List<CalDto> list= calService.calBoardList(id, yyyyMMdd);
+		model.addAttribute("list", list);
+		
+		return "thymeleaf/calboard/calBoardList";
 	}
 }
 
