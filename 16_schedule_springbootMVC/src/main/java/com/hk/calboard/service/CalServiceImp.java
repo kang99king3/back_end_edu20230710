@@ -128,8 +128,7 @@ public class CalServiceImp implements ICalService{
 
 	@Override
 	public List<CalDto> calViewList(String id, String yyyyMM) {
-		// TODO Auto-generated method stub
-		return null;
+		return calMapper.calViewList(id, yyyyMM);
 	}
 
 	@Override

@@ -38,8 +38,19 @@ public class CalController {
 	@GetMapping(value="/calendar")
 	public String calendar(Model model, HttpServletRequest request) {
 		logger.info("달력보기"); 
+		
+		//달력에서 일일별 일정목록 구하기
+		String id="kbj";//나중에 세션에서 가져온 아이디 사용
+		String year=request.getParameter("year");
+		String month=request.getParameter("month");
+		String yyyyMM=year+Util.isTwo(month);//202311 6자리변환
+		List<CalDto>clist=calService.calViewList(id, yyyyMM);
+		model.addAttribute("clist", clist);
+		
+		//달력만들기위한 값 구하기
 		Map<String, Integer>map=calService.makeCalendar(request);
 		model.addAttribute("calMap", map);
+		
 		return "thymeleaf/calboard/calendar";
 	}
 	
@@ -164,6 +175,22 @@ public class CalController {
 		model.addAttribute("updateCalCommand", updateCalCommand);
 		
 		return "thymeleaf/calboard/calBoardDetail";
+	}
+	
+	@PostMapping(value = "/calBoardUpdate")
+	public String calBoardUpdate(@Validated UpdateCalCommand updateCalCommand
+								,BindingResult result
+								,Model model) {
+		logger.info("일정 수정하기");
+		
+		if(result.hasErrors()) {
+			System.out.println("수정할 목록을 확인하세요");
+			return "thymeleaf/calboard/calBoardDetail";
+		}
+		
+		calService.calBoardUpdate(updateCalCommand);
+		
+		return "redirect:/schedule/calBoardDetail?seq="+updateCalCommand.getSeq();
 	}
 }
 
