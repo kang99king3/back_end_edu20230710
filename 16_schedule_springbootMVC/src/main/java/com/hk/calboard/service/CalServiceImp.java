@@ -98,8 +98,7 @@ public class CalServiceImp implements ICalService{
 
 	@Override
 	public CalDto calBoardDetail(int seq) {
-		// TODO Auto-generated method stub
-		return null;
+		return calMapper.calBoardDetail(seq);
 	}
 
 	@Override

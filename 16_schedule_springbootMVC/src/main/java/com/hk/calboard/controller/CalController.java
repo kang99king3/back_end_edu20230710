@@ -129,6 +129,26 @@ public class CalController {
 		
 		return "redirect:/schedule/calBoardList";
 	}
+	
+	@GetMapping("/calMulDel")
+	public String calDel(String[] seq) {
+		logger.info("일정삭제하기");
+		System.out.println(seq[0]);
+		Map<String,String[]>map=new HashMap<>();
+		map.put("seqs", seq); 
+		calService.calMulDel(map);
+		return "redirect:/schedule/calBoardList";
+	}
+	
+	@GetMapping(value = "/calBoardDetail")
+	public String calBoardDetail(int seq, Model model) {
+		logger.info("일정상세보기");
+		
+		CalDto dto=calService.calBoardDetail(seq);
+		model.addAttribute("dto", dto);
+		
+		return "thymeleaf/calboard/calBoardDetail";
+	}
 }
 
 
