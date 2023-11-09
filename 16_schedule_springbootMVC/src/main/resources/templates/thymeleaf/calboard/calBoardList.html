@@ -60,9 +60,9 @@
 						  <span class="glyphicon glyphicon-trash" ></span>
 						</button>
 						<button type="button" title="달력보기" class="btn btn-default"
-								th:onclick="|location.href='@{/schedule/calendar}'|" >
+								th:onclick="|location.href='@{/schedule/calendar(year=${session.ymdMap.year},month=${session.ymdMap.month})}'|" >                        
 						  <span class="glyphicon glyphicon-calendar" ></span>
-						</button>
+						</button> 
 						<span class="errorField" th:if="${#fields.hasErrors('seq')}"
 												 th:errors="*{seq}"></span>
 					</td>

@@ -26,7 +26,10 @@
     .pen{
     	width: 20px;
     	height: 20px;
-    }			 
+    }		
+    .d{
+    	font-weight: bold;
+    }	 
 </style>
 <script type="text/javascript">
 
@@ -57,9 +60,9 @@
 				</th:block>
 				<th:block th:each="i:${#numbers.sequence(1,calMap.lastDay)}">
 					<div>
-						<a class="d" th:text="${i}" 
-						   th:href="@{/schedule/calBoardList(year=${calMap.year},month=${calMap.month},date=${i})}"	 
-						></a>
+						<a class="d" th:text="${i}" th:style="'color:'+${@util.fontColor(i,calMap.dayOfWeek)}"
+						   th:href="@{/schedule/calBoardList(year=${calMap.year},month=${calMap.month},date=${i})}">
+						</a>
 						<a th:href="@{/schedule/addCalBoardForm(year=${calMap.year},month=${calMap.month},date=${i})}">
 							<img class="pen" th:src="@{/img/pen.png}" />
 						</a>

@@ -35,9 +35,10 @@ public class CalServiceImp implements ICalService{
 		
 		Calendar cal=Calendar.getInstance(); // 추상클래스이고, static 메서드 new(X)
 		
+		int	year=(paramYear==null)?cal.get(Calendar.YEAR):Integer.parseInt(paramYear) ;
+		int	month=(paramMonth==null)?cal.get(Calendar.MONTH)+1:Integer.parseInt(paramMonth) ;						
+		
 		//                          기본 오늘날짜로 저장할지  :  요청된 날짜로 저장할지
-		int year=(paramYear==null)?cal.get(Calendar.YEAR):Integer.parseInt(paramYear) ;
-		int month=(paramMonth==null)?cal.get(Calendar.MONTH)+1:Integer.parseInt(paramMonth) ;
 		//                         calendar객체에서 month는 0~11월임
 		
 		// 11월,12월,13월.....      오류 처리

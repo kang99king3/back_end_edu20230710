@@ -26,6 +26,19 @@ public class Util {
 		Timestamp tm=Timestamp.valueOf(m);//문자열값을 Date타입으로 변환하는 코드
 		return sdf.format(tm);// 문자열 타입일 경우 date타입으로 변환해서 사용해야 한다.
 	}
+	
+	// 요일별 날짜 색깔 적용하기 : 파라미터 - i , dayOfWeek 필요
+	// (공백수+현재일)%7==0 토요일
+	// (공백수+현재일)%7==1 일요일
+	public static String fontColor(int i, int dayOfWeek) {
+		String str="black";//평일
+		if((dayOfWeek-1+i)%7==0) {//토요일
+			str="blue";
+		}else if((dayOfWeek-1+i)%7==1) {//일요일
+			str="red";
+		}
+		return str;
+	}
 }
 
 
