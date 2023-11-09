@@ -1,5 +1,6 @@
 package com.hk.calboard.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +42,16 @@ public class CalController {
 		
 		//달력에서 일일별 일정목록 구하기
 		String id="kbj";//나중에 세션에서 가져온 아이디 사용
+		
 		String year=request.getParameter("year");
 		String month=request.getParameter("month");
+		
+		if(year==null||month==null) {
+			Calendar cal=Calendar.getInstance();
+			year=cal.get(Calendar.YEAR)+"";
+			month=cal.get(Calendar.MONTH)+"";
+		}
+		
 		String yyyyMM=year+Util.isTwo(month);//202311 6자리변환
 		List<CalDto>clist=calService.calViewList(id, yyyyMM);
 		model.addAttribute("clist", clist);
@@ -75,7 +84,8 @@ public class CalController {
 		
 		calService.insertCalBoard(insertCalCommand);
 		
-		return "redirect:/schedule/calendar";
+		return "redirect:/schedule/calendar?year="+insertCalCommand.getYear()
+										+"&month="+insertCalCommand.getMonth();
 	}
 	
 	@GetMapping(value = "/calBoardList")
