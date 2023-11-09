@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hk.calboard.command.InsertCalCommand;
+import com.hk.calboard.command.UpdateCalCommand;
 import com.hk.calboard.dtos.CalDto;
 import com.hk.calboard.mapper.CalMapper;
 import com.hk.calboard.utils.Util;
@@ -102,9 +103,22 @@ public class CalServiceImp implements ICalService{
 	}
 
 	@Override
-	public boolean calBoardUpdate(CalDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean calBoardUpdate(UpdateCalCommand updateCalCommand) {
+		//command:year,month,date.. ---> dto: mdate
+		String mdate=updateCalCommand.getYear()
+			    +Util.isTwo(updateCalCommand.getMonth()+"")
+			    +Util.isTwo(updateCalCommand.getDate()+"")
+			    +Util.isTwo(updateCalCommand.getHour()+"")
+			    +Util.isTwo(updateCalCommand.getMin()+""); // 12자리
+		
+		//dto <---command값
+		CalDto dto=new CalDto();
+		dto.setSeq(updateCalCommand.getSeq());
+		dto.setTitle(updateCalCommand.getTitle());
+		dto.setContent(updateCalCommand.getContent());
+		dto.setMdate(mdate);
+		
+		return calMapper.calBoardUpdate(dto);
 	}
 
 	@Override

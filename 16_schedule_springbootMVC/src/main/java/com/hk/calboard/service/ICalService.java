@@ -5,6 +5,7 @@ import java.util.Map;
 
 
 import com.hk.calboard.command.InsertCalCommand;
+import com.hk.calboard.command.UpdateCalCommand;
 import com.hk.calboard.dtos.CalDto;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public interface ICalService {
 	//일정 상세조회
 	public CalDto calBoardDetail(int seq);
 	//일정 수정하기
-	public boolean calBoardUpdate(CalDto dto);
+	public boolean calBoardUpdate(UpdateCalCommand updateCalCommand);
 	//일정 삭제하기
 	public boolean calMulDel(Map<String, String[]>map);
 	//한달의 일정보여주기

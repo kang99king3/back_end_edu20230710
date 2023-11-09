@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hk.calboard.command.DeleteCalCommand;
 import com.hk.calboard.command.InsertCalCommand;
+import com.hk.calboard.command.UpdateCalCommand;
 import com.hk.calboard.dtos.CalDto;
 import com.hk.calboard.service.ICalService;
 import com.hk.calboard.utils.Util;
@@ -141,11 +142,26 @@ public class CalController {
 	}
 	
 	@GetMapping(value = "/calBoardDetail")
-	public String calBoardDetail(int seq, Model model) {
+	public String calBoardDetail(UpdateCalCommand updateCalCommand, int seq, Model model) {
 		logger.info("일정상세보기");
 		
 		CalDto dto=calService.calBoardDetail(seq);
-		model.addAttribute("dto", dto);
+		
+		//dto ---> command
+		updateCalCommand.setSeq(dto.getSeq());
+		updateCalCommand.setTitle(dto.getTitle());
+		updateCalCommand.setContent(dto.getContent());
+		updateCalCommand
+		          .setYear(Integer.parseInt(dto.getMdate().substring(0, 4)));
+		updateCalCommand
+		          .setMonth(Integer.parseInt(dto.getMdate().substring(4, 6)));
+		updateCalCommand
+		          .setDate(Integer.parseInt(dto.getMdate().substring(6, 8)));
+		updateCalCommand
+        		  .setHour(Integer.parseInt(dto.getMdate().substring(8, 10)));
+		updateCalCommand
+		          .setMin(Integer.parseInt(dto.getMdate().substring(10)));
+		model.addAttribute("updateCalCommand", updateCalCommand);
 		
 		return "thymeleaf/calboard/calBoardDetail";
 	}
