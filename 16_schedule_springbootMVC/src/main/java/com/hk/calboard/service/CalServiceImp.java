@@ -133,8 +133,7 @@ public class CalServiceImp implements ICalService{
 
 	@Override
 	public int calBoardCount(String id, String yyyyMMdd) {
-		// TODO Auto-generated method stub
-		return 0;
+		return calMapper.calBoardCount(id, yyyyMMdd);
 	}
 
 }

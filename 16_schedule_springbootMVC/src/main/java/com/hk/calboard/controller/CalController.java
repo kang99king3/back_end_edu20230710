@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hk.calboard.command.DeleteCalCommand;
 import com.hk.calboard.command.InsertCalCommand;
@@ -49,16 +50,17 @@ public class CalController {
 		if(year==null||month==null) {
 			Calendar cal=Calendar.getInstance();
 			year=cal.get(Calendar.YEAR)+"";
-			month=cal.get(Calendar.MONTH)+"";
+			month=(cal.get(Calendar.MONTH)+1)+"";
 		}
+		System.out.println("year:"+year);
+		System.out.println("month:"+month);
+		//달력만들기위한 값 구하기
+		Map<String, Integer>map=calService.makeCalendar(request);
+		model.addAttribute("calMap", map);
 		
 		String yyyyMM=year+Util.isTwo(month);//202311 6자리변환
 		List<CalDto>clist=calService.calViewList(id, yyyyMM);
 		model.addAttribute("clist", clist);
-		
-		//달력만들기위한 값 구하기
-		Map<String, Integer>map=calService.makeCalendar(request);
-		model.addAttribute("calMap", map);
 		
 		return "thymeleaf/calboard/calendar";
 	}
@@ -201,6 +203,17 @@ public class CalController {
 		calService.calBoardUpdate(updateCalCommand);
 		
 		return "redirect:/schedule/calBoardDetail?seq="+updateCalCommand.getSeq();
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/calCountAjax")
+	public Map<String,Integer> calCountAjax(String yyyyMMdd){
+		logger.info("일정개수");
+		Map<String, Integer>map=new HashMap<>();
+		String  id="kbj";
+		int count=calService.calBoardCount(id, yyyyMMdd);
+		map.put("count", count);
+		return map;
 	}
 }
 
