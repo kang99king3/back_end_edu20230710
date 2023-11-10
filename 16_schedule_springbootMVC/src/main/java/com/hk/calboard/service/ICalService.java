@@ -16,7 +16,7 @@ public interface ICalService {
 	public Map<String, Integer> makeCalendar(HttpServletRequest request);
 	
 	//일정 추가
-	public boolean insertCalBoard(InsertCalCommand insertCalCommand);
+	public boolean insertCalBoard(InsertCalCommand insertCalCommand) throws Exception  ;
 	//일정 목록
 	public List<CalDto> calBoardList(String id,String yyyyMMdd);
 	//일정 상세조회

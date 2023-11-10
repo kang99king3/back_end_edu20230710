@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hk.calboard.command.InsertCalCommand;
 import com.hk.calboard.command.UpdateCalCommand;
@@ -69,7 +70,7 @@ public class CalServiceImp implements ICalService{
 	}
 	
 	@Override
-	public boolean insertCalBoard(InsertCalCommand insertCalCommand) {
+	public boolean insertCalBoard(InsertCalCommand insertCalCommand) throws Exception {
 		// command --> dto로  값을 이동
 		// DB에서는 mdate 컬럼 , command에서는 year, month... : 12자리로 변환작업
 		String mdate=insertCalCommand.getYear()
@@ -88,6 +89,11 @@ public class CalServiceImp implements ICalService{
 		dto.setMdate(mdate);
 		
 		int count=calMapper.insertCalBoard(dto);
+		
+		//예외발생코드 추가
+		if(count>0) {
+			throw new Exception("트랜젝션 실행됨");
+		}
 		
 		return count>0?true:false;
 	}
@@ -130,7 +136,7 @@ public class CalServiceImp implements ICalService{
 	public List<CalDto> calViewList(String id, String yyyyMM) {
 		return calMapper.calViewList(id, yyyyMM);
 	}
-
+	
 	@Override
 	public int calBoardCount(String id, String yyyyMMdd) {
 		return calMapper.calBoardCount(id, yyyyMMdd);
