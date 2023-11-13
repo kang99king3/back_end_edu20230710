@@ -33,7 +33,7 @@
       	,F.FILE_SEQ, F.ORIGIN_NAME
 		FROM TESTBOARD B LEFT OUTER JOIN FILEINFO F
 		ON B.BOARD_SEQ = F.BOARD_SEQ
-		WHERE B.BOARD_SEQ = #{board_seq};
+		WHERE B.BOARD_SEQ = #{board_seq}
 	</select>
 	
 <!-- 	useGeneratedKeys="true" keyProperty="board_seq"
