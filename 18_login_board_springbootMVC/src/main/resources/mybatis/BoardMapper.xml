@@ -36,7 +36,27 @@
 		WHERE B.BOARD_SEQ = #{board_seq};
 	</select>
 	
+<!-- 	useGeneratedKeys="true" keyProperty="board_seq"
+        : 증가된 board_seq값을 BoardDto에 전달 : BoardDto dto=insertBoard() -->
+	<insert id="insertBoard" parameterType="boardDto"
+		useGeneratedKeys="true" keyProperty="board_seq">
+		INSERT INTO TESTBOARD
+		VALUES(NULL,#{id},#{title},#{content},sysdate(),'N')
+	</insert>
 	
+	<update id="updateBoard" parameterType="boardDto">
+		UPDATE TESTBOARD
+		SET TITLE=#{title}, CONTENT=#{content}
+		WHERE BOARD_SEQ=#{board_seq}
+	</update>
+	
+	<update id="mulDel" parameterType="Map">
+		UPDATE TESTBOARD SET DELFLAG = 'Y' WHERE BOARD_SEQ IN
+		<foreach collection="seqs" item="board_seq" open="(" close=")"
+		         separator=",">
+			#{board_seq}
+		</foreach>
+	</update>
 </mapper>
 
 

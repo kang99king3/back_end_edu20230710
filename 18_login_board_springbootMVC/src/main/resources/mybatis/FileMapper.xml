@@ -3,6 +3,17 @@
 
 <mapper namespace="com.hk.board.mapper.FileMapper">
 	
+	<insert id="insertFileBoard" parameterType="fileBoardDto">
+		INSERT INTO FILEINFO
+		VALUES(NULL,#{board_seq},#{origin_filename},#{stored_filename})
+	</insert>
+	
+	<select id="getFileInfo" parameterType="Integer" 
+			resultType="fileBoardDto">
+		SELECT FILE_SEQ, BOARD_SEQ,ORIGIN_FILENAME, STORED_FILENAME
+		FROM FILEINFO
+		WHERE FILE_SEQ=#{file_seq}
+	</select>
 </mapper>
 
 
