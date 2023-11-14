@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.hk.board.command.AddUserCommand;
 import com.hk.board.dtos.MemberDto;
 import com.hk.board.mapper.MemberMapper;
+import com.hk.board.status.RoleStatus;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ public class MemberService {
 	private PasswordEncoder passwordEncoder;
 	
 	public boolean addUser(AddUserCommand addUserCommand) {
+		
 		MemberDto mdto=new MemberDto();
 		mdto.setId(addUserCommand.getId());
 		mdto.setName(addUserCommand.getName());
@@ -29,7 +31,7 @@ public class MemberService {
 		
 		mdto.setEmail(addUserCommand.getEmail());
 		mdto.setAddress(addUserCommand.getAddress());
-		
+		mdto.setRole(RoleStatus.USER+"");//등급추가
 		return memberMapper.addUser(mdto);
 	}
 	
