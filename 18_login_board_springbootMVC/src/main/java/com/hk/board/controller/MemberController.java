@@ -101,6 +101,10 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	//나의 정보 조회
+	
+	//나의 정보 수정
+	
 }
 
 
