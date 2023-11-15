@@ -37,7 +37,7 @@
 	</select>
 	
 <!-- 	useGeneratedKeys="true" keyProperty="board_seq"
-        : 증가된 board_seq값을 BoardDto에 전달 : BoardDto dto=insertBoard() -->
+        : 증가된 board_seq값을 BoardDto에 전달 : insertBoard(boardDto) -->
 	<insert id="insertBoard" parameterType="boardDto"
 		useGeneratedKeys="true" keyProperty="board_seq">
 		INSERT INTO TESTBOARD
