@@ -47,9 +47,10 @@ public class BoardService {
 		//새글을 추가할때 파라미터로 전달된 boardDto객체에 자동으로,
 		//증가된 board_seq값이 저장
 		boardMapper.insertBoard(boardDto);//새글 추가
-		
+		System.out.println("파일첨부여부:"
+		+multipartRequest.getFiles("filename").get(0).isEmpty());
 		//첨부된 파일들이 있는 경우
-		if(!multipartRequest.getFiles("filename").isEmpty()) {
+		if(!multipartRequest.getFiles("filename").get(0).isEmpty()) {
 			//파일 저장경로 설정: 절대경로, 상대경로
 			String filepath=request.getSession().getServletContext()
 					       .getRealPath("upload");
@@ -69,6 +70,10 @@ public class BoardService {
 			}
 		}
 		
+	}
+	//상세내용조회
+	public BoardDto getBoard(int board_seq) {
+		return boardMapper.getBoard(board_seq);
 	}
 
 
