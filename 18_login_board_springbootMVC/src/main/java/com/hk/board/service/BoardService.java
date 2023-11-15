@@ -87,7 +87,9 @@ public class BoardService {
 		return boardMapper.updateBoard(dto);
 	}
 
-
+	public boolean mulDel(String[] seqs) {
+		return boardMapper.mulDel(seqs);
+	}
 }
 
 

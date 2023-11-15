@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.hk.board.command.DelBoardCommand;
@@ -106,6 +107,21 @@ public class BoardController {
 		fileService.fileDownload(fdto.getOrigin_filename()
 				                ,fdto.getStored_filename()
 				                ,request,response);
+	}
+	
+	@RequestMapping(value="mulDel",method = {RequestMethod.POST,RequestMethod.GET})
+	public String mulDel(@Validated DelBoardCommand delBoardCommand
+						 ,BindingResult result
+			             , Model model) {
+		if(result.hasErrors()) {
+			System.out.println("최소하나 체크하기");
+			List<BoardDto> list=boardService.getAllList();
+			model.addAttribute("list", list);
+			return "board/boardlist";
+		}
+		boardService.mulDel(delBoardCommand.getSeq());
+		System.out.println("글삭제함");
+		return "redirect:/board/boardList";
 	}
 }
 
