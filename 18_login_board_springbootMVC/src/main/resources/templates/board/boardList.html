@@ -40,7 +40,7 @@
 		<th:block th:if="${#lists.isEmpty(list)}">
 			<tr>
 				<td colspan="4" style="text-align: center;" >---작성된 글이 없습니다.---</td>
-			</tr>
+			</tr> 
 		</th:block>
 		<th:block th:unless="${#lists.isEmpty(list)}">
 			<tr th:each="dto:${list}">
