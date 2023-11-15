@@ -46,7 +46,7 @@ public class TestInterceptor implements HandlerInterceptor{
 		System.out.println("인터셉터:postHandle실행");
 	}
 	
-	//컨트롤러에서 뷰까지 실해이 완료된 후 호출됨
+	//컨트롤러에서 뷰까지 실행이 완료된 후 호출됨
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
