@@ -19,10 +19,10 @@ public class LoginInterceptor implements HandlerInterceptor{
 		if(session.getAttribute("mdto")==null) {// 로그인X
 			System.out.println("로그인 필요");
 			response.sendRedirect("/user/login");//home.html로 이동
-//			request.getRequestDispatcher("member/login")
-//			.forward(request, response);
+			return false;
+		}else {
+			return true;			
 		}
-		return true;
 	}
 	
 	
