@@ -24,7 +24,7 @@
 				<input type="text" class="form-control"
 				      name="id" th:field="*{id}" />
 				<span th:if="${#fields.hasErrors('id')}"
-				      th:errors="*{id}"></span>          
+				      th:errors="*{id}" class="errorField"></span>          
 			</td>
 		</tr>
 		<tr>
@@ -33,7 +33,7 @@
 				<input type="password" class="form-control"
 				      name="password" th:field="*{password}" />
 				<span th:if="${#fields.hasErrors('password')}"
-				      th:errors="*{password}"></span>      
+				      th:errors="*{password}" class="errorField"></span>      
 			</td>
 		</tr>
 		<tr>

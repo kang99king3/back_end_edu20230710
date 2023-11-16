@@ -23,7 +23,7 @@
 <h1>상세보기</h1>
 <form action="/board/boardUpdate" method="post" onsubmit="return updateEX()"
 								th:object="${updateBoardCommand}">
-	<input type="hidden" name="board_seq" th:value="${dto.board_seq}"/>
+	<input type="hidden" name="board_seq"  th:value="${dto.board_seq}"/>
 	<table class="table">
 		<tr>
 			<th>작성자[ID]</th>
@@ -35,7 +35,7 @@
 				<input type="text" name="title" th:value="${dto.title}"
 												class="form-control"/>
 				<span th:if="${#fields.hasErrors('title')}" 
-					  th:errors="*{title}"></span>
+					  th:errors="*{title}" class="errorField"></span>
 			</td>
 		</tr>
 		<tr>
@@ -60,16 +60,16 @@
 						  th:text="${dto.content}"
 				          class="form-control"></textarea>
 				<span th:if="${#fields.hasErrors('content')}" 
-					  th:errors="*{content}"></span>
+					  th:errors="*{content}" class="errorField"></span>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<th:block th:if="${session.mdto!=null&&session.mdto.id==dto.id}">
+<!-- 				<th:block th:if="${session.mdto!=null&&session.mdto.id==dto.id}"> -->
 					<button type="submit" class="btn">수정</button>
 					<button type="button" class="btn"
 					 th:onclick="|location.href='@{/board/mulDel(seq=${dto.board_seq})}'|">삭제</button>
-				</th:block>
+<!-- 				</th:block> -->
 				<button type="button" class="btn"
 				 th:onclick="|location.href='@{/board/boardList}'|">목록</button>
 			</td>

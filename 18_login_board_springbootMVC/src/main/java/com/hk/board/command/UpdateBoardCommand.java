@@ -1,8 +1,10 @@
 package com.hk.board.command;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class UpdateBoardCommand {
+
 
 	private int board_seq;
 	@NotBlank(message = "제목을 입력하세요")
@@ -14,7 +16,7 @@ public class UpdateBoardCommand {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UpdateBoardCommand(int board_seq, @NotBlank(message = "제목을 입력하세요") String title,
+	public UpdateBoardCommand(@NotNull int board_seq, @NotBlank(message = "제목을 입력하세요") String title,
 			@NotBlank(message = "내용을 입력하세요") String content) {
 		super();
 		this.board_seq = board_seq;

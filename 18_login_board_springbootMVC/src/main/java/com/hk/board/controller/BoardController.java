@@ -85,10 +85,15 @@ public class BoardController {
 	@PostMapping(value = "/boardUpdate")
 	public String boardUpdate(
 				@Validated UpdateBoardCommand updateBoardCommand
-				,BindingResult result) {
+				,BindingResult result
+				,Model model) {
 		
 		if(result.hasErrors()) {
 			System.out.println("수정내용을 모두 입력하세요");
+			//코드 추가--------------------------------------------
+			BoardDto dto=boardService.getBoard(updateBoardCommand.getBoard_seq());
+			model.addAttribute("dto", dto);
+			//--------------------------------------------------
 			return "board/boardDetail";
 		}
 		
