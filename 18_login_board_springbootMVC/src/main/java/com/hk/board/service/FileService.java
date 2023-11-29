@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
@@ -30,6 +31,7 @@ public class FileService {
 	private FileMapper fileMapper;
 	
 	//파일업로드하기
+	@Transactional
 	public List<FileBoardDto> uploadFiles(String uploadPath
 						    ,MultipartRequest multipartRequest) 
 						   throws IllegalStateException, IOException{

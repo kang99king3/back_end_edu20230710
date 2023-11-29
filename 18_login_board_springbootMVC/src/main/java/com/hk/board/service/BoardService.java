@@ -34,7 +34,7 @@ public class BoardService {
 	}
 
 	//글 추가, 파일업로드및 파일정보 추가
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void insertBoard(InsertBoardCommand insertBoardCommand
 			              , MultipartRequest multipartRequest
 			              , HttpServletRequest request) 

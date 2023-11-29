@@ -12,7 +12,7 @@ public class DelBoardCommand {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+ 
 	public DelBoardCommand(@NotEmpty(message = "최소 하나 이상 체크해야 합니다.") String[] seq) {
 		super();
 		this.seq = seq;
