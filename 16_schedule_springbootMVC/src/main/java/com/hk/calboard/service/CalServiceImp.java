@@ -91,9 +91,9 @@ public class CalServiceImp implements ICalService{
 		int count=calMapper.insertCalBoard(dto);
 		
 		//예외발생코드 추가
-		if(count>0) {
-			throw new Exception("트랜젝션 실행됨");
-		}
+//		if(count>0) {
+//			throw new Exception("트랜젝션 실행됨");
+//		}
 		
 		return count>0?true:false;
 	}
