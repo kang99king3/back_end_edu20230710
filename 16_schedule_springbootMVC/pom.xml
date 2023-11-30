@@ -17,25 +17,6 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-	<profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <spring.profiles.active>dev</spring.profiles.active>
-                <embedded.tomcat.scope>compile</embedded.tomcat.scope>
-            </properties>
-        </profile>
-        <profile>
-            <id>opsec</id>
-            <properties>
-                <spring.profiles.active>operation</spring.profiles.active>
-                <embedded.tomcat.scope>provided</embedded.tomcat.scope>
-            </properties>
-        </profile>
-	</profiles>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
