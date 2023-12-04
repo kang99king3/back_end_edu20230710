@@ -22,9 +22,9 @@ public class DataBase {
 	
 	//2단계: DB연결
 	public Connection getConnection() throws SQLException {
-		String url = "jdbc:mariadb://localhost:3306/hkedu";
+		String url = "jdbc:mariadb://192.168.55.54:3306/hkedu";
 		String user ="root";
-		String password = "manager";     
+		String password = "root";     
 		
 		Connection conn = DriverManager.getConnection(url, user, password);
 		System.out.println("2단계: DB성공");
