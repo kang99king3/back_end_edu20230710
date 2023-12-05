@@ -4,13 +4,17 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+
 @Alias(value = "hkDto")
 public class HkDto {
 	private int seq;
 	private String id;
 	private String title;
 	private String content;
-	private Date regdate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date regdate;//어노테이션을 이용해서 날짜 형식을 지정->json으로 변환했을때 지정한 형태를 표현하게 됨 
 	public HkDto() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -5,7 +5,7 @@
 
 	<select id="getAllList" resultType="HkDto">
 		SELECT seq, id, title, content, regdate 
-		FROM hkboard ORDER BY regdate DESC 	
+		FROM hkboard ORDER BY regdate DESC 	 
 	</select>
 	
 	<insert id="insertBoard" parameterType="HkDto">
