@@ -42,7 +42,7 @@ public class BoardController {
 		return map;
 	}
 	
-	//글추가하기: 전달파라미터 id,title,content
+	//글추가하기: 전달파라미터 id,title,content -> 필수
 	@PostMapping("/insert")
 	public Map<String,Integer> insert(HkDto dto){
 		System.out.println("글 추가하기");
@@ -51,7 +51,7 @@ public class BoardController {
 		return map;
 	}
 	
-	//글상세보기: 전달파라미터 글번호(seq)
+	//글상세보기: 전달파라미터 글번호(seq)    
 	@GetMapping("/detail/{seq}")
 	public Map<String,HkDto> detail(@PathVariable int seq){
 		System.out.println("글 상세조회");
