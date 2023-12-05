@@ -39,7 +39,7 @@
 				// $("<table></table>") : 태그생성하는 방법
 				var table=$(
 						'<h2>글목록</h2>'
-						+'<form action="mulDel.do" method="post" onsubmit="return isAllCheck()">'
+						+'<form id="muldel">'
 						+'<table border="1" class="table">'
 						+'	<col width="50px" />'
 						+'	<col width="50px" />'
@@ -57,7 +57,7 @@
 						+'	<tr>'
 						+'		<td colspan="5">'
 						+'			<button type="button" onclick="insertBoardForm()">글추가</button>	'
-						+'			<input type="submit" value="삭제"/>	'
+						+'			<input type="button" value="삭제" onclick="mulDel()"/>	'
 						+'		</td>'
 						+'	</tr>'
 						+'	</tfoot>'
@@ -196,6 +196,7 @@
 				var updateForm=$(
 					'<h1>수정하기</h1>'
 					+'<form id="updateForm">'
+					+'  <input type="hidden" name="seq" value="'+dto.seq+'"/>'
 					+'	<table class="table">'
 					+'		<tr>'
 					+'			<th>작성자(ID)</th>'
@@ -203,16 +204,15 @@
 					+'		</tr>'
 					+'		<tr>'
 					+'			<th>글제목</th>'
-					+'			<td>'+dto.title+'</td>'
+					+'			<td><input type="text" name="title" value="'+dto.title+'" /></td>'
 					+'		</tr>'
 					+'		<tr>'
 					+'			<th>글내용</th>'
-					+'			<td><textarea rows="10" cols="60" name="content" readonly="readonly">'+dto.content+'</textarea></td>'
+					+'			<td><textarea rows="10" cols="60" name="content">'+dto.content+'</textarea></td>'
 					+'		</tr>'
 					+'		<tr>'
 					+'			<td colspan="2">'
-					+'				<input type="button" value="수정" onclick="updateBoardForm('+dto.seq+')" />'
-					+'				<input type="button" value="삭제" onclick="delBoardForm('+dto.seq+')" />'
+					+'				<input type="button" value="수정완료" onclick="updateBoard()" />'
 					+'				<input type="button" value="글목록"'       
 					+'						onclick="getBoardList()" />'
 					+'			</td>'
@@ -220,12 +220,70 @@
 					+'	</table>'	
 					+'</form>'
 				);//updateForm종료
+				$("#boardlist").html(updateForm);
 			}//success종료
 		});//ajax종료
 	}
 	//글 수정하기 
-	
+	function updateBoard(){
+		$.ajax({
+			url:'http://localhost:8085/api/board/update',
+			method:'put',
+			async:false,
+			data:$("#updateForm").serialize(), //json형태의 문자열을 반환
+			dataType:'json',
+			success:function(data){
+				if(data.count==0){
+					alert('수정실패');
+				}else{
+					alert('수정성공');
+					//상세내용조회 페이지로 이동
+					detail($("#updateForm input[name=seq]").val());
+				}
+			}
+		});
+	}
 	//글 삭제하기
+	function delBoardForm(chk){
+		if(confirm("삭제하시겠습니까?")){
+			$.ajax({
+				url:'http://localhost:8085/api/board/muldel',
+				method:'delete',
+				async:false,
+				data:{'chk':chk}, // chk=5 , {chk:5}
+				dataType:'json',
+				success:function(data){
+					if(data.count==0){
+						alert("삭제실패");
+					}else{
+						alert("삭제성공");
+						getBoardList();
+					}
+				}
+			});//ajax종료
+		}
+	}
+	
+	//글 여러개 삭제
+	function mulDel(){
+		if(confirm("삭제하시겠습니까?")){
+			$.ajax({
+				url:'http://localhost:8085/api/board/muldel',
+				method:'delete',
+				async:false,
+				data:$("#muldel").serialize(),
+				dataType:'json',
+				success:function(data){
+					if(data.count==0){
+						alert("삭제실패");
+					}else{
+						alert("삭제성공");
+						getBoardList();
+					}
+				}
+			});//ajax종료
+		}
+	}
 </script>
 <style type="text/css">
 
