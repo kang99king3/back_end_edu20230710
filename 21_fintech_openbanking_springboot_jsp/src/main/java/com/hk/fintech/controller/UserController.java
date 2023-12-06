@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hk.fintech.dtos.UserDto;
 import com.hk.fintech.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/user")
@@ -99,6 +102,38 @@ public class UserController {
 			System.out.println("회원가입실패");
 			return "error";
 		}
+	}
+	
+	//로그인 폼 이동하기
+	@GetMapping("/signin_form")
+	public String signinForm() {
+		System.out.println("로그인폼 이동");
+		return "signin_form";
+	}
+	
+	//로그인하기
+	@PostMapping("/login")
+	public String login(UserDto dto, HttpServletRequest request) {
+		UserDto ldto=userService.loginUser(dto);
+		if(ldto==null) {
+			System.out.println("회원이 아님");
+			return "redirect:/user/signin_form";
+		}else {
+			System.out.println("회원이 맞음");
+			HttpSession session=request.getSession();
+			session.setAttribute("ldto", ldto);//로그인 정보를 session에 저장
+			session.setMaxInactiveInterval(60*10);
+			return "redirect:/banking/main";
+		}
+	}
+	
+	//로그아웃하기
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		System.out.println("로그아웃");
+		HttpSession session=request.getSession();
+		session.invalidate();
+		return "redirect:/";
 	}
 }
 

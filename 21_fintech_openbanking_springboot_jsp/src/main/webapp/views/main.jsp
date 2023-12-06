@@ -30,8 +30,9 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/user/signin_form">SignIN</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/user/signup">SignUp</a></li>
+                    <li class="nav-item">${sessionScope.ldto.username}님</li>
+                    <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!" onclick="myInfo()">나의정보</a></li>
                 </ul>
             </div>
         </div>
@@ -41,23 +42,7 @@
         <div class="container my-5">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <form action="/user/login" method="post">
-                    	<table class="table">
-                    		<tr>
-                    			<th>이메일</th>
-                    			<td><input type="email" name="useremail" class="form-control" /></td>
-                    		</tr>
-                    		<tr>
-                    			<th>비밀번호</th>
-                    			<td><input type="password" name="userpassword" class="form-control" /></td>
-                    		</tr>
-                    		<tr>
-                    			<td colspan="2">
-                    				 <input type="submit" value="signIn" class="btn btn-dark">
-                    			</td>
-                    		</tr>
-                    	</table>
-                    </form>
+                    
                 </div>
             </div>
         </div>
@@ -72,14 +57,4 @@
     <script src="resources/js/scripts.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
 
