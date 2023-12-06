@@ -60,11 +60,11 @@
                     		</tr>
                     		<tr>
                     			<th>이메일</th>
-                    			<td><input type="text" name="email" class="form-control" /></td>
+                    			<td><input type="email" name="useremail" class="form-control" /></td>
                     		</tr>
                     		<tr>
                     			<th>비밀번호</th>
-                    			<td><input type="password" name="password" class="form-control" /></td>
+                    			<td><input type="password" name="userpassword" class="form-control" /></td>
                     		</tr>
                     		<tr>
                     			<th>AccessToken</th>
