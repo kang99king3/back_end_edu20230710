@@ -9,13 +9,66 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Full Width Pics - Start Bootstrap Template</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/resources/css/styles.css" rel="stylesheet" />
-	
+	<style type="text/css">
+		.box{border-bottom: 1px solid gray; margin-bottom: 10px;}
+		.box > .sub_menu{text-align: right;}
+	</style>
 	<script type="text/javascript">
-	
+
+		//나의 정보조회[계좌목록]
+		function myInfo(){
+			$.ajax({
+// 				url:"https://testapi.openbanking.or.kr/v2.0/user/me",
+// 				headers:{"Authorization":"Bearer token"},
+// 				data:{"user_seq_no":"사용자번호"}
+				url:"/banking/myinfo",
+				method:"get",
+				dataType:"json",
+				success:function(data){
+					console.log(data.res_list);
+					var res_list=data.res_list;//나의 계좌목록 저장
+					
+					//출력할 내용
+					//계좌이름
+					//핀테크이용번호 [은행이름]
+					for (var i = 0; i < res_list.length; i++) {
+						$("#list").append(
+							'<div class="box container">'
+	                       +'	<div>'
+	                       +'	   <h1>'+res_list[i].account_alias+'</h1>'
+	                       +'	   <p>'+res_list[i].fintech_use_num+' ['+res_list[i].bank_name+']</p>'
+	                       +'	</div>'
+	                       +'	<div class="sub_menu"> '
+	                       +'		<button  onclick="balance('+res_list[i].fintech_use_num+',this)" class="balance">잔액조회</button>'
+	                       +'	</div>'
+	                       +'	<div class="balance_amt"></div>'
+	                       +'</div>	'
+						)
+					}
+				}
+			});
+		}
+		
+		//잔액조회하기
+		function balance(fintech_use_num,btnEle){
+			$.ajax({
+				url:"/banking/balance",
+				method:"get",
+				data:{"fintech_use_num":fintech_use_num},
+				dataType:"json",
+				success:function(data){
+					
+				},
+				error:function(){
+					alert("통신실패");
+				}
+			});
+		}
 	</script>
 
 </head>
@@ -41,8 +94,19 @@
     <section class="py-5">
         <div class="container my-5">
             <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    
+                <div class="col-lg-12">
+                    <div id="list">
+<!--                     	<div class="box container"> -->
+<!-- 	                       	<div> -->
+<!-- 	                     	   <h1>이름</h1> -->
+<!-- 	                     	   <p>번호 [은행이름]</p> -->
+<!-- 	                      	</div> -->
+<!-- 	                      	<div class="sub_menu"> -->
+<!-- 	                      		<button  onclick="balance(fintech_user_num,this)" class="balance">잔액조회</button> -->
+<!-- 	                      	</div> -->
+<!-- 	                      	<div class="balance_amt"></div> -->
+<!-- 	                    </div>	 -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,7 +118,7 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="resources/js/scripts.js"></script>
+<!--     <script src="resources/js/scripts.js"></script> -->
 </body>
 </html>
 

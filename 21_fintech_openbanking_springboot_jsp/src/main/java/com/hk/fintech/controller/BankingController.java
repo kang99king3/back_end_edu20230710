@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -32,7 +35,7 @@ public class BankingController {
 	@GetMapping("/myinfo")
 	public JSONObject myInfo(HttpServletRequest request) throws IOException, ParseException {
 		System.out.println("나의정보조회[계좌목록]");
-		
+
 		HttpURLConnection conn=null;
 		JSONObject result=null;
 		
@@ -66,6 +69,35 @@ public class BankingController {
 		result=(JSONObject)new JSONParser().parse(response.toString());
 		System.out.println("result:"+result.get("res_list"));
 		return result;
+	}
+	
+	@ResponseBody
+	@GetMapping("/balance")
+	public JSONObject balance(String fintech_use_num) throws MalformedURLException {
+		System.out.println("잔액조회하기");
+		HttpURLConnection conn=null;
+		JSONObject result=null;
+		URL url=new URL("https://testapi.openbanking.or.kr/v2.0/account/balance/fin_num?"
+				      + "bank_tran_id=M202201886U"+createNum()
+				      + "&fintech_use_num="+fintech_use_num
+				      + "&tran_dtime="+getDateTime());
+		return result;
+	}
+	
+	//이용기관 부여번호 9자리를 생성하는 메서드
+	public String createNum() {
+		String createNum="";
+		for (int i = 0; i < 9; i++) {
+			createNum+=((int)(Math.random()*10))+"";
+		}
+		System.out.println("이용기관부여번호9자리생성:"+createNum);
+		return createNum;
+	}
+	//현재시간 구하는 메서드
+	public String getDateTime() {
+		LocalDateTime now=LocalDateTime.now(); //현재시간 구하기
+		String formatNow=now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+		return formatNow;
 	}
 }
 
