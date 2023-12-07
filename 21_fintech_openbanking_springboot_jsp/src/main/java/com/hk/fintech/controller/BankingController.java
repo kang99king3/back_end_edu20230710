@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -73,14 +72,39 @@ public class BankingController {
 	
 	@ResponseBody
 	@GetMapping("/balance")
-	public JSONObject balance(String fintech_use_num) throws MalformedURLException {
+	public JSONObject balance(String fintech_use_num,HttpServletRequest request) throws IOException, ParseException {
 		System.out.println("잔액조회하기");
 		HttpURLConnection conn=null;
 		JSONObject result=null;
+		
+		HttpSession session=request.getSession();
+		UserDto ldto=(UserDto)session.getAttribute("ldto");
+		
 		URL url=new URL("https://testapi.openbanking.or.kr/v2.0/account/balance/fin_num?"
 				      + "bank_tran_id=M202201886U"+createNum()
 				      + "&fintech_use_num="+fintech_use_num
 				      + "&tran_dtime="+getDateTime());
+		
+		conn = (HttpURLConnection)url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-Type", "application/json");
+		conn.setRequestProperty("Authorization", "Bearer "+ldto.getUseraccesstoken());
+		conn.setDoOutput(true);
+		
+		// java에서 사용할 수 있도록 읽어들이는 코드
+		BufferedReader br=new BufferedReader(
+					new InputStreamReader(conn.getInputStream(),"utf-8")
+				);
+		StringBuilder response=new StringBuilder();
+		String responseLine=null;
+		
+		while((responseLine=br.readLine())!=null) {
+			response.append(responseLine.trim());
+		}
+		
+		result=(JSONObject)new JSONParser().parse(response.toString());
+		System.out.println("잔액:"+result.get("balance_amt"));
+		
 		return result;
 	}
 	
@@ -92,7 +116,7 @@ public class BankingController {
 		}
 		System.out.println("이용기관부여번호9자리생성:"+createNum);
 		return createNum;
-	}
+	} 
 	//현재시간 구하는 메서드
 	public String getDateTime() {
 		LocalDateTime now=LocalDateTime.now(); //현재시간 구하기

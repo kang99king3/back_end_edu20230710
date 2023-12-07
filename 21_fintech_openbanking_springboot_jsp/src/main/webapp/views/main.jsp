@@ -44,7 +44,7 @@
 	                       +'	   <p>'+res_list[i].fintech_use_num+' ['+res_list[i].bank_name+']</p>'
 	                       +'	</div>'
 	                       +'	<div class="sub_menu"> '
-	                       +'		<button  onclick="balance('+res_list[i].fintech_use_num+',this)" class="balance">잔액조회</button>'
+	                       +'		<button  onclick="balance(\''+res_list[i].fintech_use_num+'\',this)" class="balance">잔액조회</button>'
 	                       +'	</div>'
 	                       +'	<div class="balance_amt"></div>'
 	                       +'</div>	'
@@ -62,7 +62,11 @@
 				data:{"fintech_use_num":fintech_use_num},
 				dataType:"json",
 				success:function(data){
-					
+					console.log(data);
+					var box=$(btnEle).parents(".box").eq(0);
+					box.find(".balance_amt").html(
+											 "<p>잔액:"+data.balance_amt+"</p>"
+											 );
 				},
 				error:function(){
 					alert("통신실패");
