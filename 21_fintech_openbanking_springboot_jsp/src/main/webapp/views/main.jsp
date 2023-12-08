@@ -21,6 +21,10 @@
 	</style>
 	<script type="text/javascript">
 
+		function myInfo_feign(){
+			location.href="/banking/myinfo_feign";
+		}
+	
 		//나의 정보조회[계좌목록]
 		function myInfo(){
 			$.ajax({
@@ -139,6 +143,7 @@
                     <li class="nav-item"><a class="nav-link" href="#!">${sessionScope.ldto.username}님</a></li>
                     <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!" onclick="myInfo()">나의정보</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!" onclick="myInfo_feign()">나의정보2</a></li>
                 </ul>
             </div>
         </div>

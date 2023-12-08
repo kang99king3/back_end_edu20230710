@@ -21,7 +21,7 @@
 				   +"response_type=code&" //고정값 code: 인증요청시 반환되는 값의 형식의미
 				   +"client_id=4987e938-f84b-4e23-b0a2-3b15b00f4ffd&" //이용기관의 ID
 				   +"redirect_uri=http://localhost:8087/user/authresult&"//응답URL
-				   +"scope=login inquiry transfer&" //토큰의 권한
+				   +"scope=login inquiry transfer &" //토큰의 권한
 				   +"state=12345678123456781234567812345678&" //32자리 난수 설정
 				   +"auth_type=0"; //0:최초 한번 인증, 2:인증생략
 				   
