@@ -154,6 +154,18 @@ public class BankingController {
 		return result;
 	}
 	
+	//계좌등록
+	@ResponseBody
+	@GetMapping("/addaccount")
+	public String addAccount(String code) {
+		System.out.println("계좌등록하기");
+		System.out.println("code:"+code);
+		//팝업창을 닫아 주기 위해서
+		String str="<script type='text/javascript'>"
+				  +"     self.close();"
+				  +"</script>";
+		return str;
+	}
 	
 	//이용기관 부여번호 9자리를 생성하는 메서드
 	public String createNum() {

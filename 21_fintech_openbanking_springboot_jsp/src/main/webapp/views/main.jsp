@@ -17,6 +17,7 @@
 	<style type="text/css">
 		.box{border-bottom: 1px solid gray; margin-bottom: 10px;}
 		.box > .sub_menu{text-align: right;}
+		.addAccount{text-align: right;}
 	</style>
 	<script type="text/javascript">
 
@@ -32,6 +33,13 @@
 				success:function(data){
 					console.log(data.res_list);
 					var res_list=data.res_list;//나의 계좌목록 저장
+					
+					
+					//계좌등록 버튼
+					$("#list").html("<div class='addAccount'>"
+									+"  <button onclick='addAccount()'>계좌등록</button>"
+									+"</div>"
+							     	);
 					
 					//출력할 내용
 					//계좌이름
@@ -85,8 +93,34 @@
 				dataType:"json",
 				success:function(data){ //data: 응답결과을 받을 변수
 					console.log(data.res_list);
+					var list="<ul>";
+					// data.res_list  -->  배열
+					for (var i = 0; i < data.res_list.length; i++) {
+						var res=data.res_list[i];// json객체를 가져온다 {key:value,...}
+						list+="<li>"+res.tran_date
+						            +" ["+res.branch_name+"] "
+						            +res.inout_type+" "
+						            +res.print_content+":"
+						            +res.tran_amt+"</li>"
+					}
+					list+="</ul>";// <ul><li>거래내역1</li><li>거래내역2</li>..</ul>
+					//button .   p    . <div> 
+					$(btnEle).parent().next(".transaction_list").html(list);
 				}
 			});
+		}
+		
+		//계좌등록하기(센터인증 이용기관용: 사용자 인증후에 계좌 등록 가능)
+		function addAccount(){
+			var url="https://testapi.openbanking.or.kr/oauth/2.0/authorize?"
+				   +"response_type=code&" //고정값 code: 인증요청시 반환되는 값의 형식의미
+				   +"client_id=4987e938-f84b-4e23-b0a2-3b15b00f4ffd&" //이용기관의 ID
+				   +"redirect_uri=http://localhost:8087/banking/addaccount&"//응답URL
+				   +"scope=login inquiry transfer&" //토큰의 권한
+				   +"state=12345678123456781234567812345678&" //32자리 난수 설정
+				   +"auth_type=0"; //0:최초 한번 인증, 2:인증생략
+				   
+			window.open(url,"인증하기","width=400px,height=600px");	   
 		}
 	</script>
 
@@ -102,7 +136,7 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                    <li class="nav-item">${sessionScope.ldto.username}님</li>
+                    <li class="nav-item"><a class="nav-link" href="#!">${sessionScope.ldto.username}님</a></li>
                     <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!" onclick="myInfo()">나의정보</a></li>
                 </ul>
