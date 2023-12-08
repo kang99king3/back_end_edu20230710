@@ -1,4 +1,4 @@
-package com.hk.fintech.feignMapper;
+package com.hk.fintech.apidto;
 
 public class TokenResponseDto {
 
