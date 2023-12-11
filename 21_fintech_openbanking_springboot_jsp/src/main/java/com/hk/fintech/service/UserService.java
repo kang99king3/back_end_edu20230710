@@ -20,6 +20,10 @@ public class UserService {
 	public UserDto loginUser(UserDto dto) {
 		return userMapper.loginUser(dto);
 	}
+	
+	public int addCardToken(UserDto dto) {
+		return userMapper.addCardToken(dto);
+	}
 }
 
 

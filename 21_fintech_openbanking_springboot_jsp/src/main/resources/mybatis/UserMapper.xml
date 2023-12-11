@@ -11,10 +11,16 @@
 	
 	<select id="loginUser" parameterType="UserDto" resultType="UserDto">
 		SELECT USERNAME, USEREMAIL,USERPASSWORD,USERACCESSTOKEN,USERREFRESHTOKEN,
-		       USERSEQNO
+		       USERSEQNO, USERACCESSTOKEN
 		FROM FINTECH_USER
 		WHERE USEREMAIL=#{useremail} AND USERPASSWORD=#{userpassword}
 	</select> 
+	
+	<update id="addCardToken" parameterType="UserDto">
+		UPDATE fintech_user
+		SET CARDACCESSTOKEN = #{cardaccesstoken}
+		WHERE USEREMAIL = #{useremail}
+	</update>
 </mapper>
 
 

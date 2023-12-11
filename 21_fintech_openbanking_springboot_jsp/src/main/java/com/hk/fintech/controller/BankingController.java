@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hk.fintech.apidto.UserMeDto;
 import com.hk.fintech.dtos.UserDto;
 import com.hk.fintech.feignMapper.OpenBankingFeign;
+import com.hk.fintech.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +29,9 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/banking")
 public class BankingController {
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private OpenBankingFeign openBankingFeign;
@@ -200,6 +204,75 @@ public class BankingController {
 		return str;
 	}
 	
+	//카드등록(카드권한 token 발급요청 포함)
+	@ResponseBody
+	@GetMapping("/addcard")
+	public String addCard(String code,Model model,
+						  HttpServletRequest request) throws IOException, ParseException {
+		System.out.println("인증후 받은 code:"+code);
+		
+		HttpURLConnection conn=null;// api에서 제공하는 데이터를 받기 위한 연결 객체
+		JSONObject result=null; //받아온 데이터를 json으로 저장할 객체
+		
+		HttpSession session=request.getSession();
+		UserDto ldto=(UserDto)session.getAttribute("ldto");
+		System.out.println("card:"+ldto.getCardaccesstoken());
+		
+		//발급 받은 적이 없다면 토큰 요청을 하고, 이미 받았다면 요청 X
+		if(ldto.getCardaccesstoken()==null) {
+			//인증받고 얻은 code를 통해 토큰을 요청하여 발급받는다.
+			URL url=new URL("https://testapi.openbanking.or.kr/oauth/2.0/token?"
+					       +"code="+code
+					       +"&client_id=4987e938-f84b-4e23-b0a2-3b15b00f4ffd"
+					       +"&client_secret=3ff7570f-fdfb-4f9e-8f5a-7b549bf2adec"
+					       +"&redirect_uri=http://localhost:8087/banking/addcard"
+					       +"&grant_type=authorization_code"
+							);
+			
+			conn=(HttpURLConnection)url.openConnection();
+			conn.setRequestMethod("POST"); //post로 요청 설정
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			conn.setDoOutput(true); //데이터를 가져온다면 true로 설정한다.
+			
+			// 데이터를 실제로 가져오는 작업
+			BufferedReader br=new BufferedReader(
+					         new InputStreamReader(conn.getInputStream(),"utf-8"));
+			
+			StringBuilder response=new StringBuilder();//데이터를 저장할 객체
+			String responseLine=null;
+			while((responseLine=br.readLine())!=null) {
+	//			System.out.println(responseLine);
+				response.append(responseLine.trim());//데이터를 문자열에 추가
+			}
+			
+			// json 형태의 텍스트 데이터를 json객체로 변환하는 작업
+			result=(JSONObject)new JSONParser().parse(response.toString());
+			
+			//json객체에서 전달받은 값을 가져오기
+			String access_token=result.get("access_token").toString();
+			String refresh_token=result.get("refresh_token").toString();
+			String user_seq_no=result.get("user_seq_no").toString();
+			
+			System.out.println("access_token:"+access_token);
+			System.out.println("refresh_token:"+refresh_token);
+			System.out.println("user_seq_no:"+user_seq_no);
+			
+			
+			
+			UserDto dto=new UserDto();
+			dto.setCardaccesstoken(access_token);
+			dto.setUseremail(ldto.getUseremail());
+			
+			//DB에 토큰 저장
+			userService.addCardToken(dto);
+		}
+		
+		//팝업창을 닫아 주기 위해서
+		String str="<script type='text/javascript'>"
+				  +"     self.close();"
+				  +"</script>";
+		return str;
+	}
 	//이용기관 부여번호 9자리를 생성하는 메서드
 	public String createNum() {
 		String createNum="";

@@ -9,6 +9,9 @@ public class UserDto {
 	private String useraccesstoken; // 접근을 위한 토큰
 	private String userrefreshtoken;// 갱신을 위한 토큰
 	private int userseqno; // 사용자일련번호
+	
+	private String cardaccesstoken;//카드서비스 접근을 위한 토큰
+	
 	public UserDto() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -22,6 +25,14 @@ public class UserDto {
 		this.useraccesstoken = useraccesstoken;
 		this.userrefreshtoken = userrefreshtoken;
 		this.userseqno = userseqno;
+	}
+	
+	
+	public String getCardaccesstoken() {
+		return cardaccesstoken;
+	}
+	public void setCardaccesstoken(String cardaccesstoken) {
+		this.cardaccesstoken = cardaccesstoken;
 	}
 	public String getUsername() {
 		return username;
@@ -63,7 +74,8 @@ public class UserDto {
 	public String toString() {
 		return "UserDto [username=" + username + ", useremail=" + useremail + ", userpassword=" + userpassword
 				+ ", useraccesstoken=" + useraccesstoken + ", userrefreshtoken=" + userrefreshtoken + ", userseqno="
-				+ userseqno + "]";
+				+ userseqno + ", cardaccesstoken=" + cardaccesstoken + "]";
 	}
+	
 	
 }
