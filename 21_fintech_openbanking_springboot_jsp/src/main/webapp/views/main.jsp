@@ -21,16 +21,32 @@
 		.box{border-bottom: 1px solid gray; margin-bottom: 10px;}
 		.box > .sub_menu{text-align: right;}
 		.addAccount{text-align: right;}
+		/*계좌,카드목록 감추기*/
 		#list, #cardList{display: none;}
+		/*계좌,카드목록버튼 감추기*/
+		.alistview,.clistview{display: none;}
 	</style>
 	<script type="text/javascript">
 
 		$(function(){
+			//계좌목록 버튼 클릭하면 계좌목록 보여주기
 			$(".alistview").click(function(){
-
 				$("#list").show();
 				$("#cardList").hide();
 			});
+			//카드목록 버튼 클릭하면 카드목록 보여주기
+			$(".clistview").click(function(){
+				$("#list").hide();
+				$("#cardList").show();
+				
+				$.ajax({
+					url:"/banking/cardlist",
+					method:"get",
+					
+				});
+				
+			});
+			
 		});
 	
 		//나의정보2 feign 사용
@@ -40,6 +56,7 @@
 	
 		//나의 정보조회[계좌목록]
 		function myInfo(){
+			$(".alistview,.clistview").show();//계좌,카드목록버튼 보여주기
 			$.ajax({
 // 				url:"https://testapi.openbanking.or.kr/v2.0/user/me",
 // 				headers:{"Authorization":"Bearer token"},
