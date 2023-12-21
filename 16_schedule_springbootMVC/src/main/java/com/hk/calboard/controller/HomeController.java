@@ -12,4 +12,9 @@ public class HomeController {
 		System.out.println("home");
 		return "thymeleaf/home";
 	}
+	@GetMapping(value = "/new")
+	public String newz() { 
+		System.out.println("new");
+		return "NewFile";
+	}
 }
