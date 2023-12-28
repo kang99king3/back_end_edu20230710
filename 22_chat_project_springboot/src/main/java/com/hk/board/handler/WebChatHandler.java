@@ -9,6 +9,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 public class WebChatHandler extends TextWebSocketHandler{
 
 	private HashMap<Integer, HashMap<String, WebSocketSession>> map = new HashMap<>();
@@ -19,6 +21,7 @@ public class WebChatHandler extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		String path = session.getUri().getPath();
 		System.out.println("채팅참가자요청path:"+path);
+		System.out.println("채팅참가자ID:"+session.getAttributes().get("userId"));
 		//path에서 roomNO 추출(1~9)
 		roomNo = Integer.parseInt(path.charAt(path.length()-1) + "");
 		if (map.get(roomNo) == null) {//채팅방에 없는 경우 채팅방에 추가한다.
@@ -48,7 +51,25 @@ public class WebChatHandler extends TextWebSocketHandler{
 	
 	//연결이 종료되면 사용자 세션 삭제
 	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+	public void afterConnectionClosed(WebSocketSession session,CloseStatus status) throws Exception {
 		map.get(roomNo).remove(session.getId());
+		String userId=(String)session.getAttributes().get("userId");
+		
+		System.out.println("채팅종료:"+userId);
+		 HashMap<String, WebSocketSession> room = map.get(roomNo);
+		 for (var v : room.values()) {//참여자들에게 각각 메시지를 전달하기 위해 session 값들을 구한다.
+			 if (v.isOpen()) {//참여자들이 채팅연결이 되어 있다면
+				 v.sendMessage(new TextMessage(
+						 "{\"type\":\"bye\",\"userId\":\"kk\",\"roomNo\":\"1\",\"msg\":\"님이 퇴장하셨습니다.\"}"));
+				 System.out.println( new TextMessage(
+					 		"{\"type\":\"bye\",\"userId\":\"kk\",\"roomNo\":\"1\",\"msg\":\"님이 퇴장하셨습니다.\"}").getPayload());
+			 }
+		 }
 	}
+	
 }
+
+
+
+
+

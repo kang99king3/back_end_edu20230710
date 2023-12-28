@@ -12,7 +12,11 @@
 </head>
 <body>
 <h1>HOME</h1>
-
+<form action="/chatform" method="post">
+<label>ROOM:</label><input type="text" name="roomNo"> <br/>
+<label>ID:</label><input type="text" name="userId" >
+<input type="submit" value="시작"/>
+</form>
 
 </body>
 </html>
