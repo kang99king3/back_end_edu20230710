@@ -9,10 +9,10 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 public class WebChatHandler extends TextWebSocketHandler{
-
+	// roomNo는 채팅방을 구별하는 값 , websocketId는 참여자를 구별하는 값, websocketSession은 참여자
+	// { roomNo:{websocketId:websocketSession,websocketId:websocketSession}
+	//  ,roomNo:{websocketId:websocketSession,websocketId:websocketSession}....}
 	private HashMap<Integer, HashMap<String, WebSocketSession>> map = new HashMap<>();
 	private int roomNo;
 	
