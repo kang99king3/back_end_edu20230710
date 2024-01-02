@@ -4,10 +4,17 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hk.board.dtos.MessageDto;
 
 public class WebChatHandler extends TextWebSocketHandler{
 	// roomNo는 채팅방을 구별하는 값 , websocketId는 참여자를 구별하는 값, websocketSession은 참여자
@@ -34,17 +41,21 @@ public class WebChatHandler extends TextWebSocketHandler{
 		}
 		
 	}
-	
+
+	@Autowired
+	ObjectMapper objectMapper;
 	//클라이언트에서 전달받은 메시지를 각각의 채팅참여자들에게 전송한다.
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 //		 String msg = message.getPayload();
 //		 JSONObject json = (JSONObject)new JSONParser().parse(msg);
+//		 MessageDto mDto=objectMapper.readValue(message.getPayload(), MessageDto.class);
+//		 System.out.println("room번호:"+mDto.getRoomNo());
 		 HashMap<String, WebSocketSession> room = map.get(roomNo);
 		 for (var v : room.values()) {//참여자들에게 각각 메시지를 전달하기 위해 session 값들을 구한다.
 			 if (v.isOpen()) {//참여자들이 채팅연결이 되어 있다면
 				 System.out.println(message.getPayload());//메시지 콘솔에 출력
-				 v.sendMessage(message);// 클라이언트로 메시지를 전송한다.
+				 v.sendMessage(message);// 클라이언트로 메시지를 전송한다. 
 			 }
 		 }
 	}
@@ -60,9 +71,9 @@ public class WebChatHandler extends TextWebSocketHandler{
 		 for (var v : room.values()) {//참여자들에게 각각 메시지를 전달하기 위해 session 값들을 구한다.
 			 if (v.isOpen()) {//참여자들이 채팅연결이 되어 있다면
 				 v.sendMessage(new TextMessage(
-						 "{\"type\":\"bye\",\"userId\":\"kk\",\"roomNo\":\"1\",\"msg\":\"님이 퇴장하셨습니다.\"}"));
+						 "{\"type\":\"bye\",\"userId\":\""+userId+"\",\"roomNo\":\"1\",\"msg\":\""+userId+" 님이 퇴장하셨습니다.\"}"));
 				 System.out.println( new TextMessage(
-					 		"{\"type\":\"bye\",\"userId\":\"kk\",\"roomNo\":\"1\",\"msg\":\"님이 퇴장하셨습니다.\"}").getPayload());
+						 "{\"type\":\"bye\",\"userId\":\""+userId+"\",\"roomNo\":\"1\",\"msg\":\""+userId+" 님이 퇴장하셨습니다.\"}").getPayload());
 			 }
 		 }
 	}
