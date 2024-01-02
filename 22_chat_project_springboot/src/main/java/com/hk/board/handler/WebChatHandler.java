@@ -68,7 +68,7 @@ public class WebChatHandler extends TextWebSocketHandler{
 		
 		System.out.println("채팅종료:"+userId);
 		 HashMap<String, WebSocketSession> room = map.get(roomNo);
-		 for (var v : room.values()) {//참여자들에게 각각 메시지를 전달하기 위해 session 값들을 구한다.
+		 for (var v : room.values()) {//참여자들에게 각 각 메시지를 전달하기 위해 session 값들을 구한다.
 			 if (v.isOpen()) {//참여자들이 채팅연결이 되어 있다면
 				 v.sendMessage(new TextMessage(
 						 "{\"type\":\"bye\",\"userId\":\""+userId+"\",\"roomNo\":\"1\",\"msg\":\""+userId+" 님이 퇴장하셨습니다.\"}"));
