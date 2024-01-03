@@ -31,6 +31,7 @@ public class WebChatHandler extends TextWebSocketHandler{
 		System.out.println("채팅참가자ID:"+session.getAttributes().get("userId"));
 		//path에서 roomNO 추출(1~9)
 		roomNo = Integer.parseInt(path.charAt(path.length()-1) + "");
+		session.getAttributes().put("roomNo", roomNo);
 		if (map.get(roomNo) == null) {//채팅방에 없는 경우 채팅방에 추가한다.
 			var room = new HashMap<String, WebSocketSession>();
 			room.put(session.getId(), session);//id이름으로 session 저장
@@ -42,16 +43,17 @@ public class WebChatHandler extends TextWebSocketHandler{
 		
 	}
 
-	@Autowired
-	ObjectMapper objectMapper;
+//	@Autowired
+//	ObjectMapper objectMapper=new ObjectMapper();
 	//클라이언트에서 전달받은 메시지를 각각의 채팅참여자들에게 전송한다.
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-//		 String msg = message.getPayload();
-//		 JSONObject json = (JSONObject)new JSONParser().parse(msg);
-//		 MessageDto mDto=objectMapper.readValue(message.getPayload(), MessageDto.class);
-//		 System.out.println("room번호:"+mDto.getRoomNo());
-		 HashMap<String, WebSocketSession> room = map.get(roomNo);
+		 //클라이언트에서 전달된 값들을 MessageDto에 담는다.
+		 ObjectMapper objectMapper=new ObjectMapper();//message-->mDto에 담아줄 객체
+		 MessageDto mDto=objectMapper.readValue(message.getPayload(), MessageDto.class);//담아주는 작업
+		 System.out.println("room번호:"+mDto.getRoomNo());//클라이언트에서 전달된 방번호를 구한다.
+		 roomNo=Integer.parseInt(mDto.getRoomNo());//맴버필드에 방번호 저장
+		 HashMap<String, WebSocketSession> room = map.get(roomNo);//방번호에 해당하는 hashMap<id,websocketSession>객체 구한다.
 		 for (var v : room.values()) {//참여자들에게 각각 메시지를 전달하기 위해 session 값들을 구한다.
 			 if (v.isOpen()) {//참여자들이 채팅연결이 되어 있다면
 				 System.out.println(message.getPayload());//메시지 콘솔에 출력
@@ -63,12 +65,20 @@ public class WebChatHandler extends TextWebSocketHandler{
 	//연결이 종료되면 사용자 세션 삭제
 	@Override
 	public void afterConnectionClosed(WebSocketSession session,CloseStatus status) throws Exception {
-		map.get(roomNo).remove(session.getId());
-		String userId=(String)session.getAttributes().get("userId");
 		
-		System.out.println("채팅종료:"+userId);
-		 HashMap<String, WebSocketSession> room = map.get(roomNo);
-		 for (var v : room.values()) {//참여자들에게 각 각 메시지를 전달하기 위해 session 값들을 구한다.
+		//종료시 퇴장메시지를 보내줄 방번호 구하기
+		String path=session.getUri().getPath();
+		System.out.println("종료시path:"+session.getUri().getPath());
+		roomNo = Integer.parseInt(path.charAt(path.length()-1) + "");
+		System.out.println("방번호:"+roomNo);
+		
+		//사용자 아이디 구하기
+		String userId=(String)session.getAttributes().get("userId");
+		System.out.println("채팅종료하는 로그인 아이디:"+userId);
+		
+		//퇴장하는 방번호에 해당하는 참여자 session을 구해서 메시지 전달하기
+		HashMap<String, WebSocketSession> room = map.get(roomNo);
+		for (var v : room.values()) {//참여자들에게 각 각 메시지를 전달하기 위해 session 값들을 구한다.
 			 if (v.isOpen()) {//참여자들이 채팅연결이 되어 있다면
 				 v.sendMessage(new TextMessage(
 						 "{\"type\":\"bye\",\"userId\":\""+userId+"\",\"roomNo\":\"1\",\"msg\":\""+userId+" 님이 퇴장하셨습니다.\"}"));

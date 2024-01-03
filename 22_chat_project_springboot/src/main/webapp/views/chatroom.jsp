@@ -102,6 +102,7 @@
 
 		//웹소켓 연결 종료되면 실행
 		ws.onclose=function(){
+			
 			ws=null;//웹소켓 연결 끊고 null로 초기화
 // 			alert("채팅종료");
 		}
