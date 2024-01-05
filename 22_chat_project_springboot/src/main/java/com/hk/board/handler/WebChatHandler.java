@@ -31,6 +31,7 @@ public class WebChatHandler extends TextWebSocketHandler{
 		System.out.println("채팅참가자ID:"+session.getAttributes().get("userId"));
 		//path에서 roomNO 추출(1~9)
 		roomNo = Integer.parseInt(path.charAt(path.length()-1) + "");
+//		roomNo = Integer.parseInt(path.substring(path.lastIndexOf("/")+1));//방번호 1자리수이상일경우
 		session.getAttributes().put("roomNo", roomNo);
 		if (map.get(roomNo) == null) {//채팅방에 없는 경우 채팅방에 추가한다.
 			var room = new HashMap<String, WebSocketSession>();
@@ -70,6 +71,7 @@ public class WebChatHandler extends TextWebSocketHandler{
 		String path=session.getUri().getPath();
 		System.out.println("종료시path:"+session.getUri().getPath());
 		roomNo = Integer.parseInt(path.charAt(path.length()-1) + "");
+//		roomNo = Integer.parseInt(path.substring(path.lastIndexOf("/")+1));//방번호 1자리수이상일경우
 		System.out.println("방번호:"+roomNo);
 		
 		//사용자 아이디 구하기
