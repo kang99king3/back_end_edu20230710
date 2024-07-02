@@ -14,6 +14,7 @@ public class LibraryTest {
 		
 		testMethod();
 		testMethod02();
+
 	}
 	
 	//메서드작성: 클래스내부에서의 기능정의, 단독으로 기능정의 함수

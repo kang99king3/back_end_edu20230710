@@ -6,8 +6,17 @@ import java.io.InputStreamReader;
 
 public class ExceptionTest {
 
-	public static void main(String[] args) {
-		exTest("12345");
+	public static void main(String[] args){
+//		exTest("12345");
+		
+		try {
+			userExceptionTest(15);
+		} catch (UserException e) {
+			System.out.println("발생한 예외를 처리합니다.");
+			e.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void exTest(String s) {
@@ -44,7 +53,19 @@ public class ExceptionTest {
 	public void test02() throws IOException {
 		test01();//마지막에는 반드시 예외를 처리해야 한다.(try~catch)
 	}
+	
+	//사용자 예외처리
+	public static void userExceptionTest(int a) throws UserException {
+		//a는 1~10까지 숫자만 전달받을 수 있는 상황
+		if(!(a>0&&a<11)) {// 조건은 1~10범위를 벗어난 경우
+			throw new UserException("1부터 10까지만 입력 가능합니다.");
+		}
+	}
 }
+
+
+
+
 
 
 

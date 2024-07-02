@@ -54,6 +54,22 @@ public class D1_ControlFlow_For_While {
 			System.out.println("do~while: 최소 한번은 실행한다.");
 		} while (10<5);
 
+		System.out.println("======================");
+
+		  for(int ii = 0; ii < 10; ii++) {
+            aa: {
+                // 라벨 브레이크는 { } 을 사용하여 만든다. aa:는 시작하는 라벨이다.
+                // break aa; 위치에서 aa:로 옮겨서 시작한다.
+                System.out.println("i ==> " + ii);
+                for (int j = 0; j < 2; j++) {
+                     if((ii % 5 == 1) || (ii % 5 == 2)) {
+                          System.out.println("i : "+ ii + " j : "+ j);
+                     }else 
+                          break aa;
+                } // for
+                System.out.println("라벨aa종료");
+            } // aa:
+       } // for
 	}
 
 }

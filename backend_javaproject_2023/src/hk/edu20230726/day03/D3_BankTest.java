@@ -16,17 +16,32 @@ public class D3_BankTest {
 		//제공하는 코드를 작성해보세요. 이 프로그램을 실행시키면 다음과 같은 실행 결과가 나와야 합니다.
 		//추가 문제: 출금을 할때 잔액이 초과되면 초과됐다고 안내하고 다시 입력받게 하자 
 		
-		Scanner scan=new Scanner(System.in);
 		
 		int balance=0;//계좌
 		
+		Scanner scan=new Scanner(System.in);
 		while(true) {
 			System.out.println("--------------------------");
 			System.out.println("1.예금|2.출금|3.잔고|4.종료");
 			System.out.println("--------------------------");
 			System.out.println("선택>");
 			
-			int num=scan.nextInt();//원하는 작업 선택을 위한 입력
+			int num=0;
+//			try {
+//				num = scan.nextInt();
+//			} catch (Exception e) {
+//				System.out.println("숫자를 입력하세요");
+//				continue;
+////				e.printStackTrace();
+//			}
+			
+			if(!scan.hasNextInt()) {
+				System.out.println("숫자를 입력하세요");
+				scan=new Scanner(System.in);
+				continue;
+			}else {
+				num=scan.nextInt();
+			}
 			
 			if(num==1) {//입금(예금)
 				System.out.println("예금액을 입력하세요>");
@@ -53,6 +68,7 @@ public class D3_BankTest {
 				System.out.println("1~4까지의 숫자만 입력하세요");
 				continue;
 			}
+			
 		}
 	}
 }
