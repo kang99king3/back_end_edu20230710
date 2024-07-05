@@ -18,7 +18,7 @@ public class CalculatorMain {
 			//예: "5+10"입력값 받는 코드 작성
 			String s=scan.next();
 			//입력받은 값 s의 패턴: 숫자[+-/*]숫자 확인 ---> 정규화표현식 
-			if(Pattern.matches("^[0-9]*[+|\\-|*|/][0-9]*$", s)) {
+			if(Pattern.matches("^[0-9]*[+|\\-|*|/][0-9]*$", s)) {//   -가 그대로 해석되기 위해 \\- 라고 표현해줌
 				cal.calcu(s);//계산실행메서드
 			}else {
 				if(s.equals("9")) {

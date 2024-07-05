@@ -13,10 +13,10 @@ public class D4_StringMethodMain {
 //		
 //		System.out.println(ss);
 //		
-//		st.sTest4();
+		st.sTest4();
 //		
 //		System.out.println(st.sTest5("한경닷컴")); 
-		st.search("부산");
+//		st.search("부산");
 	}
 
 }

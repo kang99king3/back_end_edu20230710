@@ -69,7 +69,7 @@ public class D4_StringMethodTest {
 	// 
 	//1.해당 검색어가 존재하는 여부 판단해보기,해당검색어가 없으면 "검색어가 존재하지 않습니다."출력
 	//2.해당 검색어의 인덱스를 구해보기: 검색어 인덱스 출력하기
-	//3.해당 검색어를 추출해서 출력해보기: substring()을 사용해서 출력하기
+	//3.해당 검색어를 추출해서 출력해보기: substring()을 사용해서 추출한뒤  출력하기
 	//4.해당 검색어를 문자열에서 ###으로 바꿔주기
 	//5.해당 검색어의 검색된 개수 출력하기[indexOf(idx,검색시작인덱스)]
 	
@@ -111,7 +111,7 @@ public class D4_StringMethodTest {
 			System.out.println("검색어 추출:"
 			    +txt.substring(txt.indexOf(str,idx), txt.indexOf(str,idx)+str.length()));
 			
-			idx=txt.indexOf(str,idx)+str.length();
+			idx=txt.indexOf(str,idx)+str.length();// "String" -> 첫글자의 인덱스는 0 + 길이는 6 = 6 (다음 검색어 검색 시작 인덱스) 
 			System.out.println("--------------------------");
 		}
 		
