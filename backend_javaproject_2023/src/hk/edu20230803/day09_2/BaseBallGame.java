@@ -17,8 +17,8 @@ public class BaseBallGame {
 	public void play(){
 		Hitter h=new Hitter();
 		int count=0;
-		while(count<10){
-			bat=h.make();
+		while(true){
+			bat=h.make();//타자로부터 숫자3개 담긴 배열을 받는다
 			if(!isInt(bat)){//1~9까지의 숫자인지 확인
 				h.Bprint();
 				if(compare()==3){// 3이면 strike3개로 게임 종료
@@ -30,7 +30,7 @@ public class BaseBallGame {
 					break;
 				}
 			}else{
-				System.out.println("숫자만 입력하세요");
+				System.out.println("1~9까지의 숫자를 입력하세요");
 			}
 			
 		}

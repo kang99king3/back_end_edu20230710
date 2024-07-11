@@ -1,16 +1,16 @@
 package hk.edu20230807.day11;
 
 //상속: 키워드 extends, 다중상속 X
-public class Child extends Parent{
+public class D1_Child extends D1_Parent{
 
 	//자식이 생성되면 부모가 생성된다.Child생성자가 호출되면 super(Parent)생성자가 호출된다.
-	public Child() {
+	public D1_Child() {
 //		super();//생략되어 있다...   항상 첫줄에 작성, 부모가 먼저 생성되고 자식이 생성된다.
 		this(5);
 		System.out.println("자식의 생성자입니다.(default)");
 	}
 	
-	public Child(int a) {
+	public D1_Child(int a) {
 //		super();
 		super(a);
 		System.out.println("자식의 생성자 오버로딩입니다.");

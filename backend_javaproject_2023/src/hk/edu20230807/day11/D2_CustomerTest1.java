@@ -1,6 +1,6 @@
 package hk.edu20230807.day11;
 
-public class CustomerTest1 {
+public class D2_CustomerTest1 {
 
 	public static void main(String[] args) {
 //		Customer customerLee = new Customer();
@@ -15,11 +15,11 @@ public class CustomerTest1 {
 //		customerKim.bonusPoint=10000;
 //		System.out.println(customerKim.showCustomerInfo());
 		
-		Customer customerLee = new Customer(10010,"이순신");
+		D2_Customer customerLee = new D2_Customer(10010,"이순신");
 		customerLee.bonusPoint=1000;
 		System.out.println(customerLee.showCustomerInfo());
 		
-		VIPCustomer customerKim = new VIPCustomer(10020,"김유신",20010);
+		D2_VIPCustomer customerKim = new D2_VIPCustomer(10020,"김유신",20010);
 		customerKim.bonusPoint=10000;
 		System.out.println(customerKim.showCustomerInfo());
 	}

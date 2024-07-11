@@ -1,6 +1,6 @@
 package hk.edu20230807.day11;
 
-public class Customer {
+public class D2_Customer {
 
 	protected int customerID;
 	protected String customerName;
@@ -8,12 +8,12 @@ public class Customer {
 	int bonusPoint;
 	double bonusRatio;//적립비율
 	
-	public Customer() {
+	public D2_Customer() {
 		customerGrade = "SILVER";//기본등급
 		bonusRatio = 0.01;
 	}
 	
-	public Customer(int customerID, String customerName) {
+	public D2_Customer(int customerID, String customerName) {
 		super();
 		this.customerID = customerID;
 		this.customerName = customerName;

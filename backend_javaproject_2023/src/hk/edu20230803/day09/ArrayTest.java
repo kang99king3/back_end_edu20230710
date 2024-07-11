@@ -95,7 +95,7 @@ public class ArrayTest {
 		int [][] dd=new int [][] {{1,2,3},{4,5,6}};
 		int [] d1 = new int[dd.length*dd[0].length]; 
 		//2차원 --> 1차원 변환
-		// i*col+j = 0*3+0 = 0
+		// i*col+j = 0*3+0 = 0    col은 2차원배열의 내부 배열길이
 		// i*col+j = 0*3+1 = 1
 		// i*col+j = 0*3+2 = 2
 		// i*col+j = 1*3+0 = 3
@@ -108,8 +108,8 @@ public class ArrayTest {
 		}
 		System.out.println(Arrays.toString(d1));
 		
-		//1차원 --> 2차원 변환
-		//[i/col][i%col]
+		//1차원 --> 2차원 변환   
+		//[i/col][i%col]  : col은 2차원 배열의 내부 배열길이
 		//[0/3][0%3]  [1/3][1%3]  [2/3][2%3] [3/3][3%3] [4/3][4%3] [5/3][5%3] 
 		//[0][0]      [0][1]      [0] [2]    [1][0]     [1][1]     [1][2]  
 		int[][] ddd=new int[2][3];
@@ -135,6 +135,7 @@ public class ArrayTest {
 	public ArrayTest(int m,int n) {//생성자 오버로딩
 		abc=new int[m][n];
 	}
+	
 	
 }
 

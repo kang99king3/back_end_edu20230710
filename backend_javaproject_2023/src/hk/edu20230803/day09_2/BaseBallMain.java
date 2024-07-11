@@ -5,7 +5,6 @@ public class BaseBallMain {
 	public static void main(String[] args) {
 		BaseBallGame game=new BaseBallGame();
 		game.play();
-		
 	}
 
 }

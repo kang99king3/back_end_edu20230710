@@ -1,17 +1,17 @@
 package hk.edu20230807.day11;
 
-public class VIPCustomer extends Customer {
+public class D2_VIPCustomer extends D2_Customer {
 	
 	private int agentID;
 	double saleRatio; //할인율
 	
-	public VIPCustomer() {
+	public D2_VIPCustomer() {
 		customerGrade="VIP";
 		bonusRatio=0.05;
 		saleRatio=0.1;
 	}
 	
-	public VIPCustomer(int customerID, String customerName, int agentID) {
+	public D2_VIPCustomer(int customerID, String customerName, int agentID) {
 		super(customerID,customerName);//부모의 생성자를 호출
 		customerGrade="VIP";
 		bonusRatio=0.05;
