@@ -1,6 +1,6 @@
 package hk.edu20230808.day12;
 
-public interface Calc {
+public interface D4_Calc {
 
 	double PI=3.14;
 	int ERROR=-999999;

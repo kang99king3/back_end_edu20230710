@@ -1,9 +1,9 @@
 package hk.edu20230808.day12;
 
-public class CalculatorTest {
+public class D4_CalculatorTest {
 
 	public static void main(String[] args) {
-		Calc calc=new CompleteCalc();//인터페이스 타입으로 저장
+		D4_Calc calc=new D4_CompleteCalc();//인터페이스 타입으로 저장
 //		CompleteCalc calc=new CompleteCalc();
 		System.out.println(calc.add(10, 5));
 		System.out.println(calc.substract(10, 5));

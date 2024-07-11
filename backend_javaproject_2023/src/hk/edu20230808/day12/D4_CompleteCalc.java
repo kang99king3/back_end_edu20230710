@@ -1,6 +1,6 @@
 package hk.edu20230808.day12;
 
-public class CompleteCalc extends Calculator{
+public class D4_CompleteCalc extends D4_Calculator{
 
 	@Override
 	public int times(int num1, int num2) {
@@ -12,7 +12,7 @@ public class CompleteCalc extends Calculator{
 		if(num2!=0) {// 어떤수를 0으로 나누면 에러나요~
 			return num1/num2;			
 		}else {
-			return Calc.ERROR;
+			return D4_Calc.ERROR;
 		}
 	}
 

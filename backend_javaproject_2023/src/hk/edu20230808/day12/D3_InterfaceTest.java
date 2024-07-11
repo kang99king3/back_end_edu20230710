@@ -1,6 +1,6 @@
 package hk.edu20230808.day12;
 
-public interface InterfaceTest {
+public interface D3_InterfaceTest {
 
 	//다중상속 흉내.. extends..implements..
 //	public class Test extends ParentTest implements IParent{ }

@@ -1,7 +1,7 @@
 package hk.edu20230808.day12;
 
 //추상클래스가 됨 --> 객체생성 못함 --> 하위클래스에서 상속받아서 구현해야 함
-public abstract class NoteBook extends Computer{
+public abstract class D2_NoteBook extends D2_Computer{
 
 	@Override
 	public void display() {

@@ -1,6 +1,6 @@
 package hk.edu20230808.day12;
 
-public class Tiger extends Animal{
+public class D1_Tiger extends D1_Animal{
 
 	@Override
 	public void move() {

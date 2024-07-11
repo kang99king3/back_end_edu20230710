@@ -1,8 +1,8 @@
 package hk.edu20230808.day12;
 
-public class DeskTop extends Computer{
+public class D2_DeskTop extends D2_Computer{
 
-	public DeskTop() {
+	public D2_DeskTop() {
 		super();
 	}
 	

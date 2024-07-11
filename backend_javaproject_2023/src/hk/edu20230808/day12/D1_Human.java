@@ -1,6 +1,6 @@
 package hk.edu20230808.day12;
 
-public class Human extends Animal{
+public class D1_Human extends D1_Animal{
 
 	
 	public void move2() {

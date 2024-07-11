@@ -1,6 +1,6 @@
 package hk.edu20230808.day12;
 
-public abstract class Calculator implements Calc{
+public abstract class D4_Calculator implements D4_Calc{
 
 	@Override
 	public int add(int num1, int num2) {
