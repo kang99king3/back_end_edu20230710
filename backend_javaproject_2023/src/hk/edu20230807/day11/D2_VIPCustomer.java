@@ -19,8 +19,6 @@ public class D2_VIPCustomer extends D2_Customer {
 		this.agentID = agentID;
 	}
 
-
-
 	public int getAgentID() {
 		return agentID;
 	}
