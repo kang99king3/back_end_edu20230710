@@ -1,6 +1,6 @@
 package hk.edu202308089.day14;
 
-public class Main {
+public class CakeMain {
 
 	public static void main(String[] args) {
 		
