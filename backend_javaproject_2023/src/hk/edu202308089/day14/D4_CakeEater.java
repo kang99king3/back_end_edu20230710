@@ -1,19 +1,19 @@
 package hk.edu202308089.day14;
 
-public class CakeEater implements Runnable{
+public class D4_CakeEater implements Runnable{
 	
-	private CakePlate cake;
+	private D4_CakePlate cake;
 	
 	
-	public CakeEater(CakePlate cake) {
+	public D4_CakeEater(D4_CakePlate cake) {
 		setCakePlate(cake);
 	}
 
-	public CakePlate getCakePlate() {
+	public D4_CakePlate getCakePlate() {
 		return cake;
 	}
 
-	public void setCakePlate(CakePlate cake) {
+	public void setCakePlate(D4_CakePlate cake) {
 		this.cake = cake;
 	}
 

@@ -1,15 +1,15 @@
 package hk.edu202308089.day14;
 
-public class CakeMaker implements Runnable{
-	private CakePlate cake;
-	public CakeMaker(CakePlate cake){
+public class D4_CakeMaker implements Runnable{
+	private D4_CakePlate cake;
+	public D4_CakeMaker(D4_CakePlate cake){
 		setCakePlate(cake);
 	}
-	private void setCakePlate(CakePlate cake) {
+	private void setCakePlate(D4_CakePlate cake) {
 		this.cake=cake;
 		
 	}
-	public CakePlate getCake() {
+	public D4_CakePlate getCake() {
 		return cake;
 	}
 	@Override

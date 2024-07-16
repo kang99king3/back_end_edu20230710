@@ -1,9 +1,9 @@
 package hk.edu202308089.day14;
 
-public class CakePlate {
+public class D4_CakePlate {
 
 	private int breadCount=0;
-	public CakePlate(){
+	public D4_CakePlate(){
 		
 	}
 	public synchronized void makeBread(){
