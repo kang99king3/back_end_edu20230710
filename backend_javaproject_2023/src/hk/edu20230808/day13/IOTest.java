@@ -86,8 +86,8 @@ public class IOTest {
 		OutputStream out=null;
 		
 		try {
-			in=new FileInputStream("d:\\iotest\\iotestimg.png");
-			out=new FileOutputStream("d:\\iotest\\iotestimg_copy.png");
+			in=new FileInputStream("C:\\Users\\kang9\\test_io.png");
+			out=new FileOutputStream("C:\\Users\\kang9\\test_io_copy.png");
 			
 			//10byte단위로 읽기
 			byte [] b=new byte[10];
@@ -122,18 +122,25 @@ public class IOTest {
 			in=new InputStreamReader(System.in);
 			out=new OutputStreamWriter(System.out);
 			
-			char[] ch=new char[512];
+			char[] ch=new char[512];// 1byte -128~127  2byte -256~255 : 512 
 			int i=0;
 			while((i=in.read(ch))!=-1) {
+				System.out.println("입력값");
 				out.write(ch, 0, i);
+				out.flush();// ~er 객체들은 기본적으로 버퍼의기능을 가지고 있어 다 채워질때 까지 
+				            // 출력을 하지 않을 수 있어서 flush() 밀어내준다.
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			try {
-				out.close();
-				in.close();
+				if(out!=null) {
+					out.close();					
+				}
+				if(in!=null) {
+					in.close();					
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
