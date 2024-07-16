@@ -59,14 +59,14 @@ public class IOTest {
 		
 		String s="파일을 기록합니다.";
 		try {
-			out=new FileOutputStream("d:\\outdata.txt");
+			out=new FileOutputStream("C:\\Users\\user\\output_data.txt");
 			ds=new DataOutputStream(out);//보조스트림 사용
-			ds.writeUTF(s);//UTF-8형식으로 인코딩된 문자열을 출력해 준다.
+//					ds.writeUTF(s);//UTF-8형식으로 인코딩된 문자열을 출력해 준다.
 			               //문자열을 자동으로 byte로 나눠서 처리
-			
+			ds.writeChars(s);
 			//보조스트림 미사용시
-//			byte [] b=s.getBytes();//문자열을 byte단위로 변환하여 배열로 반환
-//			out.write(b);
+//					byte [] b=s.getBytes();//문자열을 byte단위로 변환하여 배열로 반환
+//					out.write(b);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,7 +80,6 @@ public class IOTest {
 			}
 		}
 	}
-	
 	//한번 읽을 때 크기를 설정해서 읽고 쓰기
 	public static void test03() {
 		InputStream in=null;
