@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class D1_MultiServer {
+public class D3_MultiServer {
 	public static void main(String[] args) {
 		Socket clientSocket=null;
 		ServerSocket serverSocket=null;
@@ -22,7 +22,7 @@ public class D1_MultiServer {
 				//클라이언트 호스트 이름 출력
 				System.out.println("New client connected: "+ clientSocket.getInetAddress().getHostName());
 				//클라이언트 소켓으로 보낼 outputstream객체 생성
-				new D1_MultiServer().new Server2Thread(clientSocket).start();
+				new D3_MultiServer().new Server2Thread(clientSocket).start();
 				
 			}
 		} catch (IOException e) {

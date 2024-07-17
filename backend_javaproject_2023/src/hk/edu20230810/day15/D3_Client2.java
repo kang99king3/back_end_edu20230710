@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class D1_Client2 {
+public class D3_Client2 {
 
 	public static void main(String[] args) {
 		Socket socket = null;
