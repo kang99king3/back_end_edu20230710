@@ -4,6 +4,21 @@ import javax.swing.plaf.synth.SynthColorChooserUI;
 
 public class D3_ThreadA {
 
+	//내부 클래스
+	class ShareObject{
+		
+		public synchronized void print(String title) {
+			for (int i = 0; i < 10; i++) {
+				System.out.println(title);
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		
 		//공유 객체: A,B 스레드가 공유하는 객체 
@@ -28,6 +43,7 @@ public class D3_ThreadA {
 //		};
 //		trA.start();
 //		trB.start();
+		
 		
 		//StringBuffer vs StringBuilder
 	    D3_ThreadA d3=new D3_ThreadA();
@@ -70,20 +86,6 @@ public class D3_ThreadA {
 		}
 	}
 
-	//내부 클래스
-	class ShareObject{
-		
-		public synchronized void print(String title) {
-			for (int i = 0; i < 10; i++) {
-				System.out.println(title);
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
 	
 	
 }
