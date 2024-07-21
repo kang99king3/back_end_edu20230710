@@ -21,7 +21,7 @@ public class D3_MultiServer {
 				clientSocket = serverSocket.accept();
 				//클라이언트 호스트 이름 출력
 				System.out.println("New client connected: "+ clientSocket.getInetAddress().getHostName());
-				//클라이언트 소켓으로 보낼 outputstream객체 생성
+				//여러 클라이언트 소켓을 처리하기 위해 스레드 클래스로 클라이언드 소켓 전달 및 실행
 				new D3_MultiServer().new Server2Thread(clientSocket).start();
 				
 			}
@@ -45,12 +45,13 @@ public class D3_MultiServer {
 	
 	class Server2Thread extends Thread{
 		
+		//전달된 클라이언트 소켓을 저장할 맴버필드
 		Socket clientSocket;
 		
 		public Server2Thread() {
 			// TODO Auto-generated constructor stub
 		}
-		
+		//클라이언트 소켓 초기화
 		public Server2Thread(Socket clientSocket) {
 			this.clientSocket=clientSocket;
 		}
@@ -61,8 +62,9 @@ public class D3_MultiServer {
 			BufferedReader in = null;
 			
 			try {
+				//클라이언트 소켓으로 출려할 outputStream객체를 얻어오고, PrintWriter객체로 생성: 클라이언트로 보내기
 				out = new PrintWriter(clientSocket.getOutputStream(),true);
-				//클라이언트 소켓으로부터 inputstream객체 생성
+				//클라이언트 소켓으로부터 inputstream객체를 얻어오고, BufferedReader객체로 생성: 클라이언트로부터 읽어오기
 				in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 				
 				String inputLine;

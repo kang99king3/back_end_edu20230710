@@ -73,8 +73,9 @@ public class D4_ChatServer {
                     System.out.println("받은 메시지: " + message);
                     //clients에 동시적으로 접근하지 못하도록 동기화 블럭 설정
                     synchronized (clients) {
+                    	//채팅 참가자들 모두에게 메시지 전달
                         for (PrintWriter writer : clients) {//Set은 Iterator 패턴으로 꺼낼 수 있다.
-                            writer.println(message);              //향상된 for문-iterator 패턴 사용
+                            writer.println(message);        //향상된 for문-iterator 패턴 사용
                         }
                     }
                 }
