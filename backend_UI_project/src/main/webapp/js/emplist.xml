@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datalist>
+	<item>
+		<num>1</num>
+		<id>a</id>
+		<name>kang1</name>
+	</item>
+	<item>
+		<num>2</num>
+		<id>b</id>
+		<name>kang2</name>
+	</item>
+	<item>
+		<num>3</num>
+		<id>c</id>
+		<name>kang3</name>
+	</item>
+</datalist>
