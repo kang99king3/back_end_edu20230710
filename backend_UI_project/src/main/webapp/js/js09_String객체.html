@@ -131,9 +131,9 @@
 			alert(count+"개까지만 입력 가능합니다.");
 		}else{
 			var propVal="";
-<!--			for(var i=0;i<propArray.length;i++){-->
-<!--				propVal=propVal+"<br/>키워드:"+propArray[i];-->
-<!--			}-->
+			//for(var i=0;i<propArray.length;i++){
+			//	propVal=propVal+"<br/>키워드:"+propArray[i];
+			//}
 			propArray.forEach(function(item){
 				propVal+=`<br/>키워드:${item}`;
 			});
