@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	//POST방식일경우
+	function postFetch(){
+		var formEle=document.querySelector("#board");
+// 		var formData=new FormData(formEle); // multipart/form-data 형식으로 전송할때
+		var formData=new URLSearchParams(new FormData(formEle));//기본방식으로 전송할때
+		fetch('emplist.xml',{
+			method:"POST",  //기본값은 GET
+			headers:{
+				"Content-Type":"application/x-www-form-urlencoded",
+			},
+			body:formData.toString()
+		})
+		.then(response=>response.text())  // json일 경우 response.json()
+		.then(data=>{
+			const parser=new DOMParser();
+			const xml=parser.parseFromString(data,"application/xml");
+			let id=xml.querySelector("id").textContent;
+			console.log("받은 데이터출려:",id);
+			
+		})
+		.catch(error=>{console.log('오류:',error)});
+		
+	}
+	
+	//get방식일 경우
+	fetch('emplist.xml')  // fetch('test.com?id=a&name=b') get방식 전송
+	  .then(response => {
+	    if (!response.ok) {//성공이 아니라면
+	      throw new Error('Network response was not ok');
+	    }
+	    return response.text(); // 응답을 텍스트로 가져오기
+	  })
+	  .then(str => { // response.text() -> str이 받는다.
+	    // 문자열을 XML로 파싱
+	    const parser = new DOMParser();
+	    const xmlDoc = parser.parseFromString(str, 'application/xml');
+	    
+	    // XML 데이터를 사용해 원하는 작업을 수행
+	    console.log(xmlDoc);
+	    
+	    var container=document.querySelector("#container");
+	    
+// 	    var items=xmlDoc.querySelectorAll("item");
+// 	    console.log(items[0].querySelector("num").textContent);
+// 	    items.forEach((item)=>{
+// 			var num=item.querySelector("num").textContent;
+// 			var id=item.querySelector("id").textContent;
+// 			var name=item.querySelector("name").textContent;
+// 			var p=document.createElement("p");
+// 			p.textContent=`${num}:${id}:${name}`;
+// 			container.appendChild(p);
+// 		});
+		var item=xmlDoc.querySelectorAll("item");
+		console.log(item);
+		for (var i = 0; i < item[0].children.length; i++) {
+			container.innerHTML+="<p>"+item[0].children[i].textContent+"</p>";
+		}
+	  })
+	  .catch(error => {
+	    console.error('There has been a problem with your fetch operation:', error);
+	  });
+	
+	
+</script>
+</head>
+<body>
+<form id="board">
+	<input type="text" name="id"/>
+	<input type="text" name="name"/>
+	<input type="button" value="전송" onclick="postFetch()"/>
+</form>
+<div id="container"></div>
+</body>
+</html>
