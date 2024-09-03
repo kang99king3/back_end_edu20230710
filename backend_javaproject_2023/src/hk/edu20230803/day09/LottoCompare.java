@@ -5,17 +5,17 @@ import java.util.Arrays;
 //구매한 로또를 당첨번호와 비교해서 결과를 보여주는 클래스
 public class LottoCompare {
 	//당첨번호를 저장할 맴버필드
-	public Lotto lottoBall;
+	public static Lotto lottoBall=new Lotto();//static으로 선언하면 객체들이 하나를 공유하게 됨
 	//사용자 번호를 저장할 맴버필드
 	public LottoStore userBall;
 	
 	public LottoCompare() {
-		this.lottoBall=new Lotto();
+//		this.lottoBall=new Lotto();
 		this.userBall=new LottoStore();//기본 5장구매
 	}
 	
 	public LottoCompare(int n) {
-		this.lottoBall=new Lotto();
+//		this.lottoBall=new Lotto();
 		this.userBall=new LottoStore(n);//원하는 만큼 구매
 	}
 	

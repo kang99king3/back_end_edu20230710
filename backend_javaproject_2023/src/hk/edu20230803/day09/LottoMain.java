@@ -20,8 +20,11 @@ public class LottoMain {
 //			System.out.println(Arrays.toString(lotto.getLots())); 
 //		}
 		
-		LottoCompare compare=new LottoCompare(15);
+		LottoCompare compare=new LottoCompare(2);
 		compare.comapreBall();
+		
+		LottoCompare compare2=new LottoCompare(2);
+		compare2.comapreBall();
 	}
 
 }

@@ -67,8 +67,8 @@ public class Calendar {
 	public void calendarPrint(int year, int month) {
 		System.out.println("\t\t\t"+year+"년 "+month+"월" );
 		System.out.println("일\t월\t화\t수\t목\t금\t토");
-		int dayOfWeek=dates(year, month, 1)%7;//공백수
-		for (int i = 0; i < dayOfWeek; i++) {
+		int dayOfWeek=dates(year, month, 1)%7;//공백수  1년1월1일을 월요일로 시작함 그래서 달력은 +1되어진걸로 표현
+		for (int i = 0; i < dayOfWeek; i++) { //      예) 12/1이 원래는 목요일인데 금요일에 표시되어 있음 그래서 -1일 할필요없음
 			System.out.print("\t");
 		}
 		for (int i = 1; i <= lastDay(year, month); i++) {

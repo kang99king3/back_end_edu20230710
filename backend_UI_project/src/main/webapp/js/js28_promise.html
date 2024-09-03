@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	//promise객체: 비동기 작업을 처리하기 위한 하나의 방법,패턴을 제공
+	//resolve: 성공 , reject: 실패
+	const myPromise = new Promise((resolve, reject) => {
+	  if(false){
+		  setTimeout(() => {
+		    resolve("3초 후 작업이 완료되었습니다!");
+		  }, 3000);		  
+	  }else{
+		  reject("오류네요");
+	  }
+	});
+
+	//myPromise에서 성공이나 실패에 대한 값을 받는다.
+	myPromise
+	  .then(result => {  //resolve -> result가 받음
+	    console.log(result); // "3초 후 작업이 완료되었습니다!" 출력
+	  })
+	  .catch(error => { //reject -> error가 받음
+	    console.error(error); // 에러 발생 시 출력
+	  });
+</script>
+</head>
+<body>
+
+</body>
+</html>

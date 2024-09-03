@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	//fetch(): 서버와의 비동기 통신을 지원하는 javascript API
+	fetch('emplist.xml',{
+		 
+		  method: 'POST', // HTTP 메서드 설정
+		  headers: {
+		    'Content-Type': 'application/xml' // 요청 헤더 설정
+		  }
+	})
+	  .then(response => {
+	    if (!response.ok) {
+	      throw new Error('Network response was not ok');
+	    }
+	    return response.text(); // 응답을 텍스트로 가져오기
+	  })
+	  .then(str => {
+	    // 문자열을 XML로 파싱
+	    const parser = new DOMParser();
+	    const xmlDoc = parser.parseFromString(str, 'application/xml');
+	    
+	    // XML 데이터를 사용해 원하는 작업을 수행
+	    console.log(xmlDoc);
+	    
+	    var container=document.querySelector("#container");
+	    
+	    var items=xmlDoc.querySelectorAll("item");
+	    console.log(items[0].querySelector("num").textContent);
+
+		//forEach()사용가능 :  querySelector()는 nodeList반환
+		//         사용못함 :  getElementBy~ 는  HTMLCollection
+	     items.forEach((item)=>{
+			 console.log(item);
+			var num=item.querySelector("num").textContent;
+			var id=item.querySelector("id").textContent;
+			var name=item.querySelector("name").textContent;
+			var p=document.createElement("p");
+			p.textContent=`${num}:${id}:${name}`;
+			container.appendChild(p);
+		}); 
+	  })
+	  .catch(error => {
+	    console.error('There has been a problem with your fetch operation:', error);
+	  });
+	 
+</script>
+</head>
+<body>
+<div id="container"></div>
+</body>
+</html>

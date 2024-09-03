@@ -10,12 +10,14 @@ public class D3_IsLeapYear {
 		// 또는 400으로 나누어 떨어지는 수
         // 2023년도가 윤년인지 아닌지 확인해서 출력해보기 : "2023년은 윤년이다"
 		
+		//2023년도만 확인 가능한 코드
 //		if((2023%4==0&&2023%100!=0)||2023%400==0) {
 //			System.out.println(2023+"년은 윤년이다");
 //		}else {
 //			System.out.println(2023+"년은 평년이다.");
 //		}
 		
+		//변수를 사용해서 다양한 년도를 확인해볼 수 있다.
 //		int year=2023;
 //		if((year%4==0&&year%100!=0)||year%400==0) {
 //			System.out.println(year+"년은 윤년이다");
@@ -23,6 +25,7 @@ public class D3_IsLeapYear {
 //			System.out.println(year+"년은 평년이다.");
 //		}
 		
+		//반복문을 활용해서 원하는 기간의 모든 년도를 확인해볼 수 있다.
 //		2000~2030년 기간중에 윤년을 출력하시오
 //		for (int year = 2000; year <= 2030; year++) {
 //			if((year%4==0&&year%100!=0)||year%400==0) {
@@ -32,6 +35,7 @@ public class D3_IsLeapYear {
 //			}
 //		}
 		
+		//메서드를 활용하여 코드를 단순화하고, 재활용성을 높인다.
 		for (int year = 2000; year <= 2030; year++) {
 			if(isLeapYear(year)) {
 				System.out.println(year+"년은 윤년이다");

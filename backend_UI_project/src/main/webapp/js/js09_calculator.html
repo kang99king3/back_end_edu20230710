@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	onload=function(){
+		var inputs=document.querySelectorAll("input[type=button]");
+		var view=document.getElementById("view");
+		inputs.forEach(function(item){
+			item.onclick=function(evt){
+				var inputVal=evt.target.value;
+				if(inputVal=="="){
+					view.value=eval(view.value);
+				}else if(inputVal=="C"){
+					view.value="";
+				}else if(inputVal=="←"){
+					view.value=view.value.substring(0,view.value.length-1);
+				}
+				else{
+					view.value+=inputVal;					
+				}
+			}
+		});
+		
+	}
+
+</script>
+</head>
+<body>
+<div>
+	<fieldset>
+		<input id="view"  / >
+	</fieldset>	
+	<fieldset>
+		<input type="button" value="1"/>
+		<input type="button" value="2" />
+		<input type="button" value="3"/>
+		<input type="button" value="4"/>
+		<input type="button" value="5"/>
+		<input type="button" value="6"/>
+		<input type="button" value="7"/>
+		<input type="button" value="8"/>
+		<input type="button" value="9"/>
+		<input type="button" value="0"/>
+		<input type="button" value="+"/>
+		<input type="button" value="-"/>
+		<input type="button" value="/"/>
+		<input type="button" value="*"/>
+		<input type="button" value="="/>
+		<input type="button" value="←"/>
+		<input type="button" value="C"/>
+	</fieldset>
+</div>
+</body>
+</html>

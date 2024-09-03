@@ -30,6 +30,7 @@ public class D2_MethodTest {
 		
 		return 0;//반환값이 있다면 반드시 return 값을 작성해야 한다.
 	}
+	
 	public void test04() {
 		int num=test03();
 	}//반환값을 작성할 필요 없음.

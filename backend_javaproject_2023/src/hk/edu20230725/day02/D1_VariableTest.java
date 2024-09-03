@@ -18,17 +18,19 @@ public class D1_VariableTest {
 //			 b=128;//128은 표현범위를 벗어나서 오류가 뜸
 		short sh=128;//2byte크기니깐 저장됨
 		int i=5000000;//4byte크기 <---java에서 정수 기본타입
-		long l=500000000000L;//int크기를 벗어나면 오류--> L을 붙여줌
+		long l=500000000000L;//int크기를 벗어나면 오류(기본형이 int이기때문에)--> L을 붙여줌
 		
 		//2.실수형
 		double d=15.8;
 //		float f=30.15F;
-		float ff=(float)40.2;// <---실수의 기본형은 double타입이다.
+		float f1=(float)40.2;// <---실수의 기본형은 double타입이다.
+		
+//		float f2=d+f1;//double타입과 float타입의 연산은 double타입이 된다.
 		
 		//3.다른 타입끼리 연산
-		int ii=(int)(i+d); //int + double
-		int iii=i+(int)d;
-		double dd=i+d;
+		int ii=(int)(i+d); //int + double = double
+		int iii=i+(int)d; //형변환 후 연산 --> double형에 소수점값은 없어진다.
+		double dd=i+d; // 자동형변환 후 연산 --> 큰 타입에 저장할 경우
 		System.out.println(ii+":"+dd);
 		
 		//4.정수형끼리 연산
