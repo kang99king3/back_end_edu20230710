@@ -120,7 +120,7 @@ public class AnsController extends HttpServlet{
 				//쿠키객체 생성하기
 				//                    cookie에 값을 저장할때 타입은 String 이다
 				Cookie cookie=new Cookie("rseq", String.valueOf(seq));
-				cookie.setMaxAge(60*10);//유효기간 설정
+				cookie.setMaxAge(60*10);//유효기간 설정[초단위]
 				response.addCookie(cookie);//클라이언트로 cookie객체 전달
 				
 				//---조회수 올리기 코드

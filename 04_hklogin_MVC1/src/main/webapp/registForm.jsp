@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/layout.css" />
+<link rel="stylesheet" href="css/layout1.css" />
 <script type="text/javascript">
 	onload=function(){
 		//아이디 중복체크를 완료한 후에 다른 정보를 입력할 수 있게 처리
