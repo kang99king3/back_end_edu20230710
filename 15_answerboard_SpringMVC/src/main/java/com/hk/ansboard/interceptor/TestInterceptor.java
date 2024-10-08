@@ -32,7 +32,8 @@ public class TestInterceptor implements HandlerInterceptor{
 			if(obj==null) {
 				System.out.println("글상세조회는 로그인 한 후에 조회 가능");
 				logger.info(request.getRequestURI()+"글상세조회");
-//				response.sendRedirect("index.jsp");
+				response.sendRedirect("index.jsp");
+				return false;
 			}
 		}
 		

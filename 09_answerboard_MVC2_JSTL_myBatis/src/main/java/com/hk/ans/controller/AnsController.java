@@ -97,6 +97,11 @@ public class AnsController extends HttpServlet{
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			AnsDto dto=dao.getBoard(seq);
 			
+			String review=request.getParameter("review");
+			if(review!=null&&review.equals("y")) {
+				dao.readCount(seq);//조회수 증가
+				response.sendRedirect("detailBoard.board?seq="+seq);
+			}else {
 			//쿠키객체 가져오기 : 반환타입 - 배열
 			// getName() : 쿠키 이름 구하기
 			// getValue() : 쿠키 값 구하기
@@ -108,27 +113,28 @@ public class AnsController extends HttpServlet{
 //				}
 //			}
 			//getCookie메서드 구현해서 활용하기
-			Cookie cookieObj=getCookie("rseq", request);
-			
-			String s=null;
-			if(cookieObj!=null) {//cookie가 null이 아닐 경우 실행
-				s=cookieObj.getValue();				
+//			Cookie cookieObj=getCookie("rseq", request);
+//			
+//			String s=null;
+//			if(cookieObj!=null) {//cookie가 null이 아닐 경우 실행
+//				s=cookieObj.getValue();				
+//			}
+//			
+//			//"rseq"라는 이름의 값이 있는지 확인(쿠키값이 없는 경우)
+//			if(s==null||!s.equals(String.valueOf(seq))) {
+//				//쿠키객체 생성하기
+//				//                    cookie에 값을 저장할때 타입은 String 이다
+//				Cookie cookie=new Cookie("rseq", String.valueOf(seq));
+//				cookie.setMaxAge(60*10);//유효기간 설정[초단위]
+//				response.addCookie(cookie);//클라이언트로 cookie객체 전달
+//				
+//				//---조회수 올리기 코드
+//				dao.readCount(seq);//조회수 증가
+//				//--조회수 코드 종료
+//			}
+				request.setAttribute("dto", dto);
+				dispatch("board/detailBoard.jsp", request, response);
 			}
-			
-			//"rseq"라는 이름의 값이 있는지 확인(쿠키값이 없는 경우)
-			if(s==null||!s.equals(String.valueOf(seq))) {
-				//쿠키객체 생성하기
-				//                    cookie에 값을 저장할때 타입은 String 이다
-				Cookie cookie=new Cookie("rseq", String.valueOf(seq));
-				cookie.setMaxAge(60*10);//유효기간 설정[초단위]
-				response.addCookie(cookie);//클라이언트로 cookie객체 전달
-				
-				//---조회수 올리기 코드
-				dao.readCount(seq);//조회수 증가
-				//--조회수 코드 종료
-			}
-			request.setAttribute("dto", dto);
-			dispatch("board/detailBoard.jsp", request, response);
 		}else if(command.equals("/updateBoardForm.board")) {//수정폼이동
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			AnsDto dto=dao.getBoard(seq);

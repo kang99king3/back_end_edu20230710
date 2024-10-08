@@ -100,7 +100,7 @@ function isAllCheck(){
 <%-- 								</c:forEach> --%>
 								<jsp:setProperty property="arrowNbsp" name="util" value="${dto.depth}"/>
 								<jsp:getProperty property="arrowNbsp" name="util"/>
-								<a href="detailBoard.board?seq=${dto.seq}">${title}</a>
+								<a href="detailBoard.board?seq=${dto.seq}&review=y">${title}</a>
 							</c:otherwise>
 						</c:choose>
 						</td>
