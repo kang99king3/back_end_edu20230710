@@ -33,8 +33,10 @@
 	<!-- transaction처리 aop이용 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="replyBoard" propagation="REQUIRED"
-										 rollback-for="Exception"/>
+<!-- 			<tx:method name="replyBoard" propagation="REQUIRED" -->
+<!-- 										 rollback-for="Exception"/> -->
+				<tx:method name="*" propagation="REQUIRED"
+							 rollback-for="Exception"/>
 		</tx:attributes>
 	</tx:advice>
 	
