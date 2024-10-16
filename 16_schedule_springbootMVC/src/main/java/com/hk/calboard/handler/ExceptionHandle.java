@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+//@Controller어노테이션이 적용된 곳에서 발생되는 예외를 catch한다.
 @ControllerAdvice
 public class ExceptionHandle {
 	

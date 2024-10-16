@@ -55,7 +55,7 @@ public class LogAspect {
 	}
 	
 	
-	//Around: 적용범위가 넒음 , before, afterReturning 모두 적용
+	//Around: 전후 모두 적용 , before, afterReturning 모두 적용
 }
 
 
