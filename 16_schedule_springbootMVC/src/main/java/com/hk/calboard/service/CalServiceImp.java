@@ -94,6 +94,10 @@ public class CalServiceImp implements ICalService{
 		dto.setContent(insertCalCommand.getContent());
 		dto.setMdate(mdate);
 		
+		//command와 dto를 자동 맵핑할 경우 맵핑라이브러리를 사용할 수 도 있다.
+//		CalDto dto=modelMapper.map(insertCalCommand, CalDto.class);
+		
+		
 		int count=calMapper.insertCalBoard(dto);
 		
 		//예외발생코드 추가
